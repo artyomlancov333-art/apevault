@@ -1,0 +1,1826 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ApeVault</title>
+<style>
+    body {
+        margin: 0;
+        font-family: 'Arial', sans-serif;
+        background-color: #121212;
+        color: #fff;
+    }
+
+    a {
+        text-decoration: none;
+        color: inherit;
+    }
+
+    header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 15px 50px;
+        background-color: #1a1a1a;
+        position: sticky;
+        top: 0;
+        z-index: 1000;
+    }
+
+    /* Логотип */
+    .logo {
+        display: flex;
+        flex-direction: column;
+    }
+    .logo h1 {
+        color: #367153;
+        margin: 0;
+        font-size: 24px;
+    }
+    .logo span {
+        font-size: 12px;
+        color: #aaa;
+        margin-top: 2px;
+    }
+
+    /* Меню */
+    nav {
+        display: flex;
+        align-items: center;
+        gap: 30px;
+    }
+
+    nav ul {
+        display: flex;
+        gap: 30px;
+        list-style: none;
+        margin: 0;
+        padding: 0;
+    }
+
+    nav li {
+        position: relative;
+    }
+
+    nav > ul > li > a {
+        padding: 5px 0;
+        position: relative;
+        transition: all 0.3s;
+    }
+
+    nav > ul > li > a::after {
+        content: '';
+        position: absolute;
+        left: 0;
+        bottom: -2px;
+        width: 0;
+        height: 2px;
+        background-color: #367153;
+        transition: width 0.3s;
+    }
+
+    nav > ul > li > a:hover::after {
+        width: 100%;
+    }
+
+    /* Подменю */
+    .submenu {
+        display: none;
+        flex-direction: column;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        background-color: #1a1a1a;
+        min-width: 180px;
+        border-radius: 5px;
+        box-shadow: 0 0 10px rgba(0,0,0,0.5);
+        padding: 10px 0;
+        z-index: 1000;
+    }
+
+    .submenu li {
+        padding: 5px 20px;
+        white-space: nowrap;
+        transition: all 0.3s;
+        border-radius: 25px;
+    }
+
+    .submenu li:hover {
+        background-color: #367153;
+        color: #fff;
+    }
+
+    nav li:hover > .submenu {
+        display: flex;
+    }
+
+    /* Кнопки */
+    .header-buttons {
+        display: flex;
+        gap: 15px;
+    }
+
+    .header-buttons button {
+        padding: 8px 20px;
+        font-weight: bold;
+        cursor: pointer;
+        border-radius: 5px;
+        transition: all 0.3s ease;
+        border: none;
+    }
+
+    /* Старт */
+    .btn-start {
+        background-color: #367153;
+        color: #fff;
+        box-shadow: 0 0 15px #367153; /* постоянная подсветка */
+    }
+
+    .btn-start:hover {
+        box-shadow: 0 0 25px #367153;
+    }
+
+    /* Напиши нам */
+    .btn-contact {
+        background-color: #1a1a1a;
+        color: #fff;
+        border: 2px solid #367153; /* постоянная обводка */
+        box-shadow: 0 0 15px #367153; /* постоянная подсветка */
+    }
+
+    .btn-contact:hover {
+        background-color: #367153;
+        color: #fff;
+        box-shadow: 0 0 25px #367153;
+    }
+
+    /* Адаптив */
+    .burger {
+        display: none;
+        flex-direction: column;
+        gap: 5px;
+        cursor: pointer;
+    }
+
+    .burger div {
+        width: 25px;
+        height: 3px;
+        background-color: #fff;
+        transition: all 0.3s;
+    }
+
+    @media (max-width: 900px) {
+        nav {
+            display: none;
+            position: absolute;
+            top: 70px;
+            left: 0;
+            width: 100%;
+            background-color: #1a1a1a;
+            flex-direction: column;
+            padding: 10px 0;
+        }
+
+        nav ul {
+            flex-direction: column;
+            gap: 0;
+        }
+
+        nav li {
+            padding: 10px 20px;
+        }
+
+        nav li:hover > .submenu {
+            position: relative;
+        }
+
+        .burger {
+            display: flex;
+        }
+
+        nav.active {
+            display: flex;
+        }
+    }
+</style>
+</head>
+<body>
+
+<header>
+    <div class="logo">
+        <h1>ApeVault</h1>
+        <span>сообщество диких криптанов</span>
+    </div>
+
+    <div class="burger" id="burger">
+        <div></div>
+        <div></div>
+        <div></div>
+    </div>
+
+    <nav id="nav">
+        <ul>
+            <li><a href="#">О проекте</a></li>
+            <li><a href="#">Наше комьюнити</a></li>
+            <li><a href="#">Наша экосистема</a></li>
+            <li>
+                <a href="#">Все по обучению</a>
+                <ul class="submenu">
+                    <li>Фишки обучения</li>
+                    <li>Программа обучения</li>
+                    <li>Тарифы</li>
+                </ul>
+            </li>
+            <li>
+                <a href="#">Продукты</a>
+                <ul class="submenu">
+                    <li>Действующие</li>
+                    <li>Ожидаются</li>
+                </ul>
+            </li>
+        </ul>
+    </nav>
+
+    <div class="header-buttons">
+        <button class="btn-start">Старт</button>
+        <button class="btn-contact">Напиши нам</button>
+    </div>
+</header>
+
+<script>
+    const burger = document.getElementById('burger');
+    const nav = document.getElementById('nav');
+
+    burger.addEventListener('click', () => {
+        nav.classList.toggle('active');
+        burger.classList.toggle('open');
+    });
+</script>
+
+<section class="about" id="about">
+    <h2>О проекте</h2>
+    <p class="subtitle">
+        Сообщество криптоэнтузиастов, объединяющее знания, опыт и проверенные стратегии 
+        для безопасного входа в мир крипты.
+    </p>
+
+    <div class="stats">
+        <div class="stat-item" data-anim="left">
+            <span class="number">50+</span>
+            <span class="label">участников</span>
+        </div>
+        <div class="stat-item" data-anim="top">
+            <span class="number">20+</span>
+            <span class="label">кейс-стратегий</span>
+        </div>
+        <div class="stat-item" data-anim="right">
+            <span class="number">100+</span>
+            <span class="label">уроков и материалов</span>
+        </div>
+        <div class="stat-item" data-anim="bottom">
+            <span class="number">1+</span>
+            <span class="label">AMA-сессии в неделю</span>
+        </div>
+        <div class="stat-item" data-anim="left">
+            <span class="number">4+</span>
+            <span class="label">собственных продуктов<br>для торговли и анализа</span>
+        </div>
+    </div>
+</section>
+
+<style>
+/* ===== О ПРОЕКТЕ ===== */
+.about {
+    text-align: center;
+    padding: 60px 20px 100px;
+    background-color: #121212;
+    overflow: hidden;
+}
+
+.about h2 {
+    color: #367153;
+    font-size: 36px;
+    margin-bottom: 15px;
+    letter-spacing: 0.5px;
+}
+
+.about .subtitle {
+    color: #ccc;
+    font-size: 18px;
+    max-width: 700px;
+    margin: 0 auto 60px auto;
+    line-height: 1.6;
+}
+
+.stats {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 40px;
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.stat-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 2s ease;
+}
+
+.stat-item.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.number {
+    color: #367153;
+    font-size: 32px;
+    font-weight: bold;
+    margin-bottom: 8px;
+}
+
+.label {
+    color: #aaa;
+    font-size: 15px;
+    text-align: center;
+    line-height: 1.4;
+}
+
+/* Разные направления появления */
+.stat-item[data-anim="left"] {
+    transform: translateX(-50px);
+}
+.stat-item[data-anim="right"] {
+    transform: translateX(50px);
+}
+.stat-item[data-anim="top"] {
+    transform: translateY(-50px);
+}
+.stat-item[data-anim="bottom"] {
+    transform: translateY(50px);
+}
+.stat-item.visible[data-anim="left"],
+.stat-item.visible[data-anim="right"],
+.stat-item.visible[data-anim="top"],
+.stat-item.visible[data-anim="bottom"] {
+    transform: translate(0, 0);
+}
+
+/* Адаптив */
+@media (max-width: 768px) {
+    .about {
+        padding: 40px 15px 70px;
+    }
+
+    .about h2 {
+        font-size: 28px;
+    }
+
+    .about .subtitle {
+        font-size: 16px;
+        margin-bottom: 40px;
+    }
+
+    .stats {
+        gap: 25px;
+    }
+
+    .number {
+        font-size: 26px;
+    }
+}
+</style>
+
+<script>
+// ===== АНИМАЦИЯ ПОЯВЛЕНИЯ =====
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+      animateNumber(entry.target.querySelector('.number')); // Запускаем счетчик
+      observer.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.2 });
+
+document.querySelectorAll('.stat-item').forEach((el, i) => {
+  setTimeout(() => observer.observe(el), i * 150);
+});
+
+// ===== ПЛАВНЫЙ СЧЕТЧИК =====
+function animateNumber(el) {
+  const target = parseInt(el.textContent.replace(/\D/g, '')); // убираем возможные плюсы
+  const duration = 2000; // длительность анимации в мс
+  const startTime = performance.now();
+
+  function update(currentTime) {
+    const elapsed = currentTime - startTime;
+    const progress = Math.min(elapsed / duration, 1);
+    const value = Math.floor(progress * target);
+    el.textContent = value + (el.textContent.includes('+') ? '+' : '');
+    if (progress < 1) {
+      requestAnimationFrame(update);
+    }
+  }
+
+  requestAnimationFrame(update);
+}
+</script>
+
+<section class="info-section-wrapper">
+  <h2 class="section-title">Наше комьюнити</h2>
+  <div class="info-section">
+
+    <!-- Зачем мы это сделали -->
+    <div class="info-card">
+      <div class="icon">
+        <!-- SVG: лампочка идеи / миссия -->
+        <svg width="40" height="40" viewBox="0 0 24 24" fill="#367153" xmlns="http://www.w3.org/2000/svg">
+          <path d="M12 2C7.03 2 3 6.03 3 11C3 14.39 5.08 17.35 8 18.73V21H16V18.73C18.92 17.35 21 14.39 21 11C21 6.03 16.97 2 12 2ZM12 16C9.24 16 7 13.76 7 11C7 8.24 9.24 6 12 6C14.76 6 17 8.24 17 11C17 13.76 14.76 16 12 16Z"/>
+        </svg>
+      </div>
+      <h3>Зачем мы это сделали</h3>
+      <p>Создать пространство, где крипта становится понятной и даёт реальную пользу каждому участнику</p>
+    </div>
+
+    <!-- Кто мы -->
+    <div class="info-card">
+      <div class="icon">
+        <!-- SVG: группа людей / команда -->
+        <svg width="40" height="40" viewBox="0 0 24 24" fill="#367153" xmlns="http://www.w3.org/2000/svg">
+          <path d="M16 11C18.21 11 20 12.79 20 15V18H12V15C12 12.79 13.79 11 16 11ZM8 11C10.21 11 12 12.79 12 15V18H4V15C4 12.79 5.79 11 8 11ZM12 3C13.66 3 15 4.34 15 6C15 7.66 13.66 9 12 9C10.34 9 9 7.66 9 6C9 4.34 10.34 3 12 3Z"/>
+        </svg>
+      </div>
+      <h3>Кто мы</h3>
+      <p>Команда практиков: трейдеры, аналитики и энтузиасты криптовалют, которые делятся опытом и инструментами</p>
+    </div>
+
+    <!-- Какие проекты реализовываем -->
+    <div class="info-card">
+      <div class="icon">
+        <!-- SVG: проекты / стратегия -->
+        <svg width="40" height="40" viewBox="0 0 24 24" fill="#367153" xmlns="http://www.w3.org/2000/svg">
+          <path d="M3 3H21V21H3V3ZM5 5V19H19V5H5ZM7 7H9V17H7V7ZM11 7H13V17H11V7ZM15 7H17V17H15V7Z"/>
+        </svg>
+      </div>
+      <h3>Наши проектым</h3>
+      <p>Обучающие кейсы, инвестиционные стратегии, безопасные гайды и комьюнити-ивенты для участников</p>
+    </div>
+
+    <!-- Новый раздел: Активности -->
+    <div class="info-card">
+      <div class="icon">
+        <!-- SVG: календарь / активности -->
+        <svg width="40" height="40" viewBox="0 0 24 24" fill="#367153" xmlns="http://www.w3.org/2000/svg">
+          <path d="M7 10H9V12H7V10ZM11 10H13V12H11V10ZM15 10H17V12H15V10ZM19 4H18V2H16V4H8V2H6V4H5C3.9 4 3 4.9 3 6V20C3 21.1 3.9 22 5 22H19C20.1 22 21 21.1 21 20V6C21 4.9 20.1 4 19 4ZM19 20H5V9H19V20Z"/>
+        </svg>
+      </div>
+      <h3>Активности</h3>
+      <p>Вебинары, челленджи, турниры и AMA-сессии с экспертами — участвуй и развивайся вместе с комьюнити</p>
+    </div>
+
+  </div>
+</section>
+
+<style>
+.info-section-wrapper {
+  background-color: #0d0d0d;
+  padding: 60px 20px 90px;
+  text-align: center;
+}
+
+.section-title {
+  font-size: 32px;
+  color: #367153;
+  margin-bottom: 50px;
+  font-weight: 700;
+}
+
+.info-section {
+  display: flex;
+  justify-content: center;
+  align-items: stretch;
+  flex-wrap: wrap;
+  gap: 32px;
+}
+
+.info-card {
+  position: relative;
+  width: 280px;
+  padding: 28px 20px;
+  color: #ccc;
+  background: linear-gradient(145deg, #0d0d0d, #141414);
+  border: 2px solid #fff; /* белая рамка */
+  box-shadow: 0 0 16px rgba(54, 113, 83, 0.1);
+  border-radius: 14px;
+  transition: all 0.3s ease;
+}
+
+.info-card::before {
+  content: "";
+  position: absolute;
+  top: 5px;
+  left: 5px;
+  right: 5px;
+  bottom: 5px;
+  border: 1px solid #367153;
+  border-radius: 12px;
+  pointer-events: none;
+}
+
+.info-card .icon {
+  margin-bottom: 14px;
+  transition: transform 0.3s;
+}
+
+.info-card:hover .icon {
+  transform: scale(1.2) rotate(-10deg);
+}
+
+.info-card h3 {
+  color: #367153;
+  font-size: 20px;
+  margin-bottom: 14px;
+  font-weight: 600;
+  text-align: center;
+}
+
+.info-card p {
+  color: #ddd;
+  font-size: 15px;
+  line-height: 1.6;
+  text-align: center;
+}
+
+.info-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 8px 30px rgba(54, 113, 83, 0.5);
+  border-color: #8ef1a4;
+}
+
+@media (max-width: 950px) {
+  .info-section {
+    flex-wrap: wrap;
+    gap: 24px;
+    justify-content: center;
+  }
+  .info-card {
+    width: 100%;
+    max-width: 320px;
+    margin: 0 auto;
+    margin-bottom: 24px;
+  }
+}
+</style>
+
+
+
+
+<section class="team-section">
+  <h2>Наша команда</h2>
+  <p class="team-subtitle">Люди, которые создают и развивают ApeVault</p>
+
+  <div class="team-grid">
+    <div class="team-card">
+      <div class="team-photo">
+        <img src="olga.jpg" alt="Ольга">
+      </div>
+      <h3>Ольга</h3>
+      <p>Спикер, NFT-трейдер, бывший арбитражник, ныне - фьючерсная торговля</p>
+    </div>
+
+    <div class="team-card">
+      <div class="team-photo">
+        <img src="kseniya.jpg" alt="Ксения">
+      </div>
+      <h3>Ксения</h3>
+      <p>Спикер, спотовая торговля, торговля мемкоинами и подарками TG</p>
+    </div>
+
+    <div class="team-card">
+      <div class="team-photo">
+        <img src="artem.jpg" alt="Артём">
+      </div>
+      <h3>Артём</h3>
+      <p>Разработчик и координатор обучения, архитектор экосистемы, торговля мемкоинами и спотовая</p>
+    </div>
+  </div>
+</section>
+<style>
+
+/* ===== СЕКЦИЯ КОМАНДЫ ===== */
+.team-section {
+  text-align: center;
+  background-color: #0d0d0d;
+  padding: 50px 20px 100px; /* уменьшили верхний отступ */
+  color: #ddd;
+}
+
+.team-section h2 {
+  color: #367153;
+  font-size: 36px;
+  margin-bottom: 10px;
+}
+
+.team-subtitle {
+  font-size: 18px;
+  color: #bbb;
+  margin-bottom: 60px;
+}
+
+.team-grid {
+  display: flex;
+  justify-content: center;
+  align-items: stretch;
+  flex-wrap: nowrap;
+  gap: 50px;
+}
+
+/* ===== КАРТОЧКА ===== */
+.team-card {
+  background: #111;
+  border: 1.5px solid #fff;
+  position: relative;
+  width: 280px;
+  padding: 25px 20px 35px;
+  box-shadow: 0 0 20px rgba(54, 113, 83, 0.15);
+  opacity: 0;               /* скрыта до анимации */
+  transform: translateY(40px); /* стартовая позиция для анимации */
+  transition: all 0.3s ease;
+}
+
+.team-card::before {
+  content: "";
+  position: absolute;
+  top: 5px;
+  left: 5px;
+  right: 5px;
+  bottom: 5px;
+  border: 1px solid #367153;
+  pointer-events: none;
+}
+
+.team-card.visible {
+  opacity: 1;
+  transform: translateY(0);
+  transition: all 0.6s ease-out;
+}
+
+/* hover: приподнятие и тряска */
+.team-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 0 35px rgba(54, 113, 83, 0.4);
+  animation: shake-hover 0.5s ease-in-out;
+  cursor: pointer;
+}
+
+/* ===== ФОТО ===== */
+.team-photo {
+  width: 100%;
+  height: 280px;
+  overflow: hidden;
+  border-radius: 10px;
+  margin-bottom: 20px;
+  border: 2px solid #367153;
+}
+
+.team-photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: grayscale(30%);
+  transition: all 0.4s ease;
+}
+
+.team-card:hover img {
+  filter: grayscale(0%);
+  transform: scale(1.05);
+}
+
+/* ===== ИМЯ И РОЛЬ ===== */
+.team-card h3 {
+  color: #367153;
+  font-size: 20px;
+  margin-bottom: 6px;
+}
+
+.team-card p {
+  font-size: 15px;
+  color: #ccc;
+}
+
+/* ===== АДАПТИВ ===== */
+@media (max-width: 950px) {
+  .team-grid {
+    flex-wrap: wrap;
+    gap: 30px;
+  }
+  .team-card {
+    width: 90%;
+    max-width: 300px;
+    margin: 0 auto;
+  }
+}
+
+/* ===== АНИМАЦИЯ ТРЯСКИ НА HOVER ===== */
+@keyframes shake-hover {
+  0%  { transform: translateY(-5px) rotate(0); }
+  10% { transform: translate(-2px, -2px) rotate(-0.4deg); }
+  25% { transform: translate(2px, 2px) rotate(0.4deg); }
+  50% { transform: translate(-1px, 1px) rotate(-0.3deg); }
+  75% { transform: translate(1px, -1px) rotate(0.3deg); }
+  100%{ transform: translateY(-5px) rotate(0); }
+}
+</style>
+
+<script>
+// ===== ПОЯВЛЕНИЕ КАРТОЧЕК ПО ОЧЕРЕДИ =====
+const teamObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if(entry.isIntersecting) {
+      entry.target.classList.add('visible');
+      teamObserver.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.3 });
+
+document.querySelectorAll('.team-card').forEach((el, i) => {
+  setTimeout(() => teamObserver.observe(el), i * 200); // по очереди с задержкой
+});
+</script>
+
+<section id="ecosystem">
+  <div class="ecosystem-container">
+    <h2>Наша экосистема</h2>
+    <p class="ecosystem-subtitle">Мы строим не просто комьюнити, а полноценную экосистему с инструментами для трейдинга, обучения и защиты наших участников</p>
+
+    <div class="ecosystem-grid">
+      <div class="ecosystem-card" data-animate="left">
+        <div class="card-inner">
+          <span class="eco-num">1</span>
+          <h3>Чат с любителями и профи</h3>
+          <p class="card-desc">Общение с новичками и экспертами, обмен стратегиями и опытом.</p>
+          <button class="card-info">i</button>
+        </div>
+      </div>
+
+      <div class="ecosystem-card" data-animate="bottom">
+        <div class="card-inner">
+          <span class="eco-num">2</span>
+          <h3>Обучение по всем популярным отраслям крипты</h3>
+          <p class="card-desc">Курсы, гайды и практические кейсы по разным направлениям.</p>
+          <button class="card-info">i</button>
+        </div>
+      </div>
+
+      <div class="ecosystem-card" data-animate="right">
+        <div class="card-inner">
+          <span class="eco-num">3</span>
+          <h3>Сервисы для торговли и анализа</h3>
+          <p class="card-desc">Инструменты для мониторинга, анализа и торговли криптой.</p>
+          <button class="card-info">i</button>
+        </div>
+      </div>
+
+      <div class="ecosystem-card" data-animate="left">
+        <div class="card-inner">
+          <span class="eco-num">4</span>
+          <h3>Торговый терминал для мемкоинов</h3>
+          <p class="card-desc">Удобная платформа для быстрой торговли мемкоинами.</p>
+          <button class="card-info">i</button>
+        </div>
+      </div>
+
+      <div class="ecosystem-card" data-animate="bottom">
+        <div class="card-inner">
+          <span class="eco-num">5</span>
+          <h3>Ивент-мероприятия, в том числе очные</h3>
+          <p class="card-desc">Мероприятия и встречи для обмена опытом и налаживания контактов.</p>
+          <button class="card-info">i</button>
+        </div>
+      </div>
+      <div class="ecosystem-card" data-animate="right">
+  <div class="card-inner">
+    <span class="eco-num">6</span>
+    <h3>Программа лояльности</h3>
+    <p class="card-desc">Бонусы и привилегии для активных участников и учеников ApeVault.</p>
+    <button class="card-info">i</button>
+  </div>
+</div>
+
+<div class="ecosystem-card" data-animate="left">
+  <div class="card-inner">
+    <span class="eco-num">7</span>
+    <h3>Резервный пул</h3>
+    <p class="card-desc">Защита вложений участников через собственную систему компенсации сообщества.</p>
+    <button class="card-info">i</button>
+  </div>
+</div>
+
+<div class="ecosystem-card" data-animate="bottom">
+  <div class="card-inner">
+    <span class="eco-num">8</span>
+    <h3>Колесо фортуны</h3>
+    <p class="card-desc">Геймифицированный способ получать призы, бонусы и скидки внутри экосистемы.</p>
+    <button class="card-info">i</button>
+  </div>
+</div>
+
+    </div>
+  </div>
+</section>
+
+<style>
+  #ecosystem {
+    background-color: #0d0d0d;
+    color: #fff;
+    padding: 60px 20px;
+    margin-top: -40px;
+    text-align: center;
+  }
+
+  .ecosystem-container h2 {
+    color: #367153;
+    font-size: 2.5rem;
+    margin-bottom: 10px;
+  }
+
+  .ecosystem-subtitle {
+    color: #aaa;
+    margin-bottom: 50px;
+    font-size: 1rem;
+  }
+
+  .ecosystem-grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 30px;
+  }
+
+  .ecosystem-card {
+    width: 300px;
+    border: 3px solid #fff; /* внешняя белая рамка */
+    border-radius: 16px;
+    padding: 5px;
+    background: #0d0d0d;
+    opacity: 1; /* сразу видимы */
+    transform: translateY(0); /* по умолчанию без смещения */
+    transition: all 0.4s ease;
+  }
+
+  .card-inner {
+    border: 2px solid #367153;
+    border-radius: 12px;
+    width: 100%;
+    height: 250px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    box-sizing: border-box;
+    position: relative;
+    background: #111;
+  }
+
+  .eco-num {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    font-size: 36px;
+    color: #367153;
+    opacity: 0.25;
+  }
+
+  .ecosystem-card h3 {
+    color: #367153;
+    margin-top: 20px;
+    font-size: 1.2rem;
+    text-align: center;
+  }
+
+  .card-desc {
+    color: #ddd;
+    font-size: 0.95rem;
+    margin-top: 10px;
+    text-align: center;
+  }
+
+  .card-info {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    background: #367153;
+    color: #fff;
+    border: none;
+    border-radius: 50%;
+    width: 28px;
+    height: 28px;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 16px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .ecosystem-card:hover .card-inner {
+    animation: shake 0.5s ease-in-out;
+    transform: scale(1.03);
+    box-shadow: 0 0 25px rgba(54,113,83,0.5);
+  }
+
+  @keyframes shake {
+    0% { transform: scale(1.03) translate(0,0); }
+    25% { transform: scale(1.03) translate(-2px,1px); }
+    50% { transform: scale(1.03) translate(2px,-1px); }
+    75% { transform: scale(1.03) translate(-1px,2px); }
+    100% { transform: scale(1.03) translate(0,0); }
+  }
+
+  /* адаптивность */
+  @media (max-width: 768px) {
+    .ecosystem-card { width: 90%; }
+    .ecosystem-container h2 { font-size: 2rem; }
+    .card-inner { height: auto; }
+  }
+</style>
+
+<script>
+  // плавное появление с задержкой (но карточки сразу видны)
+  const cards = document.querySelectorAll('.ecosystem-card');
+  cards.forEach((card, i) => {
+    setTimeout(() => {
+      card.style.opacity = '1';
+      card.style.transform = 'translateY(0)';
+    }, i * 200);
+  });
+</script>
+
+<!-- Модальное окно -->
+<div id="chatModal" class="modal">
+  <div class="modal-content">
+    <span class="close">&times;</span>
+    <h3>Чаты нашего сообщества</h3>
+    <ul class="chat-list">
+      <li><strong>Чат по обучению:</strong> включает несколько подчатов внутри обучения (если вы на курсе)</li>
+      <li><strong>Общий чат:</strong> все участники сообщества</li>
+      <li><strong>Чат обмена:</strong> где делятся наработками, токенами, обсуждают рынок</li>
+      <li><strong>Чат пула сообщества:</strong> только для участников программы пула</li>
+    </ul>
+  </div>
+</div>
+
+<style>
+  /* Стили модалки */
+  .modal {
+    display: none; /* скрыто по умолчанию */
+    position: fixed;
+    z-index: 999;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.8); /* затемнение */
+    animation: fadeIn 0.3s ease;
+  }
+
+  .modal-content {
+    background-color: #111;
+    margin: 10% auto;
+    padding: 20px;
+    border: 2px solid #367153;
+    border-radius: 12px;
+    width: 80%;
+    max-width: 500px;
+    color: #fff;
+    text-align: left;
+    position: relative;
+    animation: scaleIn 0.3s ease;
+  }
+
+  .modal-content h3 {
+    color: #367153;
+    text-align: center;
+    margin-bottom: 15px;
+  }
+
+  .chat-list {
+    list-style: none;
+    padding-left: 0;
+  }
+
+  .chat-list li {
+    margin-bottom: 10px;
+    padding-left: 10px;
+    border-left: 3px solid #367153;
+  }
+
+  .close {
+    color: #fff;
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: color 0.2s;
+  }
+
+  .close:hover {
+    color: #367153;
+  }
+
+  @keyframes fadeIn {
+    from {opacity: 0;}
+    to {opacity: 1;}
+  }
+
+  @keyframes scaleIn {
+    from {transform: scale(0.8);}
+    to {transform: scale(1);}
+  }
+</style>
+
+<script>
+  // Получаем модалку и кнопку
+  const modal = document.getElementById('chatModal');
+  const btn = document.querySelector('.ecosystem-card:first-child .card-info');
+  const close = document.querySelector('.modal .close');
+
+  // Открытие
+  btn.onclick = function() {
+    modal.style.display = 'block';
+  }
+
+  // Закрытие при нажатии на X
+  close.onclick = function() {
+    modal.style.display = 'none';
+  }
+
+  // Закрытие при клике вне модалки
+  window.onclick = function(event) {
+    if (event.target == modal) {
+      modal.style.display = 'none';
+    }
+  }
+</script>
+<!-- Модальное окно для второй карточки -->
+<div id="learningModal" class="modal">
+  <div class="modal-content">
+    <span class="close">&times;</span>
+    <h3>Обучение — модули и особенности</h3>
+
+    <ul class="module-list">
+      <li><span class="num">1</span><b>Начало твоего пути</b></li>
+      <li><span class="num">2</span><b>Введение в крипту</b></li>
+      <li><span class="num">3</span><b>Психологический блок</b></li>
+      <li><span class="num">4</span><b>Безопасность операций с криптовалютой</b></li>
+      <li><span class="num">5</span><b>Биржи и работа с ними</b></li>
+      <li><span class="num">6</span><b>Фундаментальный анализ</b></li>
+      <li><span class="num">7</span><b>Технический анализ</b></li>
+      <li><span class="num">8</span><b>Спот-торговля</b></li>
+      <li><span class="num">9</span><b>Фьючерсная торговля</b></li>
+      <li><span class="num">10</span><b>Стейкинг</b></li>
+      <li><span class="num">11</span><b>DeFi</b></li>
+      <li><span class="num">12</span><b>Airdrop</b></li>
+      <li><span class="num">13</span><b>Мемкоины</b></li>
+      <li><span class="num">14</span><b>Арбитраж</b></li>
+      <li><span class="num">15</span><b>NFT</b></li>
+      <li><span class="num">16</span><b>Цифровой капитал Telegram</b></li>
+    </ul>
+
+    <p>
+      Каждый модуль содержит уроки — от теории до практики, с <b>видео-материалами, гайдами и инструментами</b>.  
+      Для всех тарифов предоставляется <b>тестовая сумма активов</b> на обучающем кошельке — тренируйся без риска потерь.  
+      Всё, что заработаешь, будет переведено на твой реальный счёт (CEX или DEX).
+    </p>
+
+    <p>
+      Участники обучения получают доступ к <b>закрытым AMA-сессиям, чатам и премиум-сигналам</b>.  
+      При желании можно купить отдельные модули, но доступ к чатам обучения и сигналам открыт только при покупке <b>от 10 модулей</b>.
+    </p>
+
+    <p>
+      Также предусмотрена рассрочка — <b>от нас или банков-партнёров</b>.  
+      Подробнее смотри в разделе «Тарифы».
+    </p>
+  </div>
+</div>
+
+<style>
+  /* --- Общие стили модалки --- */
+  .modal {
+    display: none;
+    position: fixed;
+    z-index: 999;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow-y: auto;
+    background-color: rgba(0, 0, 0, 0.85);
+    animation: fadeIn 0.3s ease;
+  }
+
+  .modal-content {
+    background: #111;
+    color: #fff;
+    margin: 5% auto;
+    padding: 30px;
+    border: 2px solid #2f6c4f;
+    border-radius: 18px;
+    max-width: 750px;
+    width: 90%;
+    position: relative;
+    animation: scaleIn 0.3s ease;
+    line-height: 1.6;
+  }
+
+  .modal-content h3 {
+    text-align: center;
+    color: #3ea16f;
+    margin-bottom: 25px;
+    font-size: 1.6em;
+    letter-spacing: 0.5px;
+  }
+
+  /* --- Нумерация модулей --- */
+  .module-list {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 25px 0;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .module-list li {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    background: #1b1b1b;
+    padding: 10px 15px;
+    border-radius: 10px;
+    border: 1px solid #2f6c4f;
+    transition: all 0.25s ease;
+    transform: translateY(10px);
+    opacity: 0;
+    animation: slideUp 0.4s forwards;
+  }
+
+  .module-list li:hover {
+    background: #162a20;
+    transform: translateY(-3px) scale(1.02);
+  }
+
+  .module-list li:nth-child(odd) .num {
+    background: #3ea16f;
+  }
+
+  .num {
+    min-width: 28px;
+    height: 28px;
+    background: #2f6c4f;
+    color: #fff;
+    border-radius: 50%;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+    font-size: 0.9em;
+    flex-shrink: 0;
+  }
+
+  /* --- Текст и параграфы --- */
+  p {
+    margin-bottom: 18px;
+    color: #ddd;
+  }
+
+  b {
+    color: #3ea16f;
+  }
+
+  /* --- Закрытие окна --- */
+  .close {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    font-size: 28px;
+    font-weight: bold;
+    color: #fff;
+    cursor: pointer;
+    transition: color 0.2s;
+  }
+
+  .close:hover {
+    color: #3ea16f;
+  }
+
+  /* --- Анимации --- */
+  @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+  @keyframes scaleIn { from { transform: scale(0.8); } to { transform: scale(1); } }
+
+  @keyframes slideUp {
+    0% { transform: translateY(20px); opacity: 0; }
+    100% { transform: translateY(0); opacity: 1; }
+  }
+
+  /* Плавное последовательное появление пунктов */
+  .module-list li:nth-child(1) { animation-delay: 0.1s; }
+  .module-list li:nth-child(2) { animation-delay: 0.15s; }
+  .module-list li:nth-child(3) { animation-delay: 0.2s; }
+  .module-list li:nth-child(4) { animation-delay: 0.25s; }
+  .module-list li:nth-child(5) { animation-delay: 0.3s; }
+  .module-list li:nth-child(6) { animation-delay: 0.35s; }
+  .module-list li:nth-child(7) { animation-delay: 0.4s; }
+  .module-list li:nth-child(8) { animation-delay: 0.45s; }
+  .module-list li:nth-child(9) { animation-delay: 0.5s; }
+  .module-list li:nth-child(10) { animation-delay: 0.55s; }
+  .module-list li:nth-child(11) { animation-delay: 0.6s; }
+  .module-list li:nth-child(12) { animation-delay: 0.65s; }
+  .module-list li:nth-child(13) { animation-delay: 0.7s; }
+  .module-list li:nth-child(14) { animation-delay: 0.75s; }
+  .module-list li:nth-child(15) { animation-delay: 0.8s; }
+  .module-list li:nth-child(15) { animation-delay: 0.9s; }
+
+</style>
+
+<script>
+  // Модальное окно второй карточки
+  const learningModal = document.getElementById('learningModal');
+  const learningBtn = document.querySelector('.ecosystem-card:nth-child(2) .card-info');
+  const learningClose = learningModal.querySelector('.close');
+
+  learningBtn.onclick = () => learningModal.style.display = 'block';
+  learningClose.onclick = () => learningModal.style.display = 'none';
+  window.onclick = (event) => {
+    if (event.target === learningModal) learningModal.style.display = 'none';
+  };
+</script>
+
+<!-- Модальное окно для третьей карточки -->
+<div id="servicesModal" class="modal">
+  <div class="modal-content">
+    <span class="close">&times;</span>
+    <h3>Наши сервисы и инструменты</h3>
+
+    <ul class="service-list">
+      <li>
+        <span class="num">1</span>
+        <strong>Бот для отслеживания сделок кошельков:</strong>
+        <p>
+          Следи за транзакциями любых кошельков — как своих, так и популярных трейдеров.
+          Повторяй сделки прямо в нашем терминале с <b>пониженной комиссией</b> или переходи мгновенно
+          в Axiom / GMGN.
+        </p>
+      </li>
+
+      <li>
+        <span class="num">2</span>
+        <strong>Бот для анализа новых токенов:</strong>
+        <p>
+          Анализирует новые токены (от момента появления до 14 дней) и присылает сигналы:
+          <b>объём, ликвидность, капитализация, аудит Dex</b> и динамика роста.
+        </p>
+      </li>
+
+      <li>
+        <span class="num">3</span>
+        <strong>Торговый терминал ApeVault:</strong>
+        <p>
+          Удобный инструмент для анализа и торговли: графики, результаты, интеграция с ботами и
+          аналитика по твоим позициям.
+        </p>
+      </li>
+    </ul>
+
+    <p>
+      Также ты получаешь <b>подборку внешних сервисов</b>, которыми мы пользуемся сами — от анализа до
+      торговли, с подробными гайдами.  
+      Например, один сервис позволяет видеть кошельки пользователей в X, проверять, кому они принадлежат,
+      оставлять заметки и многое другое.
+    </p>
+  </div>
+</div>
+
+<style>
+  /* Изолированные стили для #servicesModal */
+  #servicesModal.modal {
+    display: none;
+    position: fixed;
+    z-index: 999;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.8);
+    animation: fadeIn 0.3s ease;
+  }
+
+  #servicesModal .modal-content {
+    background-color: #111;
+    margin: 5% auto;
+    padding: 25px;
+    border: 2px solid #367153;
+    border-radius: 14px;
+    width: 85%;
+    max-width: 600px;
+    color: #fff;
+    position: relative;
+    animation: scaleIn 0.3s ease;
+  }
+
+  #servicesModal .modal-content h3 {
+    color: #367153;
+    text-align: center;
+    margin-bottom: 20px;
+  }
+
+  #servicesModal .service-list {
+    list-style: none;
+    padding-left: 0;
+    margin-bottom: 15px;
+  }
+
+  #servicesModal .service-list li {
+    margin-bottom: 18px;
+    position: relative;
+    padding-left: 50px;
+    border-left: 3px solid transparent;
+    transition: border-color 0.3s ease;
+  }
+
+  #servicesModal .service-list li:hover {
+  }
+
+  #servicesModal .service-list p {
+    margin: 6px 0 0 0;
+    line-height: 1.5;
+    color: #ddd;
+  }
+
+  #servicesModal .num {
+    position: absolute;
+    left: 0;
+    top: 2px;
+    width: 30px;
+    height: 30px;
+    background: radial-gradient(circle at center, #367153 0%, #1a3a28 100%);
+    border-radius: 50%;
+    color: #fff;
+    text-align: center;
+    line-height: 30px;
+    font-weight: bold;
+    box-shadow: 0 0 10px rgba(54, 113, 83, 0.6);
+    transition: transform 0.2s ease, box-shadow 0.3s ease;
+  }
+
+  #servicesModal .service-list li:hover .num {
+    transform: scale(1.1);
+    box-shadow: 0 0 15px rgba(54, 113, 83, 1);
+  }
+
+  #servicesModal .close {
+    color: #fff;
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: color 0.2s;
+  }
+
+  #servicesModal .close:hover {
+    color: #367153;
+  }
+
+  @keyframes fadeIn { from {opacity: 0;} to {opacity: 1;} }
+  @keyframes scaleIn { from {transform: scale(0.8);} to {transform: scale(1);} }
+</style>
+
+<script>
+  // Модальное окно для третьей карточки
+  const servicesModal = document.getElementById('servicesModal');
+  const servicesBtn = document.querySelector('.ecosystem-card:nth-child(3) .card-info');
+  const servicesClose = servicesModal.querySelector('.close');
+
+  servicesBtn.onclick = () => servicesModal.style.display = 'block';
+  servicesClose.onclick = () => servicesModal.style.display = 'none';
+  window.onclick = (event) => { if (event.target === servicesModal) servicesModal.style.display = 'none'; }
+</script>
+
+<!-- Модальное окно для 4-го пункта -->
+<div id="terminalModal" class="modal">
+  <div class="modal-content">
+    <span class="close">&times;</span>
+    <h3>Торговый терминал для мемкоинов</h3>
+    <p>
+      Добро пожаловать в наш продвинутый терминал для мемкоинов! Здесь ты получаешь:
+    </p>
+    <ul class="terminal-features">
+      <li><strong>Мониторинг новых токенов:</strong> мгновенные уведомления о появлении мемкоинов на рынке.</li>
+      <li><strong>Анализ ликвидности и капитализации:</strong> подробные графики и показатели для оценки риска.</li>
+      <li><strong>Тестирование стратегий:</strong> симулятор сделок и возможность проверять свои стратегии без потерь.</li>
+      <li><strong>Графики и индикаторы:</strong> свечные, линейные, объёмные графики, а также стандартные индикаторы TA.</li>
+      <li><strong>Уведомления и сигналы:</strong> настраиваемые уведомления о резких движениях, FOMO, FUD и ликвидности.</li>
+      <li><strong>Низкая комиссия:</strong> совершай сделки с минимальными затратами по сравнению с другими платформами.</li>
+      <li><strong>Безопасность:</strong> мы шифруем данные и защищаем твои активы с помощью проверенных протоколов.</li>
+    </ul>
+    <p>
+      Всё собрано в одном интерфейсе: удобно, безопасно и максимально эффективно для анализа и торговли мемкоинами.
+    </p>
+    <div class="terminal-demo">
+      <p><strong>Пример интерфейса:</strong></p>
+      <div class="chart-placeholder">[График мемкоина]</div>
+      <div class="stats-placeholder">
+        <div>Ликвидность: 25 000 $</div>
+        <div>Капитализация: 120 000 $</div>
+        <div>24ч изменение: +12%</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Модальное окно для 5-го пункта -->
+<div id="eventsModal" class="modal">
+  <div class="modal-content">
+    <span class="close">&times;</span>
+    <h3>Ивент-мероприятия сообщества</h3>
+    <p>
+      Мы создаём платформу для общения и обмена опытом. В наших мероприятиях ты можешь:
+    </p>
+    <ul class="event-list">
+      <li><span class="num">1</span> Онлайн-встречи и AMA-сессии с экспертами — задавай вопросы напрямую профессионалам.</li>
+      <li><span class="num">2</span> Очные мероприятия и воркшопы — практика, разбор кейсов и новые знакомства.</li>
+      <li><span class="num">3</span> Комьюнити-чаты для обмена опытом, сигналами и инсайтами по мемкоинам.</li>
+      <li><span class="num">4</span> Конкурсы и челленджи — проверяй свои навыки в реальном времени и выигрывай призы.</li>
+      <li><span class="num">5</span> Обучающие сессии — мини-курсы и гайды прямо от трейдеров и аналитиков сообщества.</li>
+    </ul>
+  </div>
+</div>
+
+<style>
+  /* Общие стили для обоих модальных окон */
+  #terminalModal.modal,
+  #eventsModal.modal {
+    display: none;
+    position: fixed;
+    z-index: 999;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.85);
+    animation: fadeIn 0.3s ease;
+  }
+
+  #terminalModal .modal-content,
+  #eventsModal .modal-content {
+    background-color: #111;
+    margin: 3% auto;
+    padding: 30px;
+    border: 2px solid #367153;
+    border-radius: 14px;
+    width: 85%;
+    max-width: 650px;
+    color: #fff;
+    position: relative;
+    animation: scaleIn 0.3s ease;
+    box-shadow: 0 0 20px rgba(54,113,83,0.6);
+  }
+
+  #terminalModal .modal-content h3,
+  #eventsModal .modal-content h3 {
+    color: #367153;
+    text-align: center;
+    margin-bottom: 25px;
+  }
+
+  #terminalModal .terminal-features {
+    list-style: disc inside;
+    margin-left: 0;
+    margin-bottom: 20px;
+  }
+
+  #terminalModal .terminal-features li {
+    margin-bottom: 12px;
+    line-height: 1.5;
+  }
+
+  #terminalModal .terminal-demo {
+    background-color: #1a1a1a;
+    border: 1px solid #367153;
+    border-radius: 10px;
+    padding: 15px;
+    text-align: center;
+  }
+
+  #terminalModal .chart-placeholder {
+    height: 150px;
+    background: radial-gradient(circle at center, #367153 0%, #0a1a0f 100%);
+    margin-bottom: 15px;
+    border-radius: 8px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #fff;
+    font-weight: bold;
+  }
+
+  #terminalModal .stats-placeholder div {
+    margin-bottom: 6px;
+  }
+
+  #eventsModal .event-list {
+    list-style: none;
+    padding-left: 0;
+  }
+
+  #eventsModal .event-list li {
+    margin-bottom: 15px;
+    position: relative;
+    padding-left: 45px;
+  }
+
+  #eventsModal .num {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 30px;
+    height: 30px;
+    background: radial-gradient(circle at center, #367153 0%, #1a3a28 100%);
+    border-radius: 50%;
+    color: #fff;
+    text-align: center;
+    line-height: 30px;
+    font-weight: bold;
+    box-shadow: 0 0 10px rgba(54,113,83,0.6);
+  }
+
+  #terminalModal .close,
+  #eventsModal .close {
+    color: #fff;
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: color 0.2s;
+  }
+
+  #terminalModal .close:hover,
+  #eventsModal .close:hover {
+    color: #367153;
+  }
+
+  @keyframes fadeIn { from {opacity: 0;} to {opacity: 1;} }
+  @keyframes scaleIn { from {transform: scale(0.85);} to {transform: scale(1);} }
+</style>
+
+<script>
+  // Модальное окно 4-го пункта
+  const terminalModal = document.getElementById('terminalModal');
+  const terminalBtn = document.querySelector('.ecosystem-card:nth-child(4) .card-info');
+  const terminalClose = terminalModal.querySelector('.close');
+  terminalBtn.onclick = () => terminalModal.style.display = 'block';
+  terminalClose.onclick = () => terminalModal.style.display = 'none';
+
+  // Модальное окно 5-го пункта
+  const eventsModal = document.getElementById('eventsModal');
+  const eventsBtn = document.querySelector('.ecosystem-card:nth-child(5) .card-info');
+  const eventsClose = eventsModal.querySelector('.close');
+  eventsBtn.onclick = () => eventsModal.style.display = 'block';
+  eventsClose.onclick = () => eventsModal.style.display = 'none';
+
+  // Закрытие при клике вне модалки
+  window.onclick = (event) => {
+    if(event.target === terminalModal) terminalModal.style.display = 'none';
+    if(event.target === eventsModal) eventsModal.style.display = 'none';
+  }
+</script>
+
+<!-- Модальное окно для 6-го пункта -->
+<div id="loyaltyModal" class="modal">
+  <div class="modal-content">
+    <span class="close">&times;</span>
+    <h3>Программа лояльности</h3>
+    <p>
+      Активные участники и ученики ApeVault получают эксклюзивные бонусы и привилегии:
+    </p>
+    <ul>
+      <li>Скидки на курсы и образовательные материалы</li>
+      <li>Доступ к закрытым каналам и аналитике</li>
+      <li>Бонусные токены и награды за активность</li>
+      <li>Участие в специальных розыгрышах и челленджах</li>
+    </ul>
+    <p>Чем больше ты участвуешь и развиваешься, тем больше привилегий открывается!</p>
+  </div>
+</div>
+
+<!-- Модальное окно для 7-го пункта -->
+<div id="reserveModal" class="modal">
+  <div class="modal-content">
+    <span class="close">&times;</span>
+    <h3>Резервный пул</h3>
+    <p>
+      Наша система резервного пула защищает вложения участников через:
+    </p>
+    <ul>
+      <li>Прозрачное распределение средств участников</li>
+      <li>Надёжную систему страхования рисков</li>
+    </ul>
+    <p>Это повышает безопасность и доверие внутри нашей экосистемы.</p>
+  </div>
+</div>
+
+<!-- Модальное окно для 8-го пункта -->
+<div id="wheelModal" class="modal">
+  <div class="modal-content">
+    <span class="close">&times;</span>
+    <h3>Колесо фортуны</h3>
+    <p>
+      Геймифицированный способ получать призы, бонусы и скидки внутри экосистемы:
+    </p>
+    <ul>
+      <li>Выигрыши: скидки на обучение, специальные призы</li>
+      <li>Соревновательный элемент и челленджи для мотивации</li>
+    </ul>
+    <p>Играй, развивайся и получай свои награды вместе с комьюнити!</p>
+  </div>
+</div>
+
+<style>
+/* Общие стили для модальных окон */
+#loyaltyModal.modal, #reserveModal.modal, #wheelModal.modal {
+    display: none;
+    position: fixed;
+    z-index: 999;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background: rgba(0,0,0,0.85);
+    animation: fadeIn 0.3s ease;
+    font-family: 'Inter', sans-serif;
+}
+
+/* Контейнер модалки */
+#loyaltyModal .modal-content, #reserveModal .modal-content, #wheelModal .modal-content {
+    background: linear-gradient(145deg, #111, #1a1a1a);
+    margin: 3% auto;
+    padding: 35px 40px;
+    border: 2px solid #367153;
+    border-radius: 16px;
+    width: 85%;
+    max-width: 650px;
+    color: #fff;
+    position: relative;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.7);
+    animation: scaleIn 0.3s ease;
+    transition: transform 0.2s ease;
+}
+
+#loyaltyModal .modal-content:hover,
+#reserveModal .modal-content:hover,
+#wheelModal .modal-content:hover {
+    transform: scale(1.02);
+}
+
+/* Заголовки */
+#loyaltyModal h3, #reserveModal h3, #wheelModal h3 {
+    color: #367153;
+    text-align: center;
+    margin-bottom: 25px;
+    text-shadow: 1px 1px 4px rgba(0,0,0,0.5);
+}
+
+/* Списки */
+#loyaltyModal ul, #reserveModal ul, #wheelModal ul {
+    list-style: none;
+    padding-left: 0;
+    margin-bottom: 20px;
+}
+
+#loyaltyModal ul li, #reserveModal ul li, #wheelModal ul li {
+    position: relative;
+    padding-left: 30px;
+    margin-bottom: 15px;
+    font-size: 16px;
+    line-height: 1.5;
+    transition: transform 0.2s, color 0.2s;
+}
+
+/* Иконки для каждого пункта */
+#loyaltyModal ul li:nth-child(1)::before { content: '🎓'; }
+#loyaltyModal ul li:nth-child(2)::before { content: '🔒'; }
+#loyaltyModal ul li:nth-child(3)::before { content: '💎'; }
+#loyaltyModal ul li:nth-child(4)::before { content: '🏆'; }
+
+#reserveModal ul li:nth-child(1)::before { content: '💰'; } /* Прозрачное распределение */
+#reserveModal ul li:nth-child(2)::before { content: '🛡️'; } /* Надёжная система страхования */
+
+#wheelModal ul li:nth-child(1)::before { content: '🎁'; } /* Скидки и призы */
+#wheelModal ul li:nth-child(2)::before { content: '🎯'; } /* Соревновательный элемент */
+
+/* Общие стили для иконок */
+#loyaltyModal ul li::before,
+#reserveModal ul li::before,
+#wheelModal ul li::before {
+    position: absolute;
+    left: 0;
+    top: 0;
+    font-size: 20px;
+    transition: transform 0.2s, color 0.2s;
+}
+
+/* Hover эффекты для пунктов */
+#loyaltyModal ul li:hover,
+#reserveModal ul li:hover,
+#wheelModal ul li:hover {
+    color: #8ef1a4;
+    transform: translateX(6px);
+}
+
+#loyaltyModal ul li:hover::before,
+#reserveModal ul li:hover::before,
+#wheelModal ul li:hover::before {
+    transform: scale(1.3);
+}
+
+/* Абзацы */
+#loyaltyModal p, #reserveModal p, #wheelModal p {
+    margin-bottom: 20px;
+    font-size: 15px;
+    line-height: 1.6;
+    color: #ccc;
+}
+
+/* Кнопка закрытия */
+#loyaltyModal .close, #reserveModal .close, #wheelModal .close {
+    color: #fff;
+    position: absolute;
+    top: 12px;
+    right: 20px;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+#loyaltyModal .close:hover, #reserveModal .close:hover, #wheelModal .close:hover {
+    color: #8ef1a4;
+    transform: rotate(90deg);
+}
+
+/* Анимации */
+@keyframes fadeIn { from {opacity: 0;} to {opacity: 1;} }
+@keyframes scaleIn { from {transform: scale(0.8);} to {transform: scale(1);} }
+</style>
+
+<script>
+  // Модальные окна для карточек 6–8
+  const loyaltyModal = document.getElementById('loyaltyModal');
+  const loyaltyBtn = document.querySelector('.ecosystem-card:nth-child(6) .card-info');
+  const loyaltyClose = loyaltyModal.querySelector('.close');
+  loyaltyBtn.onclick = () => loyaltyModal.style.display = 'block';
+  loyaltyClose.onclick = () => loyaltyModal.style.display = 'none';
+
+  const reserveModal = document.getElementById('reserveModal');
+  const reserveBtn = document.querySelector('.ecosystem-card:nth-child(7) .card-info');
+  const reserveClose = reserveModal.querySelector('.close');
+  reserveBtn.onclick = () => reserveModal.style.display = 'block';
+  reserveClose.onclick = () => reserveModal.style.display = 'none';
+
+  const wheelModal = document.getElementById('wheelModal');
+  const wheelBtn = document.querySelector('.ecosystem-card:nth-child(8) .card-info');
+  const wheelClose = wheelModal.querySelector('.close');
+  wheelBtn.onclick = () => wheelModal.style.display = 'block';
+  wheelClose.onclick = () => wheelModal.style.display = 'none';
+
+  // Закрытие при клике вне модалки
+  window.onclick = (event) => {
+    if(event.target === loyaltyModal) loyaltyModal.style.display = 'none';
+    if(event.target === reserveModal) reserveModal.style.display = 'none';
+    if(event.target === wheelModal) wheelModal.style.display = 'none';
+  }
+</script>
+
+
+
+
+
+</body>
+</html>
