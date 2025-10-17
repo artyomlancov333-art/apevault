@@ -309,7 +309,7 @@ const burger = document.getElementById('burger');
 const nav = document.getElementById('nav');
 const body = document.body;
 
-// Открытие/закрытие меню
+// Переключение бургер-меню
 burger.addEventListener('click', e => {
     e.stopPropagation();
     const isActive = nav.classList.toggle('active');
@@ -317,7 +317,7 @@ burger.addEventListener('click', e => {
     body.classList.toggle('menu-open', isActive);
 });
 
-// Настройка подменю
+// Подменю (корректный toggle)
 document.querySelectorAll('nav li > ul').forEach(sub => {
     const parent = sub.parentElement;
     parent.classList.add('has-submenu');
@@ -328,21 +328,22 @@ document.querySelectorAll('nav li > ul').forEach(sub => {
             e.preventDefault();
             e.stopPropagation();
 
-            const isOpen = parent.classList.contains('open');
+            const isAlreadyOpen = parent.classList.contains('open');
 
-            // Закрываем ВСЕ подменю перед открытием нового
-            document.querySelectorAll('nav li.has-submenu.open').forEach(openItem => {
-                if (openItem !== parent) openItem.classList.remove('open');
+            // Закрываем все подменю
+            document.querySelectorAll('nav li.has-submenu').forEach(item => {
+                item.classList.remove('open');
             });
 
-            // Если это подменю было закрыто — открываем
-            // Если было открыто — просто закроется (toggle)
-            parent.classList.toggle('open', !isOpen);
+            // Если текущее было закрыто — открываем
+            if (!isAlreadyOpen) {
+                parent.classList.add('open');
+            }
         }
     });
 });
 
-// Клик вне меню — закрыть всё
+// Клик вне меню — закрываем всё
 document.addEventListener('click', e => {
     if (window.innerWidth <= 900) {
         const clickInside = nav.contains(e.target) || burger.contains(e.target);
@@ -352,7 +353,7 @@ document.addEventListener('click', e => {
     }
 });
 
-// При ресайзе всё сбрасываем
+// Сброс при ресайзе
 window.addEventListener('resize', () => {
     if (window.innerWidth > 900) closeAll();
 });
@@ -364,6 +365,7 @@ function closeAll() {
     document.querySelectorAll('nav li.has-submenu').forEach(item => item.classList.remove('open'));
 }
 </script>
+
 
 
 
