@@ -1119,9 +1119,6 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 </script>
 
-
-
-
 <!-- Модальное окно для второй карточки -->
 <div id="learningModal" class="modal" style="display:none;">
   <div class="modal-content">
@@ -1166,6 +1163,7 @@ document.addEventListener('DOMContentLoaded', () => {
 </div>
 
 <style>
+  
 /* --- Модальное окно --- */
 .modal {
   display: none;
@@ -1351,7 +1349,6 @@ document.addEventListener('DOMContentLoaded', () => {
   <div class="modal-content">
     <span class="close">&times;</span>
     <h3>Наши сервисы и инструменты</h3>
-
     <ul class="service-list">
       <li>
         <span class="num">1</span>
@@ -1362,7 +1359,6 @@ document.addEventListener('DOMContentLoaded', () => {
           в Axiom / GMGN.
         </p>
       </li>
-
       <li>
         <span class="num">2</span>
         <strong>Бот для анализа новых токенов:</strong>
@@ -1371,7 +1367,6 @@ document.addEventListener('DOMContentLoaded', () => {
           <b>объём, ликвидность, капитализация, аудит Dex</b> и динамика роста.
         </p>
       </li>
-
       <li>
         <span class="num">3</span>
         <strong>Торговый терминал ApeVault:</strong>
@@ -1381,7 +1376,6 @@ document.addEventListener('DOMContentLoaded', () => {
         </p>
       </li>
     </ul>
-
     <p>
       Также ты получаешь <b>подборку внешних сервисов</b>, которыми мы пользуемся сами — от анализа до
       торговли, с подробными гайдами.  
@@ -1392,112 +1386,161 @@ document.addEventListener('DOMContentLoaded', () => {
 </div>
 
 <style>
-  /* Изолированные стили для #servicesModal */
-  #servicesModal.modal {
-    display: none;
-    position: fixed;
-    z-index: 999;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    overflow: auto;
-    background-color: rgba(0,0,0,0.8);
-    animation: fadeIn 0.3s ease;
-  }
+/* Изолированные стили для #servicesModal */
+#servicesModal.modal {
+  display: none;
+  position: fixed;
+  z-index: 999;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow-y: auto;
+  background-color: rgba(0,0,0,0.8);
+  animation: fadeIn 0.3s ease;
+  align-items: center;
+  justify-content: center;
+  padding: 10px;
+  box-sizing: border-box;
+}
 
+#servicesModal .modal-content {
+  background-color: #111;
+  padding: 25px;
+  border: 2px solid #367153;
+  border-radius: 14px;
+  width: 100%;
+  max-width: 600px;
+  color: #fff;
+  position: relative;
+  animation: scaleIn 0.3s ease;
+  box-sizing: border-box;
+  max-height: 90vh;
+  overflow-y: auto;
+}
+
+#servicesModal .modal-content h3 {
+  color: #367153;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+#servicesModal .service-list {
+  list-style: none;
+  padding-left: 0;
+  margin-bottom: 15px;
+}
+
+#servicesModal .service-list li {
+  margin-bottom: 18px;
+  position: relative;
+  padding-left: 50px;
+}
+
+#servicesModal .service-list p {
+  margin: 6px 0 0 0;
+  line-height: 1.5;
+  color: #ddd;
+}
+
+#servicesModal .num {
+  position: absolute;
+  left: 0;
+  top: 2px;
+  width: 30px;
+  height: 30px;
+  background: radial-gradient(circle at center, #367153 0%, #1a3a28 100%);
+  border-radius: 50%;
+  color: #fff;
+  text-align: center;
+  line-height: 30px;
+  font-weight: bold;
+  box-shadow: 0 0 10px rgba(54, 113, 83, 0.6);
+  transition: transform 0.2s ease, box-shadow 0.3s ease;
+}
+
+#servicesModal .service-list li:hover .num {
+  transform: scale(1.1);
+  box-shadow: 0 0 15px rgba(54, 113, 83, 1);
+}
+
+#servicesModal .close {
+  color: #fff;
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  font-size: 28px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: color 0.2s;
+  z-index: 10;
+}
+
+#servicesModal .close:hover {
+  color: #367153;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes scaleIn {
+  from { transform: scale(0.85); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
+
+/* Адаптив для мобильных экранов */
+@media (max-width: 500px) {
   #servicesModal .modal-content {
-    background-color: #111;
-    margin: 5% auto;
-    padding: 25px;
-    border: 2px solid #367153;
-    border-radius: 14px;
-    width: 85%;
-    max-width: 600px;
-    color: #fff;
-    position: relative;
-    animation: scaleIn 0.3s ease;
+    padding: 15px 20px;
+    max-width: 100%;
+    max-height: 85vh;
+    border-radius: 10px;
   }
-
-  #servicesModal .modal-content h3 {
-    color: #367153;
-    text-align: center;
-    margin-bottom: 20px;
-  }
-
-  #servicesModal .service-list {
-    list-style: none;
-    padding-left: 0;
-    margin-bottom: 15px;
-  }
-
-  #servicesModal .service-list li {
-    margin-bottom: 18px;
-    position: relative;
-    padding-left: 50px;
-    border-left: 3px solid transparent;
-    transition: border-color 0.3s ease;
-  }
-
-  #servicesModal .service-list li:hover {
-  }
-
-  #servicesModal .service-list p {
-    margin: 6px 0 0 0;
-    line-height: 1.5;
-    color: #ddd;
-  }
-
-  #servicesModal .num {
-    position: absolute;
-    left: 0;
-    top: 2px;
-    width: 30px;
-    height: 30px;
-    background: radial-gradient(circle at center, #367153 0%, #1a3a28 100%);
-    border-radius: 50%;
-    color: #fff;
-    text-align: center;
-    line-height: 30px;
-    font-weight: bold;
-    box-shadow: 0 0 10px rgba(54, 113, 83, 0.6);
-    transition: transform 0.2s ease, box-shadow 0.3s ease;
-  }
-
-  #servicesModal .service-list li:hover .num {
-    transform: scale(1.1);
-    box-shadow: 0 0 15px rgba(54, 113, 83, 1);
-  }
-
   #servicesModal .close {
-    color: #fff;
-    position: absolute;
-    top: 10px;
-    right: 15px;
-    font-size: 28px;
-    font-weight: bold;
-    cursor: pointer;
-    transition: color 0.2s;
+    top: 8px;
+    right: 12px;
+    font-size: 24px;
   }
-
-  #servicesModal .close:hover {
-    color: #367153;
-  }
-
-  @keyframes fadeIn { from {opacity: 0;} to {opacity: 1;} }
-  @keyframes scaleIn { from {transform: scale(0.8);} to {transform: scale(1);} }
+}
 </style>
 
 <script>
-  // Модальное окно для третьей карточки
+document.addEventListener('DOMContentLoaded', () => {
   const servicesModal = document.getElementById('servicesModal');
   const servicesBtn = document.querySelector('.ecosystem-card:nth-child(3) .card-info');
   const servicesClose = servicesModal.querySelector('.close');
 
-  servicesBtn.onclick = () => servicesModal.style.display = 'block';
-  servicesClose.onclick = () => servicesModal.style.display = 'none';
-  window.onclick = (event) => { if (event.target === servicesModal) servicesModal.style.display = 'none'; }
+  if (!servicesBtn) return;
+
+  servicesBtn.addEventListener('click', () => {
+    servicesModal.style.display = 'flex';
+    document.body.style.overflow = 'hidden';
+  });
+
+  servicesClose.addEventListener('click', () => {
+    servicesModal.style.display = 'none';
+    document.body.style.overflow = '';
+  });
+
+  window.addEventListener('click', (event) => {
+    if(event.target === servicesModal){
+      servicesModal.style.display = 'none';
+      document.body.style.overflow = '';
+    }
+  });
+
+  document.addEventListener('keydown', (e) => {
+    if(e.key === "Escape"){
+      servicesModal.style.display = 'none';
+      document.body.style.overflow = '';
+    }
+  });
+});
 </script>
+
+
 
 <!-- Модальное окно для 4-го пункта -->
 <div id="terminalModal" class="modal">
