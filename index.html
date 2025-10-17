@@ -309,9 +309,9 @@ const burger = document.getElementById('burger');
 const nav = document.getElementById('nav');
 const body = document.body;
 
-// Переключение бургер-меню
+// Открытие/закрытие меню
 burger.addEventListener('click', e => {
-    e.stopPropagation(); // не дать событию всплыть
+    e.stopPropagation();
     const isActive = nav.classList.toggle('active');
     burger.classList.toggle('open', isActive);
     body.classList.toggle('menu-open', isActive);
@@ -326,16 +326,17 @@ document.querySelectorAll('nav li > ul').forEach(sub => {
     link.addEventListener('click', e => {
         if (window.innerWidth <= 900) {
             e.preventDefault();
-            e.stopPropagation(); // не дать закрывающему клику сработать
+            e.stopPropagation();
 
             const isOpen = parent.classList.contains('open');
 
-            // Закрываем все остальные подменю
-            document.querySelectorAll('nav li.has-submenu').forEach(item => {
-                if (item !== parent) item.classList.remove('open');
+            // Закрываем ВСЕ подменю перед открытием нового
+            document.querySelectorAll('nav li.has-submenu.open').forEach(openItem => {
+                if (openItem !== parent) openItem.classList.remove('open');
             });
 
-            // Переключаем текущее
+            // Если это подменю было закрыто — открываем
+            // Если было открыто — просто закроется (toggle)
             parent.classList.toggle('open', !isOpen);
         }
     });
@@ -346,23 +347,22 @@ document.addEventListener('click', e => {
     if (window.innerWidth <= 900) {
         const clickInside = nav.contains(e.target) || burger.contains(e.target);
         if (!clickInside) {
-            nav.classList.remove('active');
-            burger.classList.remove('open');
-            body.classList.remove('menu-open');
-            document.querySelectorAll('nav li.has-submenu').forEach(item => item.classList.remove('open'));
+            closeAll();
         }
     }
 });
 
-// Автоматический сброс при изменении ширины окна
+// При ресайзе всё сбрасываем
 window.addEventListener('resize', () => {
-    if (window.innerWidth > 900) {
-        nav.classList.remove('active');
-        burger.classList.remove('open');
-        body.classList.remove('menu-open');
-        document.querySelectorAll('nav li.has-submenu').forEach(item => item.classList.remove('open'));
-    }
+    if (window.innerWidth > 900) closeAll();
 });
+
+function closeAll() {
+    nav.classList.remove('active');
+    burger.classList.remove('open');
+    body.classList.remove('menu-open');
+    document.querySelectorAll('nav li.has-submenu').forEach(item => item.classList.remove('open'));
+}
 </script>
 
 
