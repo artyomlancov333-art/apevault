@@ -1118,45 +1118,46 @@ document.addEventListener('keydown', (e) => {
     <span class="close">&times;</span>
     <h3>Обучение — модули и особенности</h3>
 
-    <ul class="module-list">
-      <li><span class="num">1</span><b>Начало твоего пути</b></li>
-      <li><span class="num">2</span><b>Введение в крипту</b></li>
-      <li><span class="num">3</span><b>Психологический блок</b></li>
-      <li><span class="num">4</span><b>Безопасность операций с криптовалютой</b></li>
-      <li><span class="num">5</span><b>Биржи и работа с ними</b></li>
-      <li><span class="num">6</span><b>Фундаментальный анализ</b></li>
-      <li><span class="num">7</span><b>Технический анализ</b></li>
-      <li><span class="num">8</span><b>Спот-торговля</b></li>
-      <li><span class="num">9</span><b>Фьючерсная торговля</b></li>
-      <li><span class="num">10</span><b>Стейкинг</b></li>
-      <li><span class="num">11</span><b>DeFi</b></li>
-      <li><span class="num">12</span><b>Airdrop</b></li>
-      <li><span class="num">13</span><b>Мемкоины</b></li>
-      <li><span class="num">14</span><b>Арбитраж</b></li>
-      <li><span class="num">15</span><b>NFT</b></li>
-      <li><span class="num">16</span><b>Цифровой капитал Telegram</b></li>
-    </ul>
+    <div class="modal-body">
+      <ul class="module-list">
+        <li><span class="num">1</span><b>Начало твоего пути</b></li>
+        <li><span class="num">2</span><b>Введение в крипту</b></li>
+        <li><span class="num">3</span><b>Психологический блок</b></li>
+        <li><span class="num">4</span><b>Безопасность операций с криптовалютой</b></li>
+        <li><span class="num">5</span><b>Биржи и работа с ними</b></li>
+        <li><span class="num">6</span><b>Фундаментальный анализ</b></li>
+        <li><span class="num">7</span><b>Технический анализ</b></li>
+        <li><span class="num">8</span><b>Спот-торговля</b></li>
+        <li><span class="num">9</span><b>Фьючерсная торговля</b></li>
+        <li><span class="num">10</span><b>Стейкинг</b></li>
+        <li><span class="num">11</span><b>DeFi</b></li>
+        <li><span class="num">12</span><b>Airdrop</b></li>
+        <li><span class="num">13</span><b>Мемкоины</b></li>
+        <li><span class="num">14</span><b>Арбитраж</b></li>
+        <li><span class="num">15</span><b>NFT</b></li>
+        <li><span class="num">16</span><b>Цифровой капитал Telegram</b></li>
+      </ul>
 
-    <p>
-      Каждый модуль содержит уроки — от теории до практики, с <b>видео-материалами, гайдами и инструментами</b>.  
-      Для всех тарифов предоставляется <b>тестовая сумма активов</b> на обучающем кошельке — тренируйся без риска потерь.  
-      Всё, что заработаешь, будет переведено на твой реальный счёт (CEX или DEX).
-    </p>
+      <p>
+        Каждый модуль содержит уроки — от теории до практики, с <b>видео-материалами, гайдами и инструментами</b>.  
+        Для всех тарифов предоставляется <b>тестовая сумма активов</b> на обучающем кошельке — тренируйся без риска потерь.  
+        Всё, что заработаешь, будет переведено на твой реальный счёт (CEX или DEX).
+      </p>
 
-    <p>
-      Участники обучения получают доступ к <b>закрытым AMA-сессиям, чатам и премиум-сигналам</b>.  
-      При желании можно купить отдельные модули, но доступ к чатам обучения и сигналам открыт только при покупке <b>от 10 модулей</b>.
-    </p>
+      <p>
+        Участники обучения получают доступ к <b>закрытым AMA-сессиям, чатам и премиум-сигналам</b>.  
+        При желании можно купить отдельные модули, но доступ к чатам обучения и сигналам открыт только при покупке <b>от 10 модулей</b>.
+      </p>
 
-    <p>
-      Также предусмотрена рассрочка — <b>от нас или банков-партнёров</b>.  
-      Подробнее смотри в разделе «Тарифы».
-    </p>
+      <p>
+        Также предусмотрена рассрочка — <b>от нас или банков-партнёров</b>.  
+        Подробнее смотри в разделе «Тарифы».
+      </p>
+    </div>
   </div>
 </div>
 
 <style>
-/* --- Общие стили модалки --- */
 .modal {
   display: none;
   position: fixed;
@@ -1164,46 +1165,50 @@ document.addEventListener('keydown', (e) => {
   left: 0;
   top: 0;
   width: 100%;
-  height: 100%;
+  height: 100vh; /* полностью экран */
   background-color: rgba(0,0,0,0.85);
   display: flex;
   align-items: center;
   justify-content: center;
   padding: 10px;
   box-sizing: border-box;
-  animation: fadeIn 0.3s ease;
-  overflow-y: auto;
 }
 
 .modal-content {
   background: #111;
   color: #fff;
-  width: 90%;
+  width: 100%;
   max-width: 750px;
-  max-height: 90vh; /* не больше 90% высоты экрана */
-  overflow-y: auto;
-  padding: 25px 30px;
+  height: 90vh; /* почти весь экран */
   border: 2px solid #2f6c4f;
   border-radius: 18px;
   position: relative;
+  display: flex;
+  flex-direction: column;
   animation: scaleIn 0.3s ease;
+}
+
+.modal-body {
+  padding: 20px 25px;
+  overflow-y: auto; /* scroll внутри */
+  flex: 1;
   line-height: 1.6;
-  box-sizing: border-box;
 }
 
 .modal-content h3 {
   text-align: center;
   color: #3ea16f;
-  margin-bottom: 25px;
+  margin: 0;
+  padding: 15px 0;
   font-size: 1.6em;
   letter-spacing: 0.5px;
+  border-bottom: 1px solid #2f6c4f;
 }
 
-/* --- Нумерация модулей --- */
 .module-list {
   list-style: none;
   padding: 0;
-  margin: 0 0 25px 0;
+  margin: 15px 0 25px 0;
   display: flex;
   flex-direction: column;
   gap: 10px;
@@ -1218,14 +1223,6 @@ document.addEventListener('keydown', (e) => {
   border-radius: 10px;
   border: 1px solid #2f6c4f;
   transition: all 0.25s ease;
-  transform: translateY(10px);
-  opacity: 0;
-  animation: slideUp 0.4s forwards;
-}
-
-.module-list li:hover {
-  background: #162a20;
-  transform: translateY(-3px) scale(1.02);
 }
 
 .module-list li:nth-child(odd) .num {
@@ -1249,9 +1246,8 @@ document.addEventListener('keydown', (e) => {
 p { margin-bottom: 18px; color: #ddd; }
 b { color: #3ea16f; }
 
-/* --- Закрытие окна --- */
 .close {
-  position: sticky;
+  position: absolute;
   top: 10px;
   right: 15px;
   font-size: 28px;
@@ -1265,40 +1261,21 @@ b { color: #3ea16f; }
 .close:hover { color: #3ea16f; }
 
 /* --- Анимации --- */
-@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
 @keyframes scaleIn { from { transform: scale(0.85); opacity: 0; } to { transform: scale(1); opacity: 1; } }
-@keyframes slideUp { 0% { transform: translateY(20px); opacity: 0; } 100% { transform: translateY(0); opacity: 1; } }
 
-/* Плавное последовательное появление пунктов */
-.module-list li:nth-child(1) { animation-delay: 0.1s; }
-.module-list li:nth-child(2) { animation-delay: 0.15s; }
-.module-list li:nth-child(3) { animation-delay: 0.2s; }
-.module-list li:nth-child(4) { animation-delay: 0.25s; }
-.module-list li:nth-child(5) { animation-delay: 0.3s; }
-.module-list li:nth-child(6) { animation-delay: 0.35s; }
-.module-list li:nth-child(7) { animation-delay: 0.4s; }
-.module-list li:nth-child(8) { animation-delay: 0.45s; }
-.module-list li:nth-child(9) { animation-delay: 0.5s; }
-.module-list li:nth-child(10) { animation-delay: 0.55s; }
-.module-list li:nth-child(11) { animation-delay: 0.6s; }
-.module-list li:nth-child(12) { animation-delay: 0.65s; }
-.module-list li:nth-child(13) { animation-delay: 0.7s; }
-.module-list li:nth-child(14) { animation-delay: 0.75s; }
-.module-list li:nth-child(15) { animation-delay: 0.8s; }
-.module-list li:nth-child(16) { animation-delay: 0.85s; }
-
-/* --- Адаптив для мобильных --- */
 @media (max-width: 500px) {
   .modal-content {
-    padding: 15px 20px;
     max-width: 100%;
-    max-height: 85vh;
+    height: 95vh;
     border-radius: 12px;
   }
+  .modal-body {
+    padding: 15px;
+  }
   .close {
+    font-size: 24px;
     top: 8px;
     right: 12px;
-    font-size: 24px;
   }
 }
 </style>
@@ -1332,6 +1309,7 @@ document.addEventListener('keydown', (e) => {
   }
 });
 </script>
+
 
 
 <!-- Модальное окно для третьей карточки -->
