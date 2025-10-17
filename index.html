@@ -316,11 +316,10 @@ burger.addEventListener('click', () => {
     body.classList.toggle('menu-open', isActive);
 });
 
-// Подменю на мобильных
+// Подменю (логика открытия/закрытия)
 document.querySelectorAll('nav li > ul').forEach(sub => {
     const parent = sub.parentElement;
     parent.classList.add('has-submenu');
-
     const link = parent.querySelector('a');
 
     link.addEventListener('click', e => {
@@ -334,7 +333,7 @@ document.querySelectorAll('nav li > ul').forEach(sub => {
                 item.classList.remove('open');
             });
 
-            // Если клик был по уже открытому пункту — просто закрываем
+            // Если текущее подменю было закрыто — открываем его
             if (!isOpen) {
                 parent.classList.add('open');
             }
@@ -342,7 +341,7 @@ document.querySelectorAll('nav li > ul').forEach(sub => {
     });
 });
 
-// Закрытие меню при клике вне его
+// Клик вне меню — закрыть всё
 document.addEventListener('click', e => {
     if (window.innerWidth <= 900) {
         const clickedOutsideMenu = !nav.contains(e.target) && !burger.contains(e.target);
@@ -355,7 +354,7 @@ document.addEventListener('click', e => {
     }
 });
 
-// При изменении ширины экрана — сбрасываем состояние меню
+// Автоматический сброс при изменении размера экрана
 window.addEventListener('resize', () => {
     if (window.innerWidth > 900) {
         nav.classList.remove('active');
