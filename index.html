@@ -181,19 +181,8 @@ nav li:hover > .submenu {
     padding: 10px 20px;
 }
 
-/* Стрелочки для подменю только на мобиле */
+/* Мобильные стили */
 @media (max-width: 900px) {
-    nav li.has-submenu > a::after {
-        content: '▼';
-        font-size: 10px;
-        margin-left: 5px;
-        transition: transform 0.3s;
-    }
-
-    nav li.has-submenu.open > a::after {
-        transform: rotate(-180deg);
-    }
-
     nav {
         display: none;
         position: absolute;
@@ -203,6 +192,12 @@ nav li:hover > .submenu {
         background-color: #1a1a1a;
         flex-direction: column;
         padding: 10px 0;
+        transition: max-height 0.3s ease;
+        overflow: hidden;
+    }
+
+    nav.active {
+        display: flex;
     }
 
     nav ul {
@@ -214,17 +209,30 @@ nav li:hover > .submenu {
         padding: 10px 20px;
     }
 
-    nav li:hover > .submenu {
-        position: relative;
+    /* Подменю мобильное */
+    nav li.has-submenu > a::after {
+        content: '▼';
+        font-size: 10px;
+        margin-left: 5px;
+        transition: transform 0.3s;
+    }
+
+    nav li.has-submenu.open > a::after {
+        transform: rotate(-180deg);
     }
 
     nav li > .submenu {
-        display: none;
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.3s ease;
         padding-left: 15px;
     }
 
     nav li.has-submenu.open > .submenu {
-        display: flex;
+        max-height: 500px; /* достаточно для всех пунктов */
     }
 
     /* Мобильные кнопки */
@@ -245,10 +253,6 @@ nav li:hover > .submenu {
     }
 
     .burger {
-        display: flex;
-    }
-
-    nav.active {
         display: flex;
     }
 }
@@ -313,7 +317,7 @@ const body = document.body;
 burger.addEventListener('click', () => {
     nav.classList.toggle('active');
     burger.classList.toggle('open');
-    body.classList.toggle('menu-open'); // блокировка прокрутки
+    body.classList.toggle('menu-open');
 });
 
 // Подменю с кликом на мобильных
@@ -333,7 +337,7 @@ document.querySelectorAll('nav li > ul').forEach(sub => {
     });
 });
 
-// Закрытие подменю при клике вне меню или на другой пункт
+// Закрытие подменю при клике вне меню
 document.addEventListener('click', (e) => {
     if(window.innerWidth <= 900){
         if(!nav.contains(e.target) && !burger.contains(e.target)){
@@ -348,6 +352,7 @@ document.addEventListener('click', (e) => {
 
 </body>
 </html>
+
 
 
 
