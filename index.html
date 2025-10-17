@@ -310,13 +310,14 @@ const nav = document.getElementById('nav');
 const body = document.body;
 
 // Переключение бургер-меню
-burger.addEventListener('click', () => {
+burger.addEventListener('click', e => {
+    e.stopPropagation(); // не дать событию всплыть
     const isActive = nav.classList.toggle('active');
     burger.classList.toggle('open', isActive);
     body.classList.toggle('menu-open', isActive);
 });
 
-// Подменю (логика открытия/закрытия)
+// Настройка подменю
 document.querySelectorAll('nav li > ul').forEach(sub => {
     const parent = sub.parentElement;
     parent.classList.add('has-submenu');
@@ -325,18 +326,17 @@ document.querySelectorAll('nav li > ul').forEach(sub => {
     link.addEventListener('click', e => {
         if (window.innerWidth <= 900) {
             e.preventDefault();
+            e.stopPropagation(); // не дать закрывающему клику сработать
 
             const isOpen = parent.classList.contains('open');
 
-            // Закрываем все подменю
+            // Закрываем все остальные подменю
             document.querySelectorAll('nav li.has-submenu').forEach(item => {
-                item.classList.remove('open');
+                if (item !== parent) item.classList.remove('open');
             });
 
-            // Если текущее подменю было закрыто — открываем его
-            if (!isOpen) {
-                parent.classList.add('open');
-            }
+            // Переключаем текущее
+            parent.classList.toggle('open', !isOpen);
         }
     });
 });
@@ -344,8 +344,8 @@ document.querySelectorAll('nav li > ul').forEach(sub => {
 // Клик вне меню — закрыть всё
 document.addEventListener('click', e => {
     if (window.innerWidth <= 900) {
-        const clickedOutsideMenu = !nav.contains(e.target) && !burger.contains(e.target);
-        if (clickedOutsideMenu) {
+        const clickInside = nav.contains(e.target) || burger.contains(e.target);
+        if (!clickInside) {
             nav.classList.remove('active');
             burger.classList.remove('open');
             body.classList.remove('menu-open');
@@ -354,7 +354,7 @@ document.addEventListener('click', e => {
     }
 });
 
-// Автоматический сброс при изменении размера экрана
+// Автоматический сброс при изменении ширины окна
 window.addEventListener('resize', () => {
     if (window.innerWidth > 900) {
         nav.classList.remove('active');
@@ -364,6 +364,7 @@ window.addEventListener('resize', () => {
     }
 });
 </script>
+
 
 
 
