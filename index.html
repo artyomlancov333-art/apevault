@@ -1386,64 +1386,60 @@ document.addEventListener('DOMContentLoaded', () => {
 </div>
 
 <style>
-/* Изолированные стили для #servicesModal */
-#servicesModal.modal {
-  display: none;
+.modal {
+  display: none; /* скрыта по умолчанию */
   position: fixed;
-  z-index: 999;
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100%;
-  overflow-y: auto;
+  z-index: 9999;
+  inset: 0;
   background-color: rgba(0,0,0,0.8);
-  animation: fadeIn 0.3s ease;
   align-items: center;
   justify-content: center;
   padding: 10px;
   box-sizing: border-box;
+  animation: fadeIn 0.3s ease;
 }
 
-#servicesModal .modal-content {
+.modal-content {
   background-color: #111;
   padding: 25px;
   border: 2px solid #367153;
   border-radius: 14px;
   width: 100%;
   max-width: 600px;
+  max-height: 90vh;
+  overflow-y: auto;
   color: #fff;
   position: relative;
   animation: scaleIn 0.3s ease;
   box-sizing: border-box;
-  max-height: 90vh;
-  overflow-y: auto;
 }
 
-#servicesModal .modal-content h3 {
+.modal-content h3 {
   color: #367153;
   text-align: center;
   margin-bottom: 20px;
 }
 
-#servicesModal .service-list {
+.service-list {
   list-style: none;
   padding-left: 0;
   margin-bottom: 15px;
 }
 
-#servicesModal .service-list li {
+.service-list li {
   margin-bottom: 18px;
   position: relative;
   padding-left: 50px;
+  border-left: 3px solid transparent;
 }
 
-#servicesModal .service-list p {
+.service-list p {
   margin: 6px 0 0 0;
   line-height: 1.5;
   color: #ddd;
 }
 
-#servicesModal .num {
+.num {
   position: absolute;
   left: 0;
   top: 2px;
@@ -1459,12 +1455,12 @@ document.addEventListener('DOMContentLoaded', () => {
   transition: transform 0.2s ease, box-shadow 0.3s ease;
 }
 
-#servicesModal .service-list li:hover .num {
+.service-list li:hover .num {
   transform: scale(1.1);
   box-shadow: 0 0 15px rgba(54, 113, 83, 1);
 }
 
-#servicesModal .close {
+.close {
   color: #fff;
   position: absolute;
   top: 10px;
@@ -1473,10 +1469,9 @@ document.addEventListener('DOMContentLoaded', () => {
   font-weight: bold;
   cursor: pointer;
   transition: color 0.2s;
-  z-index: 10;
 }
 
-#servicesModal .close:hover {
+.close:hover {
   color: #367153;
 }
 
@@ -1486,19 +1481,18 @@ document.addEventListener('DOMContentLoaded', () => {
 }
 
 @keyframes scaleIn {
-  from { transform: scale(0.85); opacity: 0; }
-  to { transform: scale(1); opacity: 1; }
+  from { transform: scale(0.8); }
+  to { transform: scale(1); }
 }
 
-/* Адаптив для мобильных экранов */
 @media (max-width: 500px) {
-  #servicesModal .modal-content {
+  .modal-content {
     padding: 15px 20px;
     max-width: 100%;
     max-height: 85vh;
     border-radius: 10px;
   }
-  #servicesModal .close {
+  .close {
     top: 8px;
     right: 12px;
     font-size: 24px;
@@ -1508,48 +1502,46 @@ document.addEventListener('DOMContentLoaded', () => {
 
 <script>
 document.addEventListener('DOMContentLoaded', () => {
-  const servicesModal = document.getElementById('servicesModal');
-  const servicesBtn = document.querySelector('.ecosystem-card:nth-child(3) .card-info');
-  const servicesClose = servicesModal.querySelector('.close');
+  const modal = document.getElementById('servicesModal');
+  modal.style.display = 'none'; // строго скрыть при загрузке
 
-  if (!servicesBtn) return;
+  const btn = document.querySelector('.ecosystem-card:nth-child(3) .card-info');
+  const close = modal.querySelector('.close');
 
-  servicesBtn.addEventListener('click', () => {
-    servicesModal.style.display = 'flex';
+  if (!btn) return;
+
+  btn.addEventListener('click', () => {
+    modal.style.display = 'flex';
     document.body.style.overflow = 'hidden';
   });
 
-  servicesClose.addEventListener('click', () => {
-    servicesModal.style.display = 'none';
+  close.addEventListener('click', () => {
+    modal.style.display = 'none';
     document.body.style.overflow = '';
   });
 
-  window.addEventListener('click', (event) => {
-    if(event.target === servicesModal){
-      servicesModal.style.display = 'none';
+  document.addEventListener('keydown', (e) => {
+    if (e.key === "Escape") {
+      modal.style.display = 'none';
       document.body.style.overflow = '';
     }
   });
 
-  document.addEventListener('keydown', (e) => {
-    if(e.key === "Escape"){
-      servicesModal.style.display = 'none';
+  window.addEventListener('click', (event) => {
+    if (event.target === modal) {
+      modal.style.display = 'none';
       document.body.style.overflow = '';
     }
   });
 });
 </script>
 
-
-
 <!-- Модальное окно для 4-го пункта -->
 <div id="terminalModal" class="modal">
   <div class="modal-content">
     <span class="close">&times;</span>
     <h3>Торговый терминал для мемкоинов</h3>
-    <p>
-      Добро пожаловать в наш продвинутый терминал для мемкоинов! Здесь ты получаешь:
-    </p>
+    <p>Добро пожаловать в наш продвинутый терминал для мемкоинов! Здесь ты получаешь:</p>
     <ul class="terminal-features">
       <li><strong>Мониторинг новых токенов:</strong> мгновенные уведомления о появлении мемкоинов на рынке.</li>
       <li><strong>Анализ ликвидности и капитализации:</strong> подробные графики и показатели для оценки риска.</li>
@@ -1559,9 +1551,7 @@ document.addEventListener('DOMContentLoaded', () => {
       <li><strong>Низкая комиссия:</strong> совершай сделки с минимальными затратами по сравнению с другими платформами.</li>
       <li><strong>Безопасность:</strong> мы шифруем данные и защищаем твои активы с помощью проверенных протоколов.</li>
     </ul>
-    <p>
-      Всё собрано в одном интерфейсе: удобно, безопасно и максимально эффективно для анализа и торговли мемкоинами.
-    </p>
+    <p>Всё собрано в одном интерфейсе: удобно, безопасно и максимально эффективно для анализа и торговли мемкоинами.</p>
     <div class="terminal-demo">
       <p><strong>Пример интерфейса:</strong></p>
       <div class="chart-placeholder">[График мемкоина]</div>
@@ -1579,9 +1569,7 @@ document.addEventListener('DOMContentLoaded', () => {
   <div class="modal-content">
     <span class="close">&times;</span>
     <h3>Ивент-мероприятия сообщества</h3>
-    <p>
-      Мы создаём платформу для общения и обмена опытом. В наших мероприятиях ты можешь:
-    </p>
+    <p>Мы создаём платформу для общения и обмена опытом. В наших мероприятиях ты можешь:</p>
     <ul class="event-list">
       <li><span class="num">1</span> Онлайн-встречи и AMA-сессии с экспертами — задавай вопросы напрямую профессионалам.</li>
       <li><span class="num">2</span> Очные мероприятия и воркшопы — практика, разбор кейсов и новые знакомства.</li>
@@ -1593,146 +1581,197 @@ document.addEventListener('DOMContentLoaded', () => {
 </div>
 
 <style>
-  /* Общие стили для обоих модальных окон */
-  #terminalModal.modal,
-  #eventsModal.modal {
-    display: none;
-    position: fixed;
-    z-index: 999;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    overflow: auto;
-    background-color: rgba(0,0,0,0.85);
-    animation: fadeIn 0.3s ease;
-  }
+.modal {
+  display: none; /* скрыта по умолчанию */
+  position: fixed;
+  z-index: 9999;
+  inset: 0;
+  background-color: rgba(0,0,0,0.85);
+  align-items: center;
+  justify-content: center;
+  padding: 10px;
+  box-sizing: border-box;
+  animation: fadeIn 0.3s ease;
+}
 
-  #terminalModal .modal-content,
-  #eventsModal .modal-content {
-    background-color: #111;
-    margin: 3% auto;
-    padding: 30px;
-    border: 2px solid #367153;
-    border-radius: 14px;
-    width: 85%;
-    max-width: 650px;
-    color: #fff;
-    position: relative;
-    animation: scaleIn 0.3s ease;
-    box-shadow: 0 0 20px rgba(54,113,83,0.6);
-  }
+.modal-content {
+  background-color: #111;
+  padding: 25px 30px;
+  border: 2px solid #367153;
+  border-radius: 14px;
+  width: 85%;
+  max-width: 650px;
+  max-height: 90vh;
+  overflow-y: auto;
+  color: #fff;
+  text-align: left;
+  position: relative;
+  animation: scaleIn 0.3s ease;
+  box-sizing: border-box;
+}
 
-  #terminalModal .modal-content h3,
-  #eventsModal .modal-content h3 {
-    color: #367153;
-    text-align: center;
-    margin-bottom: 25px;
-  }
+.modal-content h3 {
+  color: #367153;
+  text-align: center;
+  margin-bottom: 20px;
+}
 
-  #terminalModal .terminal-features {
-    list-style: disc inside;
-    margin-left: 0;
-    margin-bottom: 20px;
-  }
+.terminal-features {
+  list-style: disc inside;
+  margin: 0 0 20px 0;
+}
 
-  #terminalModal .terminal-features li {
-    margin-bottom: 12px;
-    line-height: 1.5;
-  }
+.terminal-features li {
+  margin-bottom: 12px;
+  line-height: 1.5;
+}
 
-  #terminalModal .terminal-demo {
-    background-color: #1a1a1a;
-    border: 1px solid #367153;
-    border-radius: 10px;
-    padding: 15px;
-    text-align: center;
-  }
+.terminal-demo {
+  background-color: #1a1a1a;
+  border: 1px solid #367153;
+  border-radius: 10px;
+  padding: 15px;
+  text-align: center;
+  margin-top: 15px;
+}
 
-  #terminalModal .chart-placeholder {
-    height: 150px;
-    background: radial-gradient(circle at center, #367153 0%, #0a1a0f 100%);
-    margin-bottom: 15px;
-    border-radius: 8px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    color: #fff;
-    font-weight: bold;
-  }
+.chart-placeholder {
+  height: 150px;
+  background: radial-gradient(circle at center, #367153 0%, #0a1a0f 100%);
+  margin-bottom: 15px;
+  border-radius: 8px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #fff;
+  font-weight: bold;
+}
 
-  #terminalModal .stats-placeholder div {
-    margin-bottom: 6px;
-  }
+.stats-placeholder div {
+  margin-bottom: 6px;
+}
 
-  #eventsModal .event-list {
-    list-style: none;
-    padding-left: 0;
-  }
+.event-list {
+  list-style: none;
+  padding-left: 0;
+}
 
-  #eventsModal .event-list li {
-    margin-bottom: 15px;
-    position: relative;
-    padding-left: 45px;
-  }
+.event-list li {
+  margin-bottom: 15px;
+  position: relative;
+  padding-left: 45px;
+}
 
-  #eventsModal .num {
-    position: absolute;
-    left: 0;
-    top: 0;
-    width: 30px;
-    height: 30px;
-    background: radial-gradient(circle at center, #367153 0%, #1a3a28 100%);
-    border-radius: 50%;
-    color: #fff;
-    text-align: center;
-    line-height: 30px;
-    font-weight: bold;
-    box-shadow: 0 0 10px rgba(54,113,83,0.6);
-  }
+.num {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 30px;
+  height: 30px;
+  background: radial-gradient(circle at center, #367153 0%, #1a3a28 100%);
+  border-radius: 50%;
+  color: #fff;
+  text-align: center;
+  line-height: 30px;
+  font-weight: bold;
+  box-shadow: 0 0 10px rgba(54,113,83,0.6);
+}
 
-  #terminalModal .close,
-  #eventsModal .close {
-    color: #fff;
-    position: absolute;
-    top: 10px;
-    right: 15px;
-    font-size: 28px;
-    font-weight: bold;
-    cursor: pointer;
-    transition: color 0.2s;
-  }
+.close {
+  color: #fff;
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  font-size: 28px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: color 0.2s;
+  z-index: 10;
+}
 
-  #terminalModal .close:hover,
-  #eventsModal .close:hover {
-    color: #367153;
-  }
+.close:hover {
+  color: #367153;
+}
 
-  @keyframes fadeIn { from {opacity: 0;} to {opacity: 1;} }
-  @keyframes scaleIn { from {transform: scale(0.85);} to {transform: scale(1);} }
+@keyframes fadeIn { from {opacity: 0;} to {opacity: 1;} }
+@keyframes scaleIn { from {transform: scale(0.85);} to {transform: scale(1);} }
+
+@media (max-width: 500px) {
+  .modal-content {
+    padding: 15px 20px;
+    max-width: 100%;
+    max-height: 85vh;
+    border-radius: 12px;
+  }
+  .close {
+    top: 8px;
+    right: 12px;
+    font-size: 24px;
+  }
+}
 </style>
 
 <script>
-  // Модальное окно 4-го пункта
+document.addEventListener('DOMContentLoaded', () => {
   const terminalModal = document.getElementById('terminalModal');
+  const eventsModal = document.getElementById('eventsModal');
+
   const terminalBtn = document.querySelector('.ecosystem-card:nth-child(4) .card-info');
   const terminalClose = terminalModal.querySelector('.close');
-  terminalBtn.onclick = () => terminalModal.style.display = 'block';
-  terminalClose.onclick = () => terminalModal.style.display = 'none';
 
-  // Модальное окно 5-го пункта
-  const eventsModal = document.getElementById('eventsModal');
   const eventsBtn = document.querySelector('.ecosystem-card:nth-child(5) .card-info');
   const eventsClose = eventsModal.querySelector('.close');
-  eventsBtn.onclick = () => eventsModal.style.display = 'block';
-  eventsClose.onclick = () => eventsModal.style.display = 'none';
 
-  // Закрытие при клике вне модалки
-  window.onclick = (event) => {
-    if(event.target === terminalModal) terminalModal.style.display = 'none';
-    if(event.target === eventsModal) eventsModal.style.display = 'none';
-  }
+  // строго скрываем модалки
+  terminalModal.style.display = 'none';
+  eventsModal.style.display = 'none';
+
+  // открытие по клику
+  terminalBtn?.addEventListener('click', () => {
+    terminalModal.style.display = 'flex';
+    document.body.style.overflow = 'hidden';
+  });
+
+  eventsBtn?.addEventListener('click', () => {
+    eventsModal.style.display = 'flex';
+    document.body.style.overflow = 'hidden';
+  });
+
+  // закрытие крестиком
+  terminalClose?.addEventListener('click', () => {
+    terminalModal.style.display = 'none';
+    document.body.style.overflow = '';
+  });
+
+  eventsClose?.addEventListener('click', () => {
+    eventsModal.style.display = 'none';
+    document.body.style.overflow = '';
+  });
+
+  // закрытие по фону
+  window.addEventListener('click', (event) => {
+    if(event.target === terminalModal) {
+      terminalModal.style.display = 'none';
+      document.body.style.overflow = '';
+    }
+    if(event.target === eventsModal) {
+      eventsModal.style.display = 'none';
+      document.body.style.overflow = '';
+    }
+  });
+
+  // закрытие Escape
+  document.addEventListener('keydown', (e) => {
+    if(e.key === "Escape") {
+      [terminalModal, eventsModal].forEach(modal => {
+        modal.style.display = 'none';
+      });
+      document.body.style.overflow = '';
+    }
+  });
+});
 </script>
+
 
 <!-- Модальное окно для 6-го пункта -->
 <div id="loyaltyModal" class="modal">
