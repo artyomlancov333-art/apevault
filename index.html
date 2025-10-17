@@ -5,204 +5,248 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>ApeVault</title>
 <style>
-    body {
-        margin: 0;
-        font-family: 'Arial', sans-serif;
-        background-color: #121212;
-        color: #fff;
+body {
+    margin: 0;
+    font-family: 'Arial', sans-serif;
+    background-color: #121212;
+    color: #fff;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 15px 50px;
+    background-color: #1a1a1a;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+/* Логотип */
+.logo {
+    display: flex;
+    flex-direction: column;
+}
+.logo h1 {
+    color: #367153;
+    margin: 0;
+    font-size: 24px;
+}
+.logo span {
+    font-size: 12px;
+    color: #aaa;
+    margin-top: 2px;
+}
+
+/* Меню */
+nav {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+}
+
+nav ul {
+    display: flex;
+    gap: 30px;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+nav li {
+    position: relative;
+}
+
+nav > ul > li > a {
+    padding: 5px 0;
+    position: relative;
+    transition: all 0.3s;
+}
+
+nav > ul > li > a::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -2px;
+    width: 0;
+    height: 2px;
+    background-color: #367153;
+    transition: width 0.3s;
+}
+
+nav > ul > li > a:hover::after {
+    width: 100%;
+}
+
+/* Подменю */
+.submenu {
+    display: none;
+    flex-direction: column;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background-color: #1a1a1a;
+    min-width: 180px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.5);
+    padding: 10px 0;
+    z-index: 1000;
+}
+
+.submenu li {
+    padding: 5px 20px;
+    white-space: nowrap;
+    transition: all 0.3s;
+    border-radius: 25px;
+}
+
+.submenu li:hover {
+    background-color: #367153;
+    color: #fff;
+}
+
+nav li:hover > .submenu {
+    display: flex;
+}
+
+/* Кнопки */
+.header-buttons {
+    display: flex;
+    gap: 15px;
+}
+
+.header-buttons button {
+    padding: 8px 20px;
+    font-weight: bold;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: all 0.3s ease;
+    border: none;
+}
+
+.btn-start {
+    background-color: #367153;
+    color: #fff;
+    box-shadow: 0 0 15px #367153;
+}
+
+.btn-start:hover {
+    box-shadow: 0 0 25px #367153;
+}
+
+.btn-contact {
+    background-color: #1a1a1a;
+    color: #fff;
+    border: 2px solid #367153;
+    box-shadow: 0 0 15px #367153;
+}
+
+.btn-contact:hover {
+    background-color: #367153;
+    color: #fff;
+    box-shadow: 0 0 25px #367153;
+}
+
+/* Адаптив */
+.burger {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    cursor: pointer;
+}
+
+.burger div {
+    width: 25px;
+    height: 3px;
+    background-color: #fff;
+    transition: all 0.3s;
+}
+
+/* Мобильные кнопки */
+.mobile-buttons {
+    display: none;
+    flex-direction: column;
+    gap: 10px;
+    padding: 10px 20px;
+}
+
+/* Стрелочки для подменю только на мобиле */
+@media (max-width: 900px) {
+    nav li.has-submenu > a::after {
+        content: '▼';
+        font-size: 10px;
+        margin-left: 5px;
+        transition: transform 0.3s;
     }
 
-    a {
-        text-decoration: none;
-        color: inherit;
+    nav li.has-submenu.open > a::after {
+        transform: rotate(-180deg);
     }
 
-    header {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        padding: 15px 50px;
-        background-color: #1a1a1a;
-        position: sticky;
-        top: 0;
-        z-index: 1000;
-    }
-
-    /* Логотип */
-    .logo {
-        display: flex;
-        flex-direction: column;
-    }
-    .logo h1 {
-        color: #367153;
-        margin: 0;
-        font-size: 24px;
-    }
-    .logo span {
-        font-size: 12px;
-        color: #aaa;
-        margin-top: 2px;
-    }
-
-    /* Меню */
     nav {
-        display: flex;
-        align-items: center;
-        gap: 30px;
+        display: none;
+        position: absolute;
+        top: 70px;
+        left: 0;
+        width: 100%;
+        background-color: #1a1a1a;
+        flex-direction: column;
+        padding: 10px 0;
     }
 
     nav ul {
-        display: flex;
-        gap: 30px;
-        list-style: none;
-        margin: 0;
-        padding: 0;
+        flex-direction: column;
+        gap: 0;
     }
 
     nav li {
-        position: relative;
-    }
-
-    nav > ul > li > a {
-        padding: 5px 0;
-        position: relative;
-        transition: all 0.3s;
-    }
-
-    nav > ul > li > a::after {
-        content: '';
-        position: absolute;
-        left: 0;
-        bottom: -2px;
-        width: 0;
-        height: 2px;
-        background-color: #367153;
-        transition: width 0.3s;
-    }
-
-    nav > ul > li > a:hover::after {
-        width: 100%;
-    }
-
-    /* Подменю */
-    .submenu {
-        display: none;
-        flex-direction: column;
-        position: absolute;
-        top: 100%;
-        left: 0;
-        background-color: #1a1a1a;
-        min-width: 180px;
-        border-radius: 5px;
-        box-shadow: 0 0 10px rgba(0,0,0,0.5);
-        padding: 10px 0;
-        z-index: 1000;
-    }
-
-    .submenu li {
-        padding: 5px 20px;
-        white-space: nowrap;
-        transition: all 0.3s;
-        border-radius: 25px;
-    }
-
-    .submenu li:hover {
-        background-color: #367153;
-        color: #fff;
+        padding: 10px 20px;
     }
 
     nav li:hover > .submenu {
-        display: flex;
+        position: relative;
     }
 
-    /* Кнопки */
-    .header-buttons {
-        display: flex;
-        gap: 15px;
-    }
-
-    .header-buttons button {
-        padding: 8px 20px;
-        font-weight: bold;
-        cursor: pointer;
-        border-radius: 5px;
-        transition: all 0.3s ease;
-        border: none;
-    }
-
-    /* Старт */
-    .btn-start {
-        background-color: #367153;
-        color: #fff;
-        box-shadow: 0 0 15px #367153; /* постоянная подсветка */
-    }
-
-    .btn-start:hover {
-        box-shadow: 0 0 25px #367153;
-    }
-
-    /* Напиши нам */
-    .btn-contact {
-        background-color: #1a1a1a;
-        color: #fff;
-        border: 2px solid #367153; /* постоянная обводка */
-        box-shadow: 0 0 15px #367153; /* постоянная подсветка */
-    }
-
-    .btn-contact:hover {
-        background-color: #367153;
-        color: #fff;
-        box-shadow: 0 0 25px #367153;
-    }
-
-    /* Адаптив */
-    .burger {
+    nav li > .submenu {
         display: none;
-        flex-direction: column;
-        gap: 5px;
-        cursor: pointer;
+        padding-left: 15px;
     }
 
-    .burger div {
-        width: 25px;
-        height: 3px;
-        background-color: #fff;
-        transition: all 0.3s;
+    nav li.has-submenu.open > .submenu {
+        display: flex;
     }
 
-    @media (max-width: 900px) {
-        nav {
-            display: none;
-            position: absolute;
-            top: 70px;
-            left: 0;
-            width: 100%;
-            background-color: #1a1a1a;
-            flex-direction: column;
-            padding: 10px 0;
-        }
-
-        nav ul {
-            flex-direction: column;
-            gap: 0;
-        }
-
-        nav li {
-            padding: 10px 20px;
-        }
-
-        nav li:hover > .submenu {
-            position: relative;
-        }
-
-        .burger {
-            display: flex;
-        }
-
-        nav.active {
-            display: flex;
-        }
+    /* Мобильные кнопки */
+    #desktop-buttons {
+        display: none;
     }
+
+    .mobile-buttons {
+        display: flex;
+    }
+
+    .mobile-buttons button {
+        padding: 12px 25px;
+        font-size: 16px;
+        border-radius: 8px;
+        width: 100%;
+        text-align: center;
+    }
+
+    .burger {
+        display: flex;
+    }
+
+    nav.active {
+        display: flex;
+    }
+}
 </style>
 </head>
 <body>
@@ -240,23 +284,49 @@
                 </ul>
             </li>
         </ul>
+
+        <!-- Мобильные кнопки внутри навигации -->
+        <div class="mobile-buttons" id="mobile-buttons">
+            <button class="btn-start">Старт</button>
+            <button class="btn-contact">Напиши нам</button>
+        </div>
     </nav>
 
-    <div class="header-buttons">
+    <!-- Десктоп кнопки -->
+    <div class="header-buttons" id="desktop-buttons">
         <button class="btn-start">Старт</button>
         <button class="btn-contact">Напиши нам</button>
     </div>
 </header>
 
 <script>
-    const burger = document.getElementById('burger');
-    const nav = document.getElementById('nav');
+const burger = document.getElementById('burger');
+const nav = document.getElementById('nav');
 
-    burger.addEventListener('click', () => {
-        nav.classList.toggle('active');
-        burger.classList.toggle('open');
+// Переключение бургер-меню
+burger.addEventListener('click', () => {
+    nav.classList.toggle('active');
+    burger.classList.toggle('open');
+});
+
+// Подменю с кликом на мобильных
+document.querySelectorAll('nav li > ul').forEach(sub => {
+    const parent = sub.parentElement;
+    parent.classList.add('has-submenu');
+
+    parent.querySelector('a').addEventListener('click', e => {
+        if (window.innerWidth <= 900) {
+            e.preventDefault(); // ссылка не срабатывает
+            parent.classList.toggle('open');
+        }
     });
+});
 </script>
+
+</body>
+</html>
+
+
 
 <section class="about" id="about">
     <h2>О проекте</h2>
