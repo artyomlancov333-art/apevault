@@ -311,43 +311,61 @@ const body = document.body;
 
 // Переключение бургер-меню
 burger.addEventListener('click', () => {
-    nav.classList.toggle('active');
-    burger.classList.toggle('open');
-    body.classList.toggle('menu-open'); // блокировка прокрутки
+    const isActive = nav.classList.toggle('active');
+    burger.classList.toggle('open', isActive);
+    body.classList.toggle('menu-open', isActive);
 });
 
-// Подменю с кликом на мобильных
+// Подменю на мобильных
 document.querySelectorAll('nav li > ul').forEach(sub => {
     const parent = sub.parentElement;
     parent.classList.add('has-submenu');
 
-    parent.querySelector('a').addEventListener('click', e => {
+    const link = parent.querySelector('a');
+
+    link.addEventListener('click', e => {
         if (window.innerWidth <= 900) {
-            e.preventDefault(); 
-            // Закрываем другие подменю
+            e.preventDefault();
+
+            const isOpen = parent.classList.contains('open');
+
+            // Закрываем все подменю
             document.querySelectorAll('nav li.has-submenu').forEach(item => {
-                if(item !== parent) item.classList.remove('open');
+                item.classList.remove('open');
             });
-            parent.classList.toggle('open');
+
+            // Если клик был по уже открытому пункту — просто закрываем
+            if (!isOpen) {
+                parent.classList.add('open');
+            }
         }
     });
 });
 
-// Закрытие подменю при клике вне меню или на другой пункт
-document.addEventListener('click', (e) => {
-    if(window.innerWidth <= 900){
-        if(!nav.contains(e.target) && !burger.contains(e.target)){
-            document.querySelectorAll('nav li.has-submenu').forEach(item => item.classList.remove('open'));
+// Закрытие меню при клике вне его
+document.addEventListener('click', e => {
+    if (window.innerWidth <= 900) {
+        const clickedOutsideMenu = !nav.contains(e.target) && !burger.contains(e.target);
+        if (clickedOutsideMenu) {
             nav.classList.remove('active');
             burger.classList.remove('open');
             body.classList.remove('menu-open');
+            document.querySelectorAll('nav li.has-submenu').forEach(item => item.classList.remove('open'));
         }
+    }
+});
+
+// При изменении ширины экрана — сбрасываем состояние меню
+window.addEventListener('resize', () => {
+    if (window.innerWidth > 900) {
+        nav.classList.remove('active');
+        burger.classList.remove('open');
+        body.classList.remove('menu-open');
+        document.querySelectorAll('nav li.has-submenu').forEach(item => item.classList.remove('open'));
     }
 });
 </script>
 
-</body>
-</html>
 
 
 
