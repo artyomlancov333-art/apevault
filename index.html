@@ -12,6 +12,7 @@ body {
     color: #fff;
 }
 
+/* Блокировка прокрутки при открытом меню */
 body.menu-open {
     overflow: hidden;
 }
@@ -25,13 +26,18 @@ header {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 15px 20px;
+    padding: 15px 50px;
     background-color: #1a1a1a;
     position: sticky;
     top: 0;
     z-index: 1000;
 }
 
+/* Логотип */
+.logo {
+    display: flex;
+    flex-direction: column;
+}
 .logo h1 {
     color: #367153;
     margin: 0;
@@ -40,9 +46,10 @@ header {
 .logo span {
     font-size: 12px;
     color: #aaa;
+    margin-top: 2px;
 }
 
-/* Десктопное меню */
+/* Меню */
 nav {
     display: flex;
     align-items: center;
@@ -82,7 +89,7 @@ nav > ul > li > a:hover::after {
     width: 100%;
 }
 
-/* Подменю десктоп */
+/* Подменю */
 .submenu {
     display: none;
     flex-direction: column;
@@ -100,13 +107,17 @@ nav > ul > li > a:hover::after {
 .submenu li {
     padding: 5px 20px;
     white-space: nowrap;
-    border-radius: 25px;
     transition: all 0.3s;
+    border-radius: 25px;
 }
 
 .submenu li:hover {
     background-color: #367153;
     color: #fff;
+}
+
+nav li:hover > .submenu {
+    display: flex;
 }
 
 /* Кнопки */
@@ -147,7 +158,7 @@ nav > ul > li > a:hover::after {
     box-shadow: 0 0 25px #367153;
 }
 
-/* Бургер */
+/* Адаптив */
 .burger {
     display: none;
     flex-direction: column;
@@ -170,8 +181,19 @@ nav > ul > li > a:hover::after {
     padding: 10px 20px;
 }
 
-/* Мобильная версия */
+/* Стрелочки для подменю только на мобиле */
 @media (max-width: 900px) {
+    nav li.has-submenu > a::after {
+        content: '▼';
+        font-size: 10px;
+        margin-left: 5px;
+        transition: transform 0.3s;
+    }
+
+    nav li.has-submenu.open > a::after {
+        transform: rotate(-180deg);
+    }
+
     nav {
         display: none;
         position: absolute;
@@ -180,15 +202,7 @@ nav > ul > li > a:hover::after {
         width: 100%;
         background-color: #1a1a1a;
         flex-direction: column;
-        padding: 0;
-        max-height: 0;
-        overflow: hidden;
-        transition: max-height 0.4s ease;
-    }
-
-    nav.active {
-        display: flex;
-        max-height: 1000px;
+        padding: 10px 0;
     }
 
     nav ul {
@@ -200,37 +214,20 @@ nav > ul > li > a:hover::after {
         padding: 10px 20px;
     }
 
-    nav li.has-submenu > a::after {
-        content: '▼';
-        font-size: 10px;
-        margin-left: 5px;
-        transition: transform 0.3s;
-        color: #367153;
+    nav li:hover > .submenu {
+        position: relative;
     }
 
-    nav li.has-submenu.open > a::after {
-        transform: rotate(-180deg);
-        color: #fff;
-    }
-
-    nav li.has-submenu > .submenu {
-        display: flex;
-        flex-direction: column;
+    nav li > .submenu {
+        display: none;
         padding-left: 15px;
-        border-left: 2px solid #367153;
-        border-radius: 0 8px 8px 0;
-        margin: 5px 0;
-        box-shadow: inset 0 0 10px rgba(0,0,0,0.3);
-        max-height: 0;
-        overflow: hidden;
-        transition: max-height 0.4s ease;
-        background-color: #1a1a1a;
     }
 
     nav li.has-submenu.open > .submenu {
-        max-height: 500px; /* подменю открыто */
+        display: flex;
     }
 
+    /* Мобильные кнопки */
     #desktop-buttons {
         display: none;
     }
@@ -248,6 +245,10 @@ nav > ul > li > a:hover::after {
     }
 
     .burger {
+        display: flex;
+    }
+
+    nav.active {
         display: flex;
     }
 }
@@ -272,7 +273,7 @@ nav > ul > li > a:hover::after {
             <li><a href="#">О проекте</a></li>
             <li><a href="#">Наше комьюнити</a></li>
             <li><a href="#">Наша экосистема</a></li>
-            <li class="has-submenu">
+            <li>
                 <a href="#">Все по обучению</a>
                 <ul class="submenu">
                     <li>Фишки обучения</li>
@@ -280,7 +281,7 @@ nav > ul > li > a:hover::after {
                     <li>Тарифы</li>
                 </ul>
             </li>
-            <li class="has-submenu">
+            <li>
                 <a href="#">Продукты</a>
                 <ul class="submenu">
                     <li>Действующие</li>
@@ -289,12 +290,14 @@ nav > ul > li > a:hover::after {
             </li>
         </ul>
 
+        <!-- Мобильные кнопки внутри навигации -->
         <div class="mobile-buttons" id="mobile-buttons">
             <button class="btn-start">Старт</button>
             <button class="btn-contact">Напиши нам</button>
         </div>
     </nav>
 
+    <!-- Десктоп кнопки -->
     <div class="header-buttons" id="desktop-buttons">
         <button class="btn-start">Старт</button>
         <button class="btn-contact">Напиши нам</button>
@@ -306,63 +309,45 @@ const burger = document.getElementById('burger');
 const nav = document.getElementById('nav');
 const body = document.body;
 
-// Открытие/закрытие мобильного меню
-burger.addEventListener('click', e => {
-    e.stopPropagation();
+// Переключение бургер-меню
+burger.addEventListener('click', () => {
     nav.classList.toggle('active');
     burger.classList.toggle('open');
-    body.classList.toggle('menu-open');
+    body.classList.toggle('menu-open'); // блокировка прокрутки
 });
 
-// Клик вне меню закрывает меню
-document.addEventListener('click', e => {
-    if (window.innerWidth <= 900) {
-        if (!nav.contains(e.target) && !burger.contains(e.target)) {
-            closeMenu();
-        }
-    }
-});
+// Подменю с кликом на мобильных
+document.querySelectorAll('nav li > ul').forEach(sub => {
+    const parent = sub.parentElement;
+    parent.classList.add('has-submenu');
 
-// Esc закрывает меню
-document.addEventListener('keydown', e => {
-    if (e.key === 'Escape') closeMenu();
-});
-
-// Мобильное подменю
-document.querySelectorAll('nav li.has-submenu > a').forEach(link => {
-    link.addEventListener('click', e => {
+    parent.querySelector('a').addEventListener('click', e => {
         if (window.innerWidth <= 900) {
-            e.preventDefault();
-            const parentLi = link.parentElement;
-            parentLi.classList.toggle('open'); // открывает/закрывает подменю
+            e.preventDefault(); 
+            // Закрываем другие подменю
+            document.querySelectorAll('nav li.has-submenu').forEach(item => {
+                if(item !== parent) item.classList.remove('open');
+            });
+            parent.classList.toggle('open');
         }
     });
 });
 
-// Закрытие меню
-function closeMenu() {
-    nav.classList.remove('active');
-    burger.classList.remove('open');
-    body.classList.remove('menu-open');
-    document.querySelectorAll('nav li.has-submenu').forEach(li => li.classList.remove('open'));
-}
-
-// При ресайзе сброс
-window.addEventListener('resize', () => {
-    if (window.innerWidth > 900) closeMenu();
+// Закрытие подменю при клике вне меню или на другой пункт
+document.addEventListener('click', (e) => {
+    if(window.innerWidth <= 900){
+        if(!nav.contains(e.target) && !burger.contains(e.target)){
+            document.querySelectorAll('nav li.has-submenu').forEach(item => item.classList.remove('open'));
+            nav.classList.remove('active');
+            burger.classList.remove('open');
+            body.classList.remove('menu-open');
+        }
+    }
 });
 </script>
 
 </body>
 </html>
-
-
-</body>
-</html>
-
-
-
-
 
 
 
