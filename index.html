@@ -11,17 +11,8 @@ body {
     background-color: #121212;
     color: #fff;
 }
-
-/* Блокировка прокрутки при открытом меню */
-body.menu-open {
-    overflow: hidden;
-}
-
-a {
-    text-decoration: none;
-    color: inherit;
-}
-
+body.menu-open { overflow: hidden; }
+a { text-decoration: none; color: inherit; }
 header {
     display: flex;
     align-items: center;
@@ -32,48 +23,14 @@ header {
     top: 0;
     z-index: 1000;
 }
+.logo h1 { color: #367153; margin: 0; font-size: 24px; }
+.logo span { font-size: 12px; color: #aaa; margin-top: 2px; }
 
-/* Логотип */
-.logo {
-    display: flex;
-    flex-direction: column;
-}
-.logo h1 {
-    color: #367153;
-    margin: 0;
-    font-size: 24px;
-}
-.logo span {
-    font-size: 12px;
-    color: #aaa;
-    margin-top: 2px;
-}
-
-/* Меню */
-nav {
-    display: flex;
-    align-items: center;
-    gap: 30px;
-}
-
-nav ul {
-    display: flex;
-    gap: 30px;
-    list-style: none;
-    margin: 0;
-    padding: 0;
-}
-
-nav li {
-    position: relative;
-}
-
-nav > ul > li > a {
-    padding: 5px 0;
-    position: relative;
-    transition: all 0.3s;
-}
-
+/* Десктоп меню */
+nav { display: flex; align-items: center; gap: 30px; }
+nav ul { display: flex; gap: 30px; list-style: none; margin: 0; padding: 0; }
+nav li { position: relative; }
+nav > ul > li > a { padding: 5px 0; position: relative; transition: all 0.3s; }
 nav > ul > li > a::after {
     content: '';
     position: absolute;
@@ -84,11 +41,7 @@ nav > ul > li > a::after {
     background-color: #367153;
     transition: width 0.3s;
 }
-
-nav > ul > li > a:hover::after {
-    width: 100%;
-}
-
+nav > ul > li > a:hover::after { width: 100%; }
 /* Подменю */
 .submenu {
     display: none;
@@ -103,29 +56,12 @@ nav > ul > li > a:hover::after {
     padding: 10px 0;
     z-index: 1000;
 }
-
-.submenu li {
-    padding: 5px 20px;
-    white-space: nowrap;
-    transition: all 0.3s;
-    border-radius: 25px;
-}
-
-.submenu li:hover {
-    background-color: #367153;
-    color: #fff;
-}
-
-nav li:hover > .submenu {
-    display: flex;
-}
+.submenu li { padding: 5px 20px; white-space: nowrap; border-radius: 25px; transition: all 0.3s; }
+.submenu li:hover { background-color: #367153; color: #fff; }
+nav li:hover > .submenu { display: flex; }
 
 /* Кнопки */
-.header-buttons {
-    display: flex;
-    gap: 15px;
-}
-
+.header-buttons { display: flex; gap: 15px; }
 .header-buttons button {
     padding: 8px 20px;
     font-weight: bold;
@@ -134,116 +70,43 @@ nav li:hover > .submenu {
     transition: all 0.3s ease;
     border: none;
 }
+.btn-start { background-color: #367153; color: #fff; box-shadow: 0 0 15px #367153; }
+.btn-start:hover { box-shadow: 0 0 25px #367153; }
+.btn-contact { background-color: #1a1a1a; color: #fff; border: 2px solid #367153; box-shadow: 0 0 15px #367153; }
+.btn-contact:hover { background-color: #367153; color: #fff; box-shadow: 0 0 25px #367153; }
 
-.btn-start {
-    background-color: #367153;
-    color: #fff;
-    box-shadow: 0 0 15px #367153;
-}
-
-.btn-start:hover {
-    box-shadow: 0 0 25px #367153;
-}
-
-.btn-contact {
-    background-color: #1a1a1a;
-    color: #fff;
-    border: 2px solid #367153;
-    box-shadow: 0 0 15px #367153;
-}
-
-.btn-contact:hover {
-    background-color: #367153;
-    color: #fff;
-    box-shadow: 0 0 25px #367153;
-}
-
-/* Адаптив */
-.burger {
-    display: none;
-    flex-direction: column;
-    gap: 5px;
-    cursor: pointer;
-}
-
-.burger div {
-    width: 25px;
-    height: 3px;
-    background-color: #fff;
-    transition: all 0.3s;
-}
+/* Бургер */
+.burger { display: none; flex-direction: column; gap: 5px; cursor: pointer; }
+.burger div { width: 25px; height: 3px; background-color: #fff; transition: all 0.3s; }
 
 /* Мобильные кнопки */
-.mobile-buttons {
-    display: none;
-    flex-direction: column;
-    gap: 10px;
-    padding: 10px 20px;
-}
+.mobile-buttons { display: none; flex-direction: column; gap: 10px; padding: 10px 20px; }
 
 /* Мобильные стили */
 @media (max-width: 900px) {
-    nav {
-        display: none;
-        position: absolute;
-        top: 70px;
-        left: 0;
-        width: 100%;
-        background-color: #1a1a1a;
-        flex-direction: column;
-        padding: 10px 0;
-        transition: max-height 0.3s ease;
-        overflow: hidden;
+    nav { 
+        display: none; position: absolute; top: 70px; left: 0; width: 100%;
+        background-color: #1a1a1a; flex-direction: column; padding: 10px 0; overflow: hidden;
     }
-
-    nav.active {
-        display: flex;
-    }
-
-    nav ul {
-        flex-direction: column;
-        gap: 0;
-    }
-
-    nav li {
-        padding: 10px 20px;
-    }
-
-    /* Подменю мобильное */
-    nav li.has-submenu > a::after {
-        content: '▼';
-        font-size: 10px;
-        margin-left: 5px;
-        transition: transform 0.3s;
-    }
-
-    nav li.has-submenu.open > a::after {
-        transform: rotate(-180deg);
-    }
-
+    nav.active { display: flex; }
+    nav ul { flex-direction: column; gap: 0; }
+    nav li { padding: 10px 20px; }
+    nav li.has-submenu > a::after { content: '▼'; font-size: 10px; margin-left: 5px; transition: transform 0.3s; }
+    nav li.has-submenu.open > a::after { transform: rotate(-180deg); }
     nav li > .submenu {
         position: relative;
         display: flex;
         flex-direction: column;
         max-height: 0;
         overflow: hidden;
-        transition: max-height 0.3s ease;
+        transition: max-height 0.3s ease, padding 0.3s ease;
         padding-left: 15px;
+        margin-top: 5px;
     }
+    nav li.has-submenu.open > .submenu { max-height: 500px; }
 
-    nav li.has-submenu.open > .submenu {
-        max-height: 500px; /* достаточно для всех пунктов */
-    }
-
-    /* Мобильные кнопки */
-    #desktop-buttons {
-        display: none;
-    }
-
-    .mobile-buttons {
-        display: flex;
-    }
-
+    #desktop-buttons { display: none; }
+    .mobile-buttons { display: flex; }
     .mobile-buttons button {
         padding: 12px 25px;
         font-size: 16px;
@@ -251,26 +114,18 @@ nav li:hover > .submenu {
         width: 100%;
         text-align: center;
     }
-
-    .burger {
-        display: flex;
-    }
+    .burger { display: flex; }
 }
 </style>
 </head>
 <body>
-
 <header>
     <div class="logo">
         <h1>ApeVault</h1>
         <span>сообщество диких криптанов</span>
     </div>
 
-    <div class="burger" id="burger">
-        <div></div>
-        <div></div>
-        <div></div>
-    </div>
+    <div class="burger" id="burger"><div></div><div></div><div></div></div>
 
     <nav id="nav">
         <ul>
@@ -293,72 +148,42 @@ nav li:hover > .submenu {
                 </ul>
             </li>
         </ul>
-
-        <!-- Мобильные кнопки внутри навигации -->
         <div class="mobile-buttons" id="mobile-buttons">
             <button class="btn-start">Старт</button>
             <button class="btn-contact">Напиши нам</button>
         </div>
     </nav>
-
-    <!-- Десктоп кнопки -->
     <div class="header-buttons" id="desktop-buttons">
         <button class="btn-start">Старт</button>
         <button class="btn-contact">Напиши нам</button>
     </div>
 </header>
 
-<<script>
+<script>
 const burger = document.getElementById('burger');
 const nav = document.getElementById('nav');
 const body = document.body;
 
-// Переключение бургер-меню
+// Бургер
 burger.addEventListener('click', () => {
     nav.classList.toggle('active');
     burger.classList.toggle('open');
-    body.classList.toggle('menu-open'); // блокировка прокрутки
+    body.classList.toggle('menu-open');
 });
 
-// Добавляем класс has-submenu родителям подменю
+// Подменю
 document.querySelectorAll('nav li > ul').forEach(sub => {
-    const parent = sub.parentElement;
-    parent.classList.add('has-submenu');
+    sub.parentElement.classList.add('has-submenu');
 });
-
-// Обработчик клика на пункты с подменю с плавной анимацией
 document.querySelectorAll('nav li.has-submenu').forEach(parent => {
     const link = parent.querySelector('a');
-    const submenu = parent.querySelector('ul'); // если есть класс .submenu, используй его
+    const submenu = parent.querySelector('ul');
 
     link.addEventListener('click', e => {
-        if (window.innerWidth <= 900) {
+        if(window.innerWidth <= 900){
             e.preventDefault();
+            const isOpen = parent.classList.contains('open');
 
-            if (parent.classList.contains('open')) {
-                // закрываем текущее подменю
-                submenu.style.maxHeight = null;
-                parent.classList.remove('open');
-            } else {
-                // закрываем все остальные подменю
-                document.querySelectorAll('nav li.has-submenu').forEach(item => {
-                    item.classList.remove('open');
-                    const sub = item.querySelector('ul');
-                    if(sub) sub.style.maxHeight = null;
-                });
-
-                // открываем текущее
-                parent.classList.add('open');
-                submenu.style.maxHeight = submenu.scrollHeight + 'px';
-            }
-        }
-    });
-});
-
-// Закрытие меню и подменю при клике вне навигации
-document.addEventListener('click', e => {
-    if (window.innerWidth <= 900) {
-        if (!nav.contains(e.target) && !burger.contains(e.target)) {
             // Закрываем все подменю
             document.querySelectorAll('nav li.has-submenu').forEach(item => {
                 item.classList.remove('open');
@@ -366,7 +191,24 @@ document.addEventListener('click', e => {
                 if(sub) sub.style.maxHeight = null;
             });
 
-            // Закрываем само меню
+            // Если текущее было закрыто, открываем
+            if(!isOpen){
+                parent.classList.add('open');
+                submenu.style.maxHeight = submenu.scrollHeight + 'px';
+            }
+        }
+    });
+});
+
+// Клик вне меню
+document.addEventListener('click', e => {
+    if(window.innerWidth <= 900){
+        if(!nav.contains(e.target) && !burger.contains(e.target)){
+            document.querySelectorAll('nav li.has-submenu').forEach(item => {
+                item.classList.remove('open');
+                const sub = item.querySelector('ul');
+                if(sub) sub.style.maxHeight = null;
+            });
             nav.classList.remove('active');
             burger.classList.remove('open');
             body.classList.remove('menu-open');
@@ -374,9 +216,9 @@ document.addEventListener('click', e => {
     }
 });
 
-// Обновление при изменении размера окна (сброс при переходе на десктоп)
+// Сброс при ресайзе
 window.addEventListener('resize', () => {
-    if (window.innerWidth > 900) {
+    if(window.innerWidth > 900){
         nav.classList.remove('active');
         burger.classList.remove('open');
         body.classList.remove('menu-open');
@@ -388,6 +230,9 @@ window.addEventListener('resize', () => {
     }
 });
 </script>
+</body>
+</html>
+
 
 
 
