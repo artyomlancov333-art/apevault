@@ -1163,7 +1163,6 @@ document.addEventListener('DOMContentLoaded', () => {
 </div>
 
 <style>
-  
 /* --- Модальное окно --- */
 .modal {
   display: none;
@@ -1214,7 +1213,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 .module-list li {
   display: flex;
-  align-items: center;
+  align-items: center;  /* центрируем кружок и текст */
   gap: 12px;
   background: #1b1b1b;
   padding: 10px 15px;
@@ -1231,25 +1230,37 @@ document.addEventListener('DOMContentLoaded', () => {
   transform: translateY(-3px) scale(1.02);
 }
 
-.module-list li:nth-child(odd) .num {
-  background: #3ea16f;
-}
-
+/* --- Кружок с цифрой --- */
 .num {
-  min-width: 28px;
+  width: 28px;
   height: 28px;
   background: #2f6c4f;
   color: #fff;
   border-radius: 50%;
-  display: inline-flex;
+  display: flex;
   justify-content: center;
   align-items: center;
   font-weight: bold;
   font-size: 0.9em;
   flex-shrink: 0;
+  line-height: 1;
 }
 
-/* --- Текст и параграфы --- */
+.module-list li:nth-child(odd) .num {
+  background: #3ea16f;
+}
+
+/* --- Текст модуля --- */
+.module-list li b {
+  display: flex;
+  align-items: center;  /* выравнивание с кружком */
+  line-height: 1;
+  margin: 0;
+  color: #3ea16f;       /* зелёный текст */
+  font-weight: bold;
+}
+
+/* --- Параграфы --- */
 p {
   margin-bottom: 18px;
   color: #ddd;
@@ -1283,7 +1294,7 @@ b {
   100% { transform: translateY(0); opacity: 1; }
 }
 
-/* Плавное последовательное появление пунктов */
+/* --- Плавное появление пунктов --- */
 .module-list li:nth-child(1) { animation-delay: 0.1s; }
 .module-list li:nth-child(2) { animation-delay: 0.15s; }
 .module-list li:nth-child(3) { animation-delay: 0.2s; }
@@ -1301,7 +1312,7 @@ b {
 .module-list li:nth-child(15) { animation-delay: 0.8s; }
 .module-list li:nth-child(16) { animation-delay: 0.85s; }
 
-/* Адаптив для мобильных экранов */
+/* --- Адаптив --- */
 @media (max-width: 500px) {
   .modal {
     padding: 10px;
@@ -1325,13 +1336,23 @@ document.addEventListener('DOMContentLoaded', () => {
   const learningBtn = document.querySelector('.ecosystem-card:nth-child(2) .card-info');
   const learningClose = learningModal.querySelector('.close');
 
-  // Гарантированно скрываем модалку при загрузке
-  learningModal.style.display = 'none';
-
   if (!learningBtn) return;
 
   learningBtn.addEventListener('click', () => {
-    learningModal.style.display = 'flex'; // открытие модалки
+    // Сбрасываем анимацию модулей при каждом открытии
+    const modules = learningModal.querySelectorAll('.module-list li');
+    modules.forEach(li => {
+      li.style.opacity = 0;
+      li.style.transform = 'translateY(20px)';
+      li.style.animation = 'none';
+    });
+    void learningModal.offsetWidth; // триггер перезапуска анимации
+
+    learningModal.style.display = 'flex';
+    modules.forEach((li, index) => {
+      li.style.animation = `slideUp 0.4s forwards`;
+      li.style.animationDelay = `${0.1 + index * 0.05}s`;
+    });
   });
 
   learningClose.addEventListener('click', () => {
