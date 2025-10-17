@@ -429,8 +429,7 @@ function animateNumber(el) {
   <h2 class="section-title">Наше комьюнити</h2>
   <div class="info-section">
 
-    <!-- Зачем мы это сделали -->
-    <div class="info-card">
+    <div class="info-card left">
       <div class="icon">
         <svg width="40" height="40" viewBox="0 0 24 24" fill="#367153" xmlns="http://www.w3.org/2000/svg">
           <path d="M12 2C7.03 2 3 6.03 3 11C3 14.39 5.08 17.35 8 18.73V21H16V18.73C18.92 17.35 21 14.39 21 11C21 6.03 16.97 2 12 2ZM12 16C9.24 16 7 13.76 7 11C7 8.24 9.24 6 12 6C14.76 6 17 8.24 17 11C17 13.76 14.76 16 12 16Z"/>
@@ -440,8 +439,7 @@ function animateNumber(el) {
       <p>Создать пространство, где крипта становится понятной и даёт реальную пользу каждому участнику</p>
     </div>
 
-    <!-- Кто мы -->
-    <div class="info-card">
+    <div class="info-card right">
       <div class="icon">
         <svg width="40" height="40" viewBox="0 0 24 24" fill="#367153" xmlns="http://www.w3.org/2000/svg">
           <path d="M16 11C18.21 11 20 12.79 20 15V18H12V15C12 12.79 13.79 11 16 11ZM8 11C10.21 11 12 12.79 12 15V18H4V15C4 12.79 5.79 11 8 11ZM12 3C13.66 3 15 4.34 15 6C15 7.66 13.66 9 12 9C10.34 9 9 7.66 9 6C9 4.34 10.34 3 12 3Z"/>
@@ -451,8 +449,7 @@ function animateNumber(el) {
       <p>Команда практиков: трейдеры, аналитики и энтузиасты криптовалют, которые делятся опытом и инструментами</p>
     </div>
 
-    <!-- Наши проекты -->
-    <div class="info-card">
+    <div class="info-card left">
       <div class="icon">
         <svg width="40" height="40" viewBox="0 0 24 24" fill="#367153" xmlns="http://www.w3.org/2000/svg">
           <path d="M3 3H21V21H3V3ZM5 5V19H19V5H5ZM7 7H9V17H7V7ZM11 7H13V17H11V7ZM15 7H17V17H15V7Z"/>
@@ -462,8 +459,7 @@ function animateNumber(el) {
       <p>Обучающие кейсы, инвестиционные стратегии, безопасные гайды и комьюнити-ивенты для участников</p>
     </div>
 
-    <!-- Активности -->
-    <div class="info-card">
+    <div class="info-card right">
       <div class="icon">
         <svg width="40" height="40" viewBox="0 0 24 24" fill="#367153" xmlns="http://www.w3.org/2000/svg">
           <path d="M7 10H9V12H7V10ZM11 10H13V12H11V10ZM15 10H17V12H15V10ZM19 4H18V2H16V4H8V2H6V4H5C3.9 4 3 4.9 3 6V20C3 21.1 3.9 22 5 22H19C20.1 22 21 21.1 21 20V6C21 4.9 20.1 4 19 4ZM19 20H5V9H19V20Z"/>
@@ -507,12 +503,14 @@ function animateNumber(el) {
   border: 2px solid #fff;
   box-shadow: 0 0 16px rgba(54, 113, 83, 0.1);
   border-radius: 14px;
-  transition: all 0.3s ease;
+  transition: transform 2.2s cubic-bezier(0.22, 1, 0.36, 1), opacity 2.2s ease;
   opacity: 0;
-  transform: translateY(30px);
 }
 
-/* Зеленая рамка внутренняя */
+/* Начальное смещение */
+.info-card.left { transform: translateX(-150px); }
+.info-card.right { transform: translateX(150px); }
+
 .info-card::before {
   content: "";
   position: absolute;
@@ -530,9 +528,7 @@ function animateNumber(el) {
   transition: transform 0.3s;
 }
 
-.info-card:hover .icon {
-  transform: scale(1.2) rotate(-10deg);
-}
+.info-card:hover .icon { transform: scale(1.2) rotate(-10deg); }
 
 .info-card h3 {
   color: #367153;
@@ -555,21 +551,13 @@ function animateNumber(el) {
   border-color: #8ef1a4;
 }
 
-/* Анимация появления */
+/* Видимая карточка */
 .info-card.visible {
   opacity: 1;
-  transform: translateY(0);
-  animation: float 1s ease-out;
+  transform: translateX(0);
 }
 
-/* Лёгкое покачивание */
-@keyframes float {
-  0% { transform: translateY(30px); }
-  50% { transform: translateY(-5px); }
-  100% { transform: translateY(0); }
-}
-
-/* Адаптив для мобилок */
+/* Адаптив */
 @media (max-width: 950px) {
   .info-section {
     flex-wrap: wrap;
@@ -591,18 +579,20 @@ document.addEventListener('DOMContentLoaded', () => {
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
-        entry.target.classList.add('visible');
+        entry.target.classList.add('visible'); // плавно появляется
       } else {
-        entry.target.classList.remove('visible');
+        entry.target.classList.remove('visible'); // плавно уезжает обратно
       }
     });
-  }, {
-    threshold: 0.1
-  });
+  }, { threshold: 0.25 }); // появляется когда 25% карточки видимо
 
   cards.forEach(card => observer.observe(card));
 });
 </script>
+
+
+
+
 
 
 
