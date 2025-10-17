@@ -972,7 +972,7 @@ document.querySelectorAll('.team-card').forEach((el, i) => {
   });
 </script>
 
-<<!-- Модальное окно -->
+<!-- Модальное окно -->
 <div id="chatModal" class="modal">
   <div class="modal-content">
     <span class="close">&times;</span>
@@ -987,23 +987,21 @@ document.querySelectorAll('.team-card').forEach((el, i) => {
 </div>
 
 <style>
-/* Стили модалки */
 .modal {
-  display: none; /* скрыто по умолчанию */
+  display: none;
   position: fixed;
   z-index: 9999;
   left: 0;
   top: 0;
   width: 100%;
   height: 100%;
-  overflow-y: auto; /* скролл если контент большой */
-  background-color: rgba(0,0,0,0.8); /* затемнение */
+  background-color: rgba(0,0,0,0.8);
   display: flex;
   align-items: center;
   justify-content: center;
-  animation: fadeIn 0.3s ease;
-  padding: 20px; /* отступ для маленьких экранов */
+  padding: 10px;
   box-sizing: border-box;
+  animation: fadeIn 0.3s ease;
 }
 
 .modal-content {
@@ -1013,6 +1011,8 @@ document.querySelectorAll('.team-card').forEach((el, i) => {
   border-radius: 12px;
   width: 100%;
   max-width: 480px;
+  max-height: 90vh; /* не больше 90% высоты экрана */
+  overflow-y: auto; /* внутренний скролл, если контент большой */
   color: #fff;
   text-align: left;
   position: relative;
@@ -1040,10 +1040,9 @@ document.querySelectorAll('.team-card').forEach((el, i) => {
   word-break: break-word;
 }
 
-/* Крестик */
 .close {
   color: #fff;
-  position: absolute;
+  position: sticky;
   top: 10px;
   right: 15px;
   font-size: 28px;
@@ -1057,7 +1056,6 @@ document.querySelectorAll('.team-card').forEach((el, i) => {
   color: #8ef1a4;
 }
 
-/* Анимации */
 @keyframes fadeIn {
   from { opacity: 0; }
   to { opacity: 1; }
@@ -1068,13 +1066,14 @@ document.querySelectorAll('.team-card').forEach((el, i) => {
   to { transform: scale(1); opacity: 1; }
 }
 
-/* Адаптив для маленьких экранов */
+/* Адаптив для мобильных экранов */
 @media (max-width: 500px) {
   .modal-content {
     padding: 15px 20px;
     max-width: 100%;
+    max-height: 85vh;
+    border-radius: 10px;
   }
-
   .close {
     top: 8px;
     right: 12px;
@@ -1084,24 +1083,20 @@ document.querySelectorAll('.team-card').forEach((el, i) => {
 </style>
 
 <script>
-// Получаем элементы
 const modal = document.getElementById('chatModal');
 const btn = document.querySelector('.ecosystem-card:first-child .card-info');
 const close = modal.querySelector('.close');
 
-// Открытие модалки
 btn.onclick = () => {
   modal.style.display = 'flex';
-  document.body.style.overflow = 'hidden'; // блокируем прокрутку фона
+  document.body.style.overflow = 'hidden';
 }
 
-// Закрытие модалки по X
 close.onclick = () => {
   modal.style.display = 'none';
-  document.body.style.overflow = ''; // разблокируем прокрутку
+  document.body.style.overflow = '';
 }
 
-// Закрытие при клике вне окна
 window.onclick = (event) => {
   if (event.target === modal) {
     modal.style.display = 'none';
@@ -1109,7 +1104,6 @@ window.onclick = (event) => {
   }
 }
 
-// Закрытие по Esc
 document.addEventListener('keydown', (e) => {
   if (e.key === "Escape") {
     modal.style.display = 'none';
@@ -1117,6 +1111,7 @@ document.addEventListener('keydown', (e) => {
   }
 });
 </script>
+
 
 
 <!-- Модальное окно для второй карточки -->
