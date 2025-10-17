@@ -42,7 +42,7 @@ nav > ul > li > a::after {
     transition: width 0.3s;
 }
 nav > ul > li > a:hover::after { width: 100%; }
-/* Подменю */
+/* Подменю десктоп */
 .submenu {
     display: none;
     flex-direction: column;
@@ -95,15 +95,20 @@ nav li:hover > .submenu { display: flex; }
     nav li.has-submenu.open > a::after { transform: rotate(-180deg); }
     nav li > .submenu {
         position: relative;
-        display: flex;
-        flex-direction: column;
+        display: block; /* flex убран */
         max-height: 0;
         overflow: hidden;
         transition: max-height 0.3s ease, padding 0.3s ease;
         padding-left: 15px;
+        padding-top: 0;
+        padding-bottom: 0;
         margin-top: 5px;
     }
-    nav li.has-submenu.open > .submenu { max-height: 500px; }
+    nav li.has-submenu.open > .submenu {
+        max-height: 500px;
+        padding-top: 10px;
+        padding-bottom: 10px;
+    }
 
     #desktop-buttons { display: none; }
     .mobile-buttons { display: flex; }
@@ -188,13 +193,19 @@ document.querySelectorAll('nav li.has-submenu').forEach(parent => {
             document.querySelectorAll('nav li.has-submenu').forEach(item => {
                 item.classList.remove('open');
                 const sub = item.querySelector('ul');
-                if(sub) sub.style.maxHeight = null;
+                if(sub){
+                    sub.style.maxHeight = '0px';
+                    sub.style.paddingTop = '0px';
+                    sub.style.paddingBottom = '0px';
+                }
             });
 
             // Если текущее было закрыто, открываем
             if(!isOpen){
                 parent.classList.add('open');
                 submenu.style.maxHeight = submenu.scrollHeight + 'px';
+                submenu.style.paddingTop = '10px';
+                submenu.style.paddingBottom = '10px';
             }
         }
     });
@@ -207,7 +218,11 @@ document.addEventListener('click', e => {
             document.querySelectorAll('nav li.has-submenu').forEach(item => {
                 item.classList.remove('open');
                 const sub = item.querySelector('ul');
-                if(sub) sub.style.maxHeight = null;
+                if(sub){
+                    sub.style.maxHeight = '0px';
+                    sub.style.paddingTop = '0px';
+                    sub.style.paddingBottom = '0px';
+                }
             });
             nav.classList.remove('active');
             burger.classList.remove('open');
@@ -225,13 +240,18 @@ window.addEventListener('resize', () => {
         document.querySelectorAll('nav li.has-submenu').forEach(item => {
             item.classList.remove('open');
             const sub = item.querySelector('ul');
-            if(sub) sub.style.maxHeight = null;
+            if(sub){
+                sub.style.maxHeight = null;
+                sub.style.paddingTop = null;
+                sub.style.paddingBottom = null;
+            }
         });
     }
 });
 </script>
 </body>
 </html>
+
 
 
 
