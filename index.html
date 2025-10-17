@@ -1772,7 +1772,6 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 </script>
 
-
 <!-- Модальное окно для 6-го пункта -->
 <div id="loyaltyModal" class="modal">
   <div class="modal-content">
@@ -1826,159 +1825,155 @@ document.addEventListener('DOMContentLoaded', () => {
 <style>
 /* Общие стили для модальных окон */
 #loyaltyModal.modal, #reserveModal.modal, #wheelModal.modal {
-    display: none;
-    position: fixed;
-    z-index: 999;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    overflow: auto;
-    background: rgba(0,0,0,0.85);
-    animation: fadeIn 0.3s ease;
-    font-family: 'Inter', sans-serif;
+  display: none;
+  position: fixed;
+  z-index: 9999;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.85);
+  overflow: hidden;
+  animation: fadeIn 0.3s ease;
+  font-family: 'Inter', sans-serif;
 }
 
-/* Контейнер модалки */
-#loyaltyModal .modal-content, #reserveModal .modal-content, #wheelModal .modal-content {
-    background: linear-gradient(145deg, #111, #1a1a1a);
-    margin: 3% auto;
-    padding: 35px 40px;
-    border: 2px solid #367153;
-    border-radius: 16px;
-    width: 85%;
-    max-width: 650px;
-    color: #fff;
-    position: relative;
-    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.7);
-    animation: scaleIn 0.3s ease;
-    transition: transform 0.2s ease;
+/* Контент */
+#loyaltyModal .modal-content,
+#reserveModal .modal-content,
+#wheelModal .modal-content {
+  background: linear-gradient(145deg, #111, #1a1a1a);
+  border: 2px solid #367153;
+  border-radius: 16px;
+  color: #fff;
+  width: 85%;
+  max-width: 650px;
+  padding: 35px 40px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  box-shadow: 0 0 30px rgba(54,113,83,0.4);
+  animation: scaleIn 0.3s ease;
 }
 
-#loyaltyModal .modal-content:hover,
-#reserveModal .modal-content:hover,
-#wheelModal .modal-content:hover {
-    transform: scale(1.02);
-}
-
-/* Заголовки */
+/* Заголовок */
 #loyaltyModal h3, #reserveModal h3, #wheelModal h3 {
-    color: #367153;
-    text-align: center;
-    margin-bottom: 25px;
-    text-shadow: 1px 1px 4px rgba(0,0,0,0.5);
+  color: #367153;
+  text-align: center;
+  margin-bottom: 25px;
+}
+
+/* Текст */
+#loyaltyModal p, #reserveModal p, #wheelModal p {
+  color: #ccc;
+  line-height: 1.6;
+  margin-bottom: 20px;
 }
 
 /* Списки */
 #loyaltyModal ul, #reserveModal ul, #wheelModal ul {
-    list-style: none;
-    padding-left: 0;
-    margin-bottom: 20px;
+  list-style: none;
+  padding: 0;
+  margin: 0 0 20px 0;
 }
 
 #loyaltyModal ul li, #reserveModal ul li, #wheelModal ul li {
-    position: relative;
-    padding-left: 30px;
-    margin-bottom: 15px;
-    font-size: 16px;
-    line-height: 1.5;
-    transition: transform 0.2s, color 0.2s;
+  padding-left: 30px;
+  position: relative;
+  margin-bottom: 12px;
+  line-height: 1.5;
+  font-size: 16px;
+  transition: color 0.2s ease, transform 0.2s ease;
 }
 
-/* Иконки для каждого пункта */
+#loyaltyModal ul li:hover,
+#reserveModal ul li:hover,
+#wheelModal ul li:hover {
+  color: #8ef1a4;
+  transform: translateX(6px);
+}
+
+/* Иконки */
 #loyaltyModal ul li:nth-child(1)::before { content: '🎓'; }
 #loyaltyModal ul li:nth-child(2)::before { content: '🔒'; }
 #loyaltyModal ul li:nth-child(3)::before { content: '💎'; }
 #loyaltyModal ul li:nth-child(4)::before { content: '🏆'; }
 
-#reserveModal ul li:nth-child(1)::before { content: '💰'; } /* Прозрачное распределение */
-#reserveModal ul li:nth-child(2)::before { content: '🛡️'; } /* Надёжная система страхования */
+#reserveModal ul li:nth-child(1)::before { content: '💰'; }
+#reserveModal ul li:nth-child(2)::before { content: '🛡️'; }
 
-#wheelModal ul li:nth-child(1)::before { content: '🎁'; } /* Скидки и призы */
-#wheelModal ul li:nth-child(2)::before { content: '🎯'; } /* Соревновательный элемент */
+#wheelModal ul li:nth-child(1)::before { content: '🎁'; }
+#wheelModal ul li:nth-child(2)::before { content: '🎯'; }
 
-/* Общие стили для иконок */
 #loyaltyModal ul li::before,
 #reserveModal ul li::before,
 #wheelModal ul li::before {
-    position: absolute;
-    left: 0;
-    top: 0;
-    font-size: 20px;
-    transition: transform 0.2s, color 0.2s;
+  position: absolute;
+  left: 0;
+  top: 0;
+  font-size: 20px;
 }
 
-/* Hover эффекты для пунктов */
-#loyaltyModal ul li:hover,
-#reserveModal ul li:hover,
-#wheelModal ul li:hover {
-    color: #8ef1a4;
-    transform: translateX(6px);
-}
-
-#loyaltyModal ul li:hover::before,
-#reserveModal ul li:hover::before,
-#wheelModal ul li:hover::before {
-    transform: scale(1.3);
-}
-
-/* Абзацы */
-#loyaltyModal p, #reserveModal p, #wheelModal p {
-    margin-bottom: 20px;
-    font-size: 15px;
-    line-height: 1.6;
-    color: #ccc;
-}
-
-/* Кнопка закрытия */
+/* Крестик */
 #loyaltyModal .close, #reserveModal .close, #wheelModal .close {
-    color: #fff;
-    position: absolute;
-    top: 12px;
-    right: 20px;
-    font-size: 28px;
-    font-weight: bold;
-    cursor: pointer;
-    transition: all 0.2s;
+  color: #fff;
+  position: absolute;
+  top: 12px;
+  right: 20px;
+  font-size: 28px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  z-index: 10000;
 }
 
 #loyaltyModal .close:hover, #reserveModal .close:hover, #wheelModal .close:hover {
-    color: #8ef1a4;
-    transform: rotate(90deg);
+  color: #8ef1a4;
+  transform: rotate(90deg);
 }
 
 /* Анимации */
 @keyframes fadeIn { from {opacity: 0;} to {opacity: 1;} }
-@keyframes scaleIn { from {transform: scale(0.8);} to {transform: scale(1);} }
+@keyframes scaleIn { from {transform: translate(-50%, -50%) scale(0.8);} to {transform: translate(-50%, -50%) scale(1);} }
+
+/* Убираем белую полосу прокрутки */
+body.modal-open {
+  overflow: hidden;
+}
 </style>
 
 <script>
-  // Модальные окна для карточек 6–8
-  const loyaltyModal = document.getElementById('loyaltyModal');
-  const loyaltyBtn = document.querySelector('.ecosystem-card:nth-child(6) .card-info');
-  const loyaltyClose = loyaltyModal.querySelector('.close');
-  loyaltyBtn.onclick = () => loyaltyModal.style.display = 'block';
-  loyaltyClose.onclick = () => loyaltyModal.style.display = 'none';
+document.addEventListener("DOMContentLoaded", () => {
+  const modals = [
+    { id: 'loyaltyModal', index: 6 },
+    { id: 'reserveModal', index: 7 },
+    { id: 'wheelModal', index: 8 }
+  ];
 
-  const reserveModal = document.getElementById('reserveModal');
-  const reserveBtn = document.querySelector('.ecosystem-card:nth-child(7) .card-info');
-  const reserveClose = reserveModal.querySelector('.close');
-  reserveBtn.onclick = () => reserveModal.style.display = 'block';
-  reserveClose.onclick = () => reserveModal.style.display = 'none';
+  modals.forEach(({ id, index }) => {
+    const modal = document.getElementById(id);
+    const btn = document.querySelector(`.ecosystem-card:nth-child(${index}) .card-info`);
+    const close = modal.querySelector('.close');
 
-  const wheelModal = document.getElementById('wheelModal');
-  const wheelBtn = document.querySelector('.ecosystem-card:nth-child(8) .card-info');
-  const wheelClose = wheelModal.querySelector('.close');
-  wheelBtn.onclick = () => wheelModal.style.display = 'block';
-  wheelClose.onclick = () => wheelModal.style.display = 'none';
-
-  // Закрытие при клике вне модалки
-  window.onclick = (event) => {
-    if(event.target === loyaltyModal) loyaltyModal.style.display = 'none';
-    if(event.target === reserveModal) reserveModal.style.display = 'none';
-    if(event.target === wheelModal) wheelModal.style.display = 'none';
-  }
+    if (btn && modal && close) {
+      btn.onclick = () => {
+        modal.style.display = 'block';
+        document.body.classList.add('modal-open');
+      };
+      close.onclick = () => {
+        modal.style.display = 'none';
+        document.body.classList.remove('modal-open');
+      };
+      window.addEventListener('click', (e) => {
+        if (e.target === modal) {
+          modal.style.display = 'none';
+          document.body.classList.remove('modal-open');
+        }
+      });
+    }
+  });
+});
 </script>
+
 
 
 
