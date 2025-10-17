@@ -317,7 +317,7 @@ burger.addEventListener('click', e => {
     body.classList.toggle('menu-open', isActive);
 });
 
-// Подменю (корректный toggle)
+// Подменю с корректным открытием и закрытием
 document.querySelectorAll('nav li > ul').forEach(sub => {
     const parent = sub.parentElement;
     parent.classList.add('has-submenu');
@@ -330,13 +330,15 @@ document.querySelectorAll('nav li > ul').forEach(sub => {
 
             const isAlreadyOpen = parent.classList.contains('open');
 
-            // Закрываем все подменю
-            document.querySelectorAll('nav li.has-submenu').forEach(item => {
-                item.classList.remove('open');
-            });
-
-            // Если текущее было закрыто — открываем
-            if (!isAlreadyOpen) {
+            // Если уже открыто — просто закрываем текущее
+            if (isAlreadyOpen) {
+                parent.classList.remove('open');
+            } else {
+                // Закрываем все остальные подменю
+                document.querySelectorAll('nav li.has-submenu').forEach(item => {
+                    item.classList.remove('open');
+                });
+                // Открываем текущее
                 parent.classList.add('open');
             }
         }
@@ -365,6 +367,7 @@ function closeAll() {
     document.querySelectorAll('nav li.has-submenu').forEach(item => item.classList.remove('open'));
 }
 </script>
+
 
 
 
