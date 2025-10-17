@@ -317,38 +317,63 @@ const body = document.body;
 burger.addEventListener('click', () => {
     nav.classList.toggle('active');
     burger.classList.toggle('open');
-    body.classList.toggle('menu-open');
+    body.classList.toggle('menu-open'); // блокировка прокрутки
 });
 
-// Подменю с кликом на мобильных
+// Добавляем класс has-submenu родителям подменю
 document.querySelectorAll('nav li > ul').forEach(sub => {
     const parent = sub.parentElement;
     parent.classList.add('has-submenu');
+});
 
-    parent.querySelector('a').addEventListener('click', e => {
+// Обработчик клика на пункты с подменю
+document.querySelectorAll('nav li.has-submenu').forEach(parent => {
+    const link = parent.querySelector('a');
+
+    link.addEventListener('click', e => {
         if (window.innerWidth <= 900) {
-            e.preventDefault(); 
-            // Закрываем другие подменю
-            document.querySelectorAll('nav li.has-submenu').forEach(item => {
-                if(item !== parent) item.classList.remove('open');
-            });
-            parent.classList.toggle('open');
+            e.preventDefault();
+
+            // Если подменю уже открыто, закрываем его
+            if (parent.classList.contains('open')) {
+                parent.classList.remove('open');
+            } else {
+                // Закрываем все остальные подменю
+                document.querySelectorAll('nav li.has-submenu').forEach(item => {
+                    item.classList.remove('open');
+                });
+                // Открываем текущее
+                parent.classList.add('open');
+            }
         }
     });
 });
 
-// Закрытие подменю при клике вне меню
+// Закрытие меню и подменю при клике вне навигации
 document.addEventListener('click', (e) => {
     if(window.innerWidth <= 900){
         if(!nav.contains(e.target) && !burger.contains(e.target)){
+            // Закрываем все подменю
             document.querySelectorAll('nav li.has-submenu').forEach(item => item.classList.remove('open'));
+            // Закрываем само меню
             nav.classList.remove('active');
             burger.classList.remove('open');
             body.classList.remove('menu-open');
         }
     }
 });
+
+// Обновление при изменении размера окна (чтобы меню сбрасывалось при переходе на десктоп)
+window.addEventListener('resize', () => {
+    if(window.innerWidth > 900){
+        nav.classList.remove('active');
+        burger.classList.remove('open');
+        body.classList.remove('menu-open');
+        document.querySelectorAll('nav li.has-submenu').forEach(item => item.classList.remove('open'));
+    }
+});
 </script>
+
 
 </body>
 </html>
