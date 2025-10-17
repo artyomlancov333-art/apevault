@@ -372,6 +372,35 @@ window.addEventListener('resize', () => {
         document.querySelectorAll('nav li.has-submenu').forEach(item => item.classList.remove('open'));
     }
 });
+
+document.querySelectorAll('nav li.has-submenu').forEach(parent => {
+    const link = parent.querySelector('a');
+    const submenu = parent.querySelector('.submenu');
+
+    link.addEventListener('click', e => {
+        if (window.innerWidth <= 900) {
+            e.preventDefault();
+
+            if (parent.classList.contains('open')) {
+                // закрываем
+                submenu.style.maxHeight = null;
+                parent.classList.remove('open');
+            } else {
+                // закрываем все остальные подменю
+                document.querySelectorAll('nav li.has-submenu').forEach(item => {
+                    item.classList.remove('open');
+                    const sub = item.querySelector('.submenu');
+                    if(sub) sub.style.maxHeight = null;
+                });
+
+                // открываем текущее
+                parent.classList.add('open');
+                submenu.style.maxHeight = submenu.scrollHeight + 'px';
+            }
+        }
+    });
+});
+
 </script>
 
 
