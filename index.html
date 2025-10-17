@@ -590,14 +590,6 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 </script>
 
-
-
-
-
-
-
-
-
 <section class="team-section">
   <h2>Наша команда</h2>
   <p class="team-subtitle">Люди, которые создают и развивают ApeVault</p>
@@ -980,7 +972,7 @@ document.querySelectorAll('.team-card').forEach((el, i) => {
   });
 </script>
 
-<!-- Модальное окно -->
+<<!-- Модальное окно -->
 <div id="chatModal" class="modal">
   <div class="modal-content">
     <span class="close">&times;</span>
@@ -995,100 +987,138 @@ document.querySelectorAll('.team-card').forEach((el, i) => {
 </div>
 
 <style>
-  /* Стили модалки */
-  .modal {
-    display: none; /* скрыто по умолчанию */
-    position: fixed;
-    z-index: 999;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    overflow: auto;
-    background-color: rgba(0,0,0,0.8); /* затемнение */
-    animation: fadeIn 0.3s ease;
-  }
+/* Стили модалки */
+.modal {
+  display: none; /* скрыто по умолчанию */
+  position: fixed;
+  z-index: 9999;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow-y: auto; /* скролл если контент большой */
+  background-color: rgba(0,0,0,0.8); /* затемнение */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: fadeIn 0.3s ease;
+  padding: 20px; /* отступ для маленьких экранов */
+  box-sizing: border-box;
+}
 
+.modal-content {
+  background-color: #111;
+  padding: 20px 25px;
+  border: 2px solid #367153;
+  border-radius: 12px;
+  width: 100%;
+  max-width: 480px;
+  color: #fff;
+  text-align: left;
+  position: relative;
+  animation: scaleIn 0.3s ease;
+  box-sizing: border-box;
+}
+
+.modal-content h3 {
+  color: #367153;
+  text-align: center;
+  margin-bottom: 15px;
+}
+
+.chat-list {
+  list-style: none;
+  padding-left: 0;
+  margin: 0;
+}
+
+.chat-list li {
+  margin-bottom: 12px;
+  padding-left: 10px;
+  border-left: 3px solid #367153;
+  line-height: 1.5;
+  word-break: break-word;
+}
+
+/* Крестик */
+.close {
+  color: #fff;
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  font-size: 28px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: color 0.2s;
+  z-index: 10;
+}
+
+.close:hover {
+  color: #8ef1a4;
+}
+
+/* Анимации */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes scaleIn {
+  from { transform: scale(0.85); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
+
+/* Адаптив для маленьких экранов */
+@media (max-width: 500px) {
   .modal-content {
-    background-color: #111;
-    margin: 10% auto;
-    padding: 20px;
-    border: 2px solid #367153;
-    border-radius: 12px;
-    width: 80%;
-    max-width: 500px;
-    color: #fff;
-    text-align: left;
-    position: relative;
-    animation: scaleIn 0.3s ease;
-  }
-
-  .modal-content h3 {
-    color: #367153;
-    text-align: center;
-    margin-bottom: 15px;
-  }
-
-  .chat-list {
-    list-style: none;
-    padding-left: 0;
-  }
-
-  .chat-list li {
-    margin-bottom: 10px;
-    padding-left: 10px;
-    border-left: 3px solid #367153;
+    padding: 15px 20px;
+    max-width: 100%;
   }
 
   .close {
-    color: #fff;
-    position: absolute;
-    top: 10px;
-    right: 15px;
-    font-size: 28px;
-    font-weight: bold;
-    cursor: pointer;
-    transition: color 0.2s;
+    top: 8px;
+    right: 12px;
+    font-size: 24px;
   }
-
-  .close:hover {
-    color: #367153;
-  }
-
-  @keyframes fadeIn {
-    from {opacity: 0;}
-    to {opacity: 1;}
-  }
-
-  @keyframes scaleIn {
-    from {transform: scale(0.8);}
-    to {transform: scale(1);}
-  }
+}
 </style>
 
 <script>
-  // Получаем модалку и кнопку
-  const modal = document.getElementById('chatModal');
-  const btn = document.querySelector('.ecosystem-card:first-child .card-info');
-  const close = document.querySelector('.modal .close');
+// Получаем элементы
+const modal = document.getElementById('chatModal');
+const btn = document.querySelector('.ecosystem-card:first-child .card-info');
+const close = modal.querySelector('.close');
 
-  // Открытие
-  btn.onclick = function() {
-    modal.style.display = 'block';
-  }
+// Открытие модалки
+btn.onclick = () => {
+  modal.style.display = 'flex';
+  document.body.style.overflow = 'hidden'; // блокируем прокрутку фона
+}
 
-  // Закрытие при нажатии на X
-  close.onclick = function() {
+// Закрытие модалки по X
+close.onclick = () => {
+  modal.style.display = 'none';
+  document.body.style.overflow = ''; // разблокируем прокрутку
+}
+
+// Закрытие при клике вне окна
+window.onclick = (event) => {
+  if (event.target === modal) {
     modal.style.display = 'none';
+    document.body.style.overflow = '';
   }
+}
 
-  // Закрытие при клике вне модалки
-  window.onclick = function(event) {
-    if (event.target == modal) {
-      modal.style.display = 'none';
-    }
+// Закрытие по Esc
+document.addEventListener('keydown', (e) => {
+  if (e.key === "Escape") {
+    modal.style.display = 'none';
+    document.body.style.overflow = '';
   }
+});
 </script>
+
+
 <!-- Модальное окно для второй карточки -->
 <div id="learningModal" class="modal">
   <div class="modal-content">
