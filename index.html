@@ -988,15 +988,11 @@ document.querySelectorAll('.team-card').forEach((el, i) => {
 
 <style>
 .modal {
-  display: none;
+  display: none; /* скрыта по умолчанию */
   position: fixed;
   z-index: 9999;
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100%;
+  inset: 0;
   background-color: rgba(0,0,0,0.8);
-  display: flex;
   align-items: center;
   justify-content: center;
   padding: 10px;
@@ -1011,8 +1007,8 @@ document.querySelectorAll('.team-card').forEach((el, i) => {
   border-radius: 12px;
   width: 100%;
   max-width: 480px;
-  max-height: 90vh; /* не больше 90% высоты экрана */
-  overflow-y: auto; /* внутренний скролл, если контент большой */
+  max-height: 90vh; /* ограничение высоты */
+  overflow-y: auto; /* внутренний скролл */
   color: #fff;
   text-align: left;
   position: relative;
@@ -1042,7 +1038,7 @@ document.querySelectorAll('.team-card').forEach((el, i) => {
 
 .close {
   color: #fff;
-  position: sticky;
+  position: absolute;
   top: 10px;
   right: 15px;
   font-size: 28px;
@@ -1066,7 +1062,6 @@ document.querySelectorAll('.team-card').forEach((el, i) => {
   to { transform: scale(1); opacity: 1; }
 }
 
-/* Адаптив для мобильных экранов */
 @media (max-width: 500px) {
   .modal-content {
     padding: 15px 20px;
@@ -1083,39 +1078,52 @@ document.querySelectorAll('.team-card').forEach((el, i) => {
 </style>
 
 <script>
-const modal = document.getElementById('chatModal');
-const btn = document.querySelector('.ecosystem-card:first-child .card-info');
-const close = modal.querySelector('.close');
+document.addEventListener('DOMContentLoaded', () => {
+  const modal = document.getElementById('chatModal');
 
-btn.onclick = () => {
-  modal.style.display = 'flex';
-  document.body.style.overflow = 'hidden';
-}
-
-close.onclick = () => {
+  // строго скрываем модалку при загрузке
   modal.style.display = 'none';
-  document.body.style.overflow = '';
-}
 
-window.onclick = (event) => {
-  if (event.target === modal) {
+  const btn = document.querySelector('.ecosystem-card:first-child .card-info');
+  const close = modal.querySelector('.close');
+
+  if (!btn) return;
+
+  // открыть модалку по клику
+  btn.addEventListener('click', () => {
+    modal.style.display = 'flex';
+    document.body.style.overflow = 'hidden'; // блокировка прокрутки страницы
+  });
+
+  // закрыть крестиком
+  close.addEventListener('click', () => {
     modal.style.display = 'none';
     document.body.style.overflow = '';
-  }
-}
+  });
 
-document.addEventListener('keydown', (e) => {
-  if (e.key === "Escape") {
-    modal.style.display = 'none';
-    document.body.style.overflow = '';
-  }
+  // закрыть при клике на фон
+  window.addEventListener('click', (event) => {
+    if (event.target === modal) {
+      modal.style.display = 'none';
+      document.body.style.overflow = '';
+    }
+  });
+
+  // закрыть клавишей Escape
+  document.addEventListener('keydown', (e) => {
+    if (e.key === "Escape") {
+      modal.style.display = 'none';
+      document.body.style.overflow = '';
+    }
+  });
 });
 </script>
 
 
 
+
 <!-- Модальное окно для второй карточки -->
-<div id="learningModal" class="modal">
+<div id="learningModal" class="modal" style="display:none;">
   <div class="modal-content">
     <span class="close">&times;</span>
     <h3>Обучение — модули и особенности</h3>
@@ -1162,12 +1170,12 @@ document.addEventListener('keydown', (e) => {
 .modal {
   display: none;
   position: fixed;
-  inset: 0; /* top:0; right:0; bottom:0; left:0; */
+  inset: 0;
   background-color: rgba(0,0,0,0.85);
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 20px;  /* отступы от краев экрана */
+  padding: 20px;
   overflow-y: auto;
   animation: fadeIn 0.3s ease;
 }
@@ -1180,9 +1188,9 @@ document.addEventListener('keydown', (e) => {
   border-radius: 18px;
   max-width: 750px;
   width: 100%;
-  max-height: 90vh; /* ограничение высоты */
-  overflow-y: auto; /* прокрутка контента */
-  position: relative; /* крестик внутри */
+  max-height: 90vh;
+  overflow-y: auto;
+  position: relative;
   box-sizing: border-box;
   animation: scaleIn 0.3s ease;
   line-height: 1.6;
@@ -1314,18 +1322,29 @@ b {
 </style>
 
 <script>
-  // Модальное окно второй карточки
+document.addEventListener('DOMContentLoaded', () => {
   const learningModal = document.getElementById('learningModal');
   const learningBtn = document.querySelector('.ecosystem-card:nth-child(2) .card-info');
   const learningClose = learningModal.querySelector('.close');
 
-  learningBtn.onclick = () => learningModal.style.display = 'flex'; // flex для центрирования
-  learningClose.onclick = () => learningModal.style.display = 'none';
-  window.onclick = (event) => {
-    if (event.target === learningModal) learningModal.style.display = 'none';
-  };
-</script>
+  // Гарантированно скрываем модалку при загрузке
+  learningModal.style.display = 'none';
 
+  if (!learningBtn) return;
+
+  learningBtn.addEventListener('click', () => {
+    learningModal.style.display = 'flex'; // открытие модалки
+  });
+
+  learningClose.addEventListener('click', () => {
+    learningModal.style.display = 'none';
+  });
+
+  window.addEventListener('click', (event) => {
+    if (event.target === learningModal) learningModal.style.display = 'none';
+  });
+});
+</script>
 
 <!-- Модальное окно для третьей карточки -->
 <div id="servicesModal" class="modal">
