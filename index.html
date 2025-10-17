@@ -12,6 +12,11 @@ body {
     color: #fff;
 }
 
+/* Блокировка прокрутки при открытом меню */
+body.menu-open {
+    overflow: hidden;
+}
+
 a {
     text-decoration: none;
     color: inherit;
@@ -302,11 +307,13 @@ nav li:hover > .submenu {
 <script>
 const burger = document.getElementById('burger');
 const nav = document.getElementById('nav');
+const body = document.body;
 
 // Переключение бургер-меню
 burger.addEventListener('click', () => {
     nav.classList.toggle('active');
     burger.classList.toggle('open');
+    body.classList.toggle('menu-open'); // блокировка прокрутки
 });
 
 // Подменю с кликом на мобильных
@@ -316,15 +323,32 @@ document.querySelectorAll('nav li > ul').forEach(sub => {
 
     parent.querySelector('a').addEventListener('click', e => {
         if (window.innerWidth <= 900) {
-            e.preventDefault(); // ссылка не срабатывает
+            e.preventDefault(); 
+            // Закрываем другие подменю
+            document.querySelectorAll('nav li.has-submenu').forEach(item => {
+                if(item !== parent) item.classList.remove('open');
+            });
             parent.classList.toggle('open');
         }
     });
+});
+
+// Закрытие подменю при клике вне меню или на другой пункт
+document.addEventListener('click', (e) => {
+    if(window.innerWidth <= 900){
+        if(!nav.contains(e.target) && !burger.contains(e.target)){
+            document.querySelectorAll('nav li.has-submenu').forEach(item => item.classList.remove('open'));
+            nav.classList.remove('active');
+            burger.classList.remove('open');
+            body.classList.remove('menu-open');
+        }
+    }
 });
 </script>
 
 </body>
 </html>
+
 
 
 
