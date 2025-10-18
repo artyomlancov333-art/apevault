@@ -871,8 +871,8 @@ document.querySelectorAll('.team-card').forEach((el, i) => {
   padding: 5px;
   background: #0d0d0d;
   opacity: 0;
-  transform: translateY(50px);
-  transition: all 1.2s cubic-bezier(0.22, 1, 0.36, 1); /* замедленная анимация */
+  transform: translateY(70px);
+  transition: all 2.0s cubic-bezier(0.22, 1, 0.36, 1); /* максимально медленная анимация */
 }
 
 .card-inner {
@@ -939,7 +939,7 @@ document.querySelectorAll('.team-card').forEach((el, i) => {
 /* Анимация смещения слева/справа */
 .ecosystem-card.left { transform: translateX(-150px); }
 .ecosystem-card.right { transform: translateX(150px); }
-.ecosystem-card.bottom { transform: translateY(50px); }
+.ecosystem-card.bottom { transform: translateY(70px); }
 
 /* Видимая карточка */
 .ecosystem-card.visible {
@@ -962,13 +962,13 @@ document.addEventListener('DOMContentLoaded', () => {
   const observer = new IntersectionObserver((entries) => {
     entries.forEach((entry, i) => {
       if (entry.isIntersecting) {
-        setTimeout(() => { // каскадная задержка
+        setTimeout(() => { 
           entry.target.classList.add('visible');
-        }, i * 200);
+        }, i * 400); // увеличенная каскадная задержка
       } else {
-        setTimeout(() => { // замедленное скрытие
+        setTimeout(() => { 
           entry.target.classList.remove('visible');
-        }, 200);
+        }, 400); // замедленное скрытие
       }
     });
   }, { threshold: 0.25 });
