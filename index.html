@@ -129,9 +129,7 @@ nav li:hover > .submenu { display: flex; }
         <h1>ApeVault</h1>
         <span>сообщество диких криптанов</span>
     </div>
-
     <div class="burger" id="burger"><div></div><div></div><div></div></div>
-
     <nav id="nav">
         <ul>
             <li><a href="#">О проекте</a></li>
@@ -1398,6 +1396,204 @@ document.addEventListener('DOMContentLoaded', () => {
 }
 </style>
 
+<section id="wheel-section" style="padding:60px 20px; background-color:#0d0d0d; color:white;">
+  <!-- Заголовок -->
+  <h2 style="color:#367153; font-size:36px; margin-bottom:10px; text-align:center;">Колесо фортуны</h2>
+  <p style="color:#ccc; font-size:18px; margin-bottom:40px; text-align:center;">
+    Крути колесо и получай скидки, бонусы и доступ к материалам!
+  </p>
+
+  <div class="wheel-wrapper" style="display:flex; flex-wrap:wrap; justify-content:center; align-items:flex-start; gap:40px;">
+    <!-- Колонка: колесо + кнопка -->
+    <div class="wheel-column" style="flex:1; min-width:320px; max-width:340px; display:flex; flex-direction:column; align-items:center;">
+      <div class="wheel-container" style="position:relative; width:320px; height:320px;">
+        <div class="arrow-line" style="position:absolute; top:50%; left:50%; transform:translate(-50%,-100%); width:2px; height:50px; background:white; z-index:10;">
+          <div class="arrow-tip" style="position:absolute; top:0; left:50%; transform:translateX(-50%); width:0; height:0; border-left:6px solid transparent; border-right:6px solid transparent; border-bottom:10px solid white;"></div>
+        </div>
+        <canvas id="wheel" width="320" height="320" style="width:100%; height:100%;"></canvas>
+      </div>
+      <button id="spinBtn" style="margin-top:20px; padding:12px 20px; font-size:16px; border-radius:12px; cursor:pointer; background:#417F61; color:white; font-weight:600; border:2px solid white;">
+        Крутить колесо
+      </button>
+    </div>
+
+    <!-- Колонка: результаты и файлы -->
+    <div class="result-column" style="flex:1; min-width:250px; max-width:300px; display:flex; flex-direction:column; gap:20px; align-items:center;">
+      <div class="results" id="result" style="font-size:18px; min-height:50px; text-align:center;">Тебе пока ничего не выпало</div>
+      <div class="locked-files" id="files" style="display:flex; flex-direction:column; gap:10px; align-items:center;">
+        <div class="file locked" id="file1" style="display:flex; justify-content:center; align-items:center; background:#417F61; padding:10px; border-radius:10px; font-size:14px; text-align:center; position:relative; color:white;">
+          Гайд по алертам
+        </div>
+        <div class="file locked" id="file2" style="display:flex; justify-content:center; align-items:center; background:#417F61; padding:10px; border-radius:10px; font-size:14px; text-align:center; position:relative; color:white;">
+          Крипто-глоссарий
+        </div>
+      </div>
+      <button id="tgBtn" style="padding:12px 20px; font-size:16px; border-radius:12px; cursor:pointer; background:#417F61; color:white; font-weight:600; border:2px solid white;">
+        Скинуть результаты
+      </button>
+    </div>
+  </div>
+</section>
+
+<script>
+const canvas = document.getElementById("wheel");
+const ctx = canvas.getContext("2d");
+const spinBtn = document.getElementById("spinBtn");
+const tgBtn = document.getElementById("tgBtn");
+const result = document.getElementById("result");
+
+const sectors = ["10%", "20%", "30%", "40%", "50%", "60%", "90%", "Еще раз"];
+const colors = ["#417F61", "#262626"];
+const size = sectors.length;
+const arc = (2 * Math.PI) / size;
+
+let angle = 0;
+let spinning = false;
+let spins = 0;        // базовые попытки
+let extraSpin = 0;    // дополнительные попытки через "Ещё раз"
+let tenPercentDropped = false;
+
+const discountNames = {
+  "10%": "молекулярная скидка",
+  "20%": "скидка бронзика",
+  "30%": "не выпадает",
+  "40%": "не выпадает",
+  "50%": "не выпадает",
+  "60%": "не выпадает",
+  "90%": "не выпадает",
+  "Еще раз": "ещё один шанс"
+};
+
+// Генератор приза
+function getPrize() {
+  const remainingAttempts = 3 - spins + extraSpin;
+
+  // Если последняя попытка и 10% ещё не выпадало → гарантируем её
+  if (remainingAttempts === 1 && !tenPercentDropped) {
+    tenPercentDropped = true;
+    return "10%";
+  }
+
+  const rand = Math.random() * 100;
+  if (rand < 3) return "20%";          // 3%
+  if (rand < 15) return "Еще раз";     // 12%
+  if (rand < 25) {                      // 10%
+    tenPercentDropped = true;
+    return "10%";
+  }
+
+  tenPercentDropped = true;
+  return "10%";
+}
+
+function drawWheel() {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  ctx.save();
+  ctx.translate(canvas.width/2, canvas.height/2);
+  ctx.rotate(angle);
+
+  for(let i=0; i<size; i++){
+    ctx.beginPath();
+    ctx.fillStyle = colors[i%2];
+    ctx.moveTo(0,0);
+    ctx.arc(0,0,150,i*arc,(i+1)*arc);
+    ctx.closePath();
+    ctx.fill();
+    ctx.strokeStyle="white";
+    ctx.lineWidth=2;
+    ctx.stroke();
+
+    ctx.save();
+    ctx.rotate((i+0.5)*arc);
+    ctx.textAlign="right";
+    ctx.fillStyle="white";
+    ctx.font="bold 16px Poppins";
+    ctx.fillText(sectors[i],140,5);
+    ctx.restore();
+  }
+  ctx.restore();
+}
+
+function spinWheel(){
+  const remainingAttempts = 3 - spins + extraSpin;
+
+  // Не крутить, если нет попыток и 10% уже выпало
+  if(spinning || (remainingAttempts <= 0 && tenPercentDropped)) return;
+
+  const prize = getPrize();
+  const sectorIndex = sectors.indexOf(prize);
+  
+  let turns = 6;
+  let stopAngle = (size - sectorIndex)*arc - arc/2 - Math.PI/2;
+  let finalAngle = stopAngle + turns*2*Math.PI;
+  let duration = 6000;
+  let start=null;
+  spinning=true;
+
+  function animate(timestamp){
+    if(!start) start=timestamp;
+    let progress = (timestamp-start)/duration;
+    if(progress>1) progress=1;
+
+    let easing = 1 - Math.pow(1-progress,3);
+    angle = finalAngle*easing;
+    drawWheel();
+
+    if(progress<1){
+      requestAnimationFrame(animate);
+    }else{
+      spinning=false;
+      result.innerText = `Тебе выпало: ${prize} — ${discountNames[prize]}`;
+
+      if(spins===0){
+        document.getElementById("file1").classList.remove("locked");
+        document.getElementById("file2").classList.remove("locked");
+      }
+
+      if(prize === "Еще раз") extraSpin += 1;
+
+      spins++;
+      const newRemaining = 3 - spins + extraSpin;
+
+      if(newRemaining > 1) spinBtn.innerText = `Ещё ${newRemaining} попытки`;
+      else if(newRemaining === 1) spinBtn.innerText = "Последний шанс";
+      else spinBtn.innerText = "Попытки закончились";
+    }
+  }
+  requestAnimationFrame(animate);
+}
+
+drawWheel();
+spinBtn.addEventListener("click", spinWheel);
+tgBtn.addEventListener("click",()=>window.open('https://t.me/ApeVaultCrypto','_blank'));
+</script>
+
+<style>
+/* Адаптив для мобильных устройств */
+@media (max-width: 768px) {
+  .wheel-wrapper {
+    flex-direction: column !important;
+    align-items: center !important;
+  }
+
+  .wheel-column {
+    order: 1;
+    margin-bottom: 20px;
+  }
+
+  .result-column {
+    order: 2;
+    align-items: center;
+    text-align: center;
+  }
+
+  .locked-files {
+    align-items: center;
+  }
+}
+</style>
+
+
 
 <!-- Модальное окно -->
 <div id="chatModal" class="modal">
@@ -2363,6 +2559,108 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 });
 </script>
+
+<canvas id="crypto-bg"></canvas>
+
+<style>
+#crypto-bg {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0; /* под контентом */
+  pointer-events: none;
+}
+</style>
+
+<script>
+window.addEventListener('load', () => {
+  const canvas = document.getElementById("crypto-bg");
+  const ctx = canvas.getContext("2d");
+
+  function resizeCanvas() {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+  }
+  resizeCanvas();
+  window.addEventListener('resize', resizeCanvas);
+
+  const icons = [
+    { src: 'bitcoin.png', size: 15 },
+    { src: 'ethereum.png', size: 15 },
+    { src: 'bnb.png', size: 15 },
+    { src: 'solana.png', size: 15 },
+    { src: 'dogecoin.png', size: 15 },
+    { src: 'shiba.png', size: 15 },
+    { src: 'pepe.png', size: 15 }
+  ];
+
+  const particles = [];
+  let loadedImages = 0;
+
+  icons.forEach(icon => {
+    const img = new Image();
+    img.src = icon.src;
+    img.onload = () => {
+      loadedImages++;
+      if (loadedImages === icons.length) initParticles();
+    };
+    icon.img = img;
+  });
+
+function initParticles() {
+  const minDistance = 50; // минимальное расстояние между частицами
+  for (let i = 0; i < 25; i++) { // уменьшаем количество значков
+    let x, y, tries = 0;
+    do {
+      x = Math.random() * canvas.width;
+      y = Math.random() * canvas.height;
+      tries++;
+    } while (particles.some(p => Math.hypot(p.x - x, p.y - y) < minDistance) && tries < 100);
+
+    const icon = icons[Math.floor(Math.random() * icons.length)];
+    particles.push({
+      x,
+      y,
+      vx: (Math.random() - 0.5) * 0.3,
+      vy: (Math.random() - 0.5) * 0.3,
+      img: icon.img,
+      size: icon.size,
+      alpha: 0,
+      targetAlpha: 0.2 + Math.random() * 0.2,
+      angle: Math.random() * 2 * Math.PI,
+      speed: 0.002 + Math.random() * 0.003
+    });
+  }
+  animate();
+}
+
+  function animate() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    particles.forEach(p => {
+      if (p.alpha < p.targetAlpha) p.alpha += 0.005;
+      ctx.globalAlpha = p.alpha;
+      ctx.save();
+      ctx.translate(p.x, p.y);
+      ctx.rotate(Math.sin(p.angle) * 0.2);
+      ctx.drawImage(p.img, -p.size/2, -p.size/2, p.size, p.size);
+      ctx.restore();
+      p.x += p.vx;
+      p.y += p.vy;
+      p.angle += p.speed;
+
+      // возвращаем с другой стороны, если ушли за границу
+      if (p.x > canvas.width) p.x = 0;
+      if (p.x < 0) p.x = canvas.width;
+      if (p.y > canvas.height) p.y = 0;
+      if (p.y < 0) p.y = canvas.height;
+    });
+    requestAnimationFrame(animate);
+  }
+});
+</script>
+
 
 
 
