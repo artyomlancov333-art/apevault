@@ -145,14 +145,6 @@ nav li:hover > .submenu { display: flex; }
                     <li>Тарифы</li>
                 </ul>
             </li>
-            <li>
-                <a href="#">Продукты</a>
-                <ul class="submenu">
-                    <li>Действующие</li>
-                    <li>Ожидаются</li>
-                </ul>
-            </li>
-        </ul>
         <div class="mobile-buttons" id="mobile-buttons">
             <button class="btn-start">Старт</button>
             <button class="btn-contact">Напиши нам</button>
@@ -813,164 +805,183 @@ document.querySelectorAll('.team-card').forEach((el, i) => {
           <button class="card-info">i</button>
         </div>
       </div>
+
       <div class="ecosystem-card" data-animate="right">
-  <div class="card-inner">
-    <span class="eco-num">6</span>
-    <h3>Программа лояльности</h3>
-    <p class="card-desc">Бонусы и привилегии для активных участников и учеников ApeVault.</p>
-    <button class="card-info">i</button>
-  </div>
-</div>
+        <div class="card-inner">
+          <span class="eco-num">6</span>
+          <h3>Программа лояльности</h3>
+          <p class="card-desc">Бонусы и привилегии для активных участников и учеников ApeVault.</p>
+          <button class="card-info">i</button>
+        </div>
+      </div>
 
-<div class="ecosystem-card" data-animate="left">
-  <div class="card-inner">
-    <span class="eco-num">7</span>
-    <h3>Резервный пул</h3>
-    <p class="card-desc">Защита вложений участников через собственную систему компенсации сообщества.</p>
-    <button class="card-info">i</button>
-  </div>
-</div>
+      <div class="ecosystem-card" data-animate="left">
+        <div class="card-inner">
+          <span class="eco-num">7</span>
+          <h3>Резервный пул</h3>
+          <p class="card-desc">Защита вложений участников через собственную систему компенсации сообщества.</p>
+          <button class="card-info">i</button>
+        </div>
+      </div>
 
-<div class="ecosystem-card" data-animate="bottom">
-  <div class="card-inner">
-    <span class="eco-num">8</span>
-    <h3>Колесо фортуны</h3>
-    <p class="card-desc">Геймифицированный способ получать призы, бонусы и скидки внутри экосистемы.</p>
-    <button class="card-info">i</button>
-  </div>
-</div>
-
+      <div class="ecosystem-card" data-animate="bottom">
+        <div class="card-inner">
+          <span class="eco-num">8</span>
+          <h3>Колесо фортуны</h3>
+          <p class="card-desc">Геймифицированный способ получать призы, бонусы и скидки внутри экосистемы.</p>
+          <button class="card-info">i</button>
+        </div>
+      </div>
     </div>
   </div>
 </section>
 
 <style>
-  #ecosystem {
-    background-color: #0d0d0d;
-    color: #fff;
-    padding: 10px 20px;
-    margin-top: -40px;
-    text-align: center;
-  }
+#ecosystem {
+  background-color: #0d0d0d;
+  color: #fff;
+  padding: 10px 20px;
+  margin-top: -40px;
+  text-align: center;
+}
 
-  .ecosystem-container h2 {
-    color: #367153;
-    font-size: 2.5rem;
-    margin-bottom: 10px;
-  }
+.ecosystem-container h2 {
+  color: #367153;
+  font-size: 2.5rem;
+  margin-bottom: 10px;
+}
 
-  .ecosystem-subtitle {
-    color: #aaa;
-    margin-bottom: 50px;
-    font-size: 1rem;
-  }
+.ecosystem-subtitle {
+  color: #aaa;
+  margin-bottom: 50px;
+  font-size: 1rem;
+}
 
-  .ecosystem-grid {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 30px;
-  }
+.ecosystem-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 30px;
+}
 
-  .ecosystem-card {
-    width: 300px;
-    border: 3px solid #fff; /* внешняя белая рамка */
-    border-radius: 16px;
-    padding: 5px;
-    background: #0d0d0d;
-    opacity: 1; /* сразу видимы */
-    transform: translateY(0); /* по умолчанию без смещения */
-    transition: all 0.4s ease;
-  }
+.ecosystem-card {
+  width: 300px;
+  border: 3px solid #fff; /* белая окантовка */
+  border-radius: 16px;
+  padding: 5px;
+  background: #0d0d0d;
+  opacity: 0;
+  transform: translateY(50px);
+  transition: all 1.2s cubic-bezier(0.22, 1, 0.36, 1); /* замедленная анимация */
+}
 
-  .card-inner {
-    border: 2px solid #367153;
-    border-radius: 12px;
-    width: 100%;
-    height: 250px;
-    padding: 20px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    box-sizing: border-box;
-    position: relative;
-    background: #111;
-  }
+.card-inner {
+  border: 2px solid #367153;
+  border-radius: 12px;
+  width: 100%;
+  height: 250px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  box-sizing: border-box;
+  position: relative;
+  background: #111;
+}
 
-  .eco-num {
-    position: absolute;
-    top: 10px;
-    right: 15px;
-    font-size: 36px;
-    color: #367153;
-    opacity: 0.25;
-  }
+.eco-num {
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  font-size: 36px;
+  color: #367153;
+  opacity: 0.25;
+}
 
-  .ecosystem-card h3 {
-    color: #367153;
-    margin-top: 20px;
-    font-size: 1.2rem;
-    text-align: center;
-  }
+.ecosystem-card h3 {
+  color: #367153;
+  margin-top: 20px;
+  font-size: 1.2rem;
+  text-align: center;
+}
 
-  .card-desc {
-    color: #ddd;
-    font-size: 0.95rem;
-    margin-top: 10px;
-    text-align: center;
-  }
+.card-desc {
+  color: #ddd;
+  font-size: 0.95rem;
+  margin-top: 10px;
+  text-align: center;
+}
 
-  .card-info {
-    position: absolute;
-    bottom: 10px;
-    right: 10px;
-    background: #367153;
-    color: #fff;
-    border: none;
-    border-radius: 50%;
-    width: 28px;
-    height: 28px;
-    cursor: pointer;
-    font-weight: bold;
-    font-size: 16px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
+.card-info {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  background: #367153;
+  color: #fff;
+  border: none;
+  border-radius: 50%;
+  width: 28px;
+  height: 28px;
+  cursor: pointer;
+  font-weight: bold;
+  font-size: 16px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 
-  .ecosystem-card:hover .card-inner {
-    animation: shake 0.5s ease-in-out;
-    transform: scale(1.03);
-    box-shadow: 0 0 25px rgba(54,113,83,0.5);
-  }
+.ecosystem-card:hover .card-inner {
+  transform: scale(1.03);
+  box-shadow: 0 0 25px rgba(54,113,83,0.5);
+}
 
-  @keyframes shake {
-    0% { transform: scale(1.03) translate(0,0); }
-    25% { transform: scale(1.03) translate(-2px,1px); }
-    50% { transform: scale(1.03) translate(2px,-1px); }
-    75% { transform: scale(1.03) translate(-1px,2px); }
-    100% { transform: scale(1.03) translate(0,0); }
-  }
+/* Анимация смещения слева/справа */
+.ecosystem-card.left { transform: translateX(-150px); }
+.ecosystem-card.right { transform: translateX(150px); }
+.ecosystem-card.bottom { transform: translateY(50px); }
 
-  /* адаптивность */
-  @media (max-width: 768px) {
-    .ecosystem-card { width: 90%; }
-    .ecosystem-container h2 { font-size: 2rem; }
-    .card-inner { height: auto; }
-  }
+/* Видимая карточка */
+.ecosystem-card.visible {
+  opacity: 1;
+  transform: translateX(0) translateY(0);
+}
+
+/* адаптив */
+@media (max-width: 768px) {
+  .ecosystem-card { width: 90%; }
+  .ecosystem-container h2 { font-size: 2rem; }
+  .card-inner { height: auto; }
+}
 </style>
 
 <script>
-  // плавное появление с задержкой (но карточки сразу видны)
+document.addEventListener('DOMContentLoaded', () => {
   const cards = document.querySelectorAll('.ecosystem-card');
-  cards.forEach((card, i) => {
-    setTimeout(() => {
-      card.style.opacity = '1';
-      card.style.transform = 'translateY(0)';
-    }, i * 200);
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry, i) => {
+      if (entry.isIntersecting) {
+        setTimeout(() => { // каскадная задержка
+          entry.target.classList.add('visible');
+        }, i * 200);
+      } else {
+        setTimeout(() => { // замедленное скрытие
+          entry.target.classList.remove('visible');
+        }, 200);
+      }
+    });
+  }, { threshold: 0.25 });
+
+  cards.forEach(card => {
+    const direction = card.dataset.animate;
+    card.classList.add(direction);
+    observer.observe(card);
   });
+});
 </script>
+
+
 
 <!-- Модальное окно -->
 <div id="chatModal" class="modal">
@@ -1126,7 +1137,7 @@ document.addEventListener('DOMContentLoaded', () => {
     <h3>Обучение — модули и особенности</h3>
 
     <!-- Сетка модулей -->
-    <div class="module-grid">
+    <div class="module-grid path-style">
       <div class="module-card"><span class="num">1</span><b>Начало твоего пути</b></div>
       <div class="module-card"><span class="num">2</span><b>Введение в крипту</b></div>
       <div class="module-card"><span class="num">3</span><b>Психологический блок</b></div>
@@ -1145,25 +1156,34 @@ document.addEventListener('DOMContentLoaded', () => {
       <div class="module-card"><span class="num">16</span><b>Цифровой капитал Telegram</b></div>
     </div>
 
-    <p>
-      Каждый модуль содержит уроки — от теории до практики, с <b>видео-материалами, гайдами и инструментами</b>.
-      Для всех тарифов предоставляется <b>тестовая сумма активов</b> на обучающем кошельке — тренируйся без риска потерь.
-      Всё, что заработаешь, будет переведено на твой реальный счёт (CEX или DEX).
-    </p>
-    <p>
-      Участники обучения получают доступ к <b>закрытым AMA-сессиям, чатам и премиум-сигналам</b>.
-      При желании можно купить отдельные модули, но доступ к чатам обучения и сигналам открыт только при покупке <b>от 10 модулей</b>.
-    </p>
-    <p>
-      Также предусмотрена рассрочка — <b>от нас или банков-партнёров</b>. Подробнее смотри в разделе «Тарифы».
-    </p>
+    <div class="modal-text">
+      <p>
+        Каждый модуль содержит уроки — от теории до практики, включая 
+        <b>видео-материалы, гайды и инструменты</b>.  
+        Для всех тарифов предоставляется <b>тестовая сумма активов</b> 
+        на обучающем кошельке — тренируйся без риска потерь.
+      </p>
+      <p>
+        Всё, что заработаешь во время прохождения курсов, будет переведено 
+        на твой реальный счёт (<b>CEX или DEX</b>).
+      </p>
+      <p>
+        Участники обучения получают доступ к <b>закрытым AMA-сессиям</b>, 
+        приватным чатам и <b>премиум-сигналам</b>.  
+        Можно приобрести отдельные модули, однако доступ к сообществу и 
+        привилегиям открывается при покупке <b>от 10 модулей</b>.
+      </p>
+      <p>
+        Также предусмотрена <b>рассрочка</b> — от нас или банков-партнёров.  
+        Подробности смотри в разделе <b>«Тарифы»</b>.
+      </p>
+    </div>
   </div>
 </div>
 
 <style>
-/* --- Модальное окно --- */
+/* --- Общие стили модального окна --- */
 .modal {
-  display: none;
   position: fixed;
   inset: 0;
   background-color: rgba(0,0,0,0.85);
@@ -1172,83 +1192,22 @@ document.addEventListener('DOMContentLoaded', () => {
   align-items: center;
   padding: 20px;
   overflow-y: auto;
+  z-index: 1000;
 }
 .modal-content {
   background: #111;
   color: #fff;
-  padding: 30px;
+  padding: 40px 35px;
   border: 2px solid #2f6c4f;
-  border-radius: 18px;
-  max-width: 800px;
+  border-radius: 20px;
+  max-width: 900px;
   width: 100%;
   max-height: 90vh;
   overflow-y: auto;
   position: relative;
   box-sizing: border-box;
-  line-height: 1.6;
+  line-height: 1.7;
 }
-.modal-content h3 {
-  text-align: center;
-  color: #3ea16f;
-  margin-bottom: 25px;
-  font-size: 1.6em;
-  letter-spacing: 0.5px;
-}
-
-/* --- Сетка модулей --- */
-.module-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-  gap: 18px;
-  margin-bottom: 25px;
-}
-
-/* --- Карточки модулей --- */
-.module-card {
-  position: relative; /* чтобы кружок был относительно карточки */
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: flex-start;
-  background: #1b1b1b;
-  padding: 20px 12px 12px 12px; /* верхний padding больше, чтобы кружок не накрывал текст */
-  border-radius: 14px;
-  border: 1px solid #2f6c4f;
-  cursor: default;
-}
-.module-card:hover {
-  background: #162a20;
-}
-
-/* --- Нумерация — бейдж в углу --- */
-.num {
-  width: 36px;
-  height: 36px;
-  border-radius: 50%;
-  background: #3ea16f;
-  color: #fff;
-  font-weight: bold;
-  font-size: 1em;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  position: absolute;
-  top: -12px;   /* чуть выходит за верх карточки */
-  left: -12px;  /* чуть выходит за левый край */
-  z-index: 2;
-}
-
-/* --- Текст карточки --- */
-.module-card b {
-  color: #3ea16f;
-  text-align: center;
-}
-
-/* --- Параграфы --- */
-p { margin-bottom: 18px; color: #ddd; }
-b { color: #3ea16f; }
-
-/* --- Закрытие окна --- */
 .close {
   position: absolute;
   top: 10px;
@@ -1257,54 +1216,107 @@ b { color: #3ea16f; }
   font-weight: bold;
   color: #fff;
   cursor: pointer;
-  transition: color 0.2s;
 }
-.close:hover { color: #3ea16f; }
+.close:hover {
+  color: #3ea16f;
+}
+h3 {
+  text-align: center;
+  color: #3ea16f;
+  margin-bottom: 35px;
+  font-size: 1.7em;
+}
+b {
+  color: #3ea16f;
+}
+.modal-text p {
+  margin-bottom: 18px;
+  color: #ddd;
+  text-align: justify;
+}
 
-/* --- Адаптив --- */
-@media (max-width: 500px) {
-  .module-grid {
-    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-    gap: 12px;
-  }
-  .module-card {
-    padding: 18px 10px 10px 10px;
-  }
-  .num {
-    width: 30px;
-    height: 30px;
-    font-size: 0.9em;
-    top: -10px;
-    left: -10px;
-  }
-  .module-card b { font-size: 0.9em; }
+/* --- Анимация появления карточек --- */
+.module-grid {
+  transition: all 0.3s ease;
+}
+.module-card {
+  opacity: 0;
+  animation: fadeInUp 0.4s forwards;
+}
+@keyframes fadeInUp {
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* --- Путь героя --- */
+.path-style {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 40px;
+  margin: 40px 0;
+  padding-left: 60px;
+}
+.path-style::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 27px;
+  width: 2px;
+  height: 100%;
+  background: linear-gradient(to bottom, #3ea16f, #1b1b1b);
+  opacity: 0.8;
+}
+.path-style .module-card {
+  position: relative;
+  background: #111;
+  border: 1px solid #2f6c4f;
+  padding: 18px 20px;
+  border-radius: 12px;
+  color: #ddd;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+.path-style .module-card:hover {
+  transform: translateX(8px);
+  box-shadow: 0 0 10px #3ea16f33;
+}
+.path-style .num {
+  position: absolute;
+  left: -54px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: #3ea16f;
+  color: #fff;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s, box-shadow 0.2s;
+}
+.path-style .module-card:hover .num {
+  background: #4fd88e;
+  box-shadow: 0 0 10px #3ea16f88;
 }
 </style>
 
 <script>
 document.addEventListener('DOMContentLoaded', () => {
-  const learningModal = document.getElementById('learningModal');
-  const learningBtn = document.querySelector('.ecosystem-card:nth-child(2) .card-info');
-  const learningClose = learningModal.querySelector('.close');
+  const modal = document.getElementById('learningModal');
+  const trigger = document.querySelector('.ecosystem-card:nth-child(2) .card-info');
+  const closeBtn = modal.querySelector('.close');
 
-  if (!learningBtn) return;
+  if (!trigger) return;
 
-  learningBtn.addEventListener('click', () => {
-    learningModal.style.display = 'flex';
-  });
-
-  learningClose.addEventListener('click', () => {
-    learningModal.style.display = 'none';
-  });
-
-  window.addEventListener('click', (event) => {
-    if (event.target === learningModal) {
-      learningModal.style.display = 'none';
-    }
+  trigger.addEventListener('click', () => modal.style.display = 'flex');
+  closeBtn.addEventListener('click', () => modal.style.display = 'none');
+  window.addEventListener('click', e => {
+    if (e.target === modal) modal.style.display = 'none';
   });
 });
 </script>
-
 
 <!-- Модальное окно для третьей карточки -->
 <div id="servicesModal" class="modal">
