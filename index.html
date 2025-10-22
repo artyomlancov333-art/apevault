@@ -91,11 +91,18 @@ nav li:hover > .submenu { display: flex; }
     nav.active { display: flex; }
     nav ul { flex-direction: column; gap: 0; }
     nav li { padding: 10px 20px; }
-    nav li.has-submenu > a::after { content: '▼'; font-size: 10px; margin-left: 5px; transition: transform 0.3s; }
-    nav li.has-submenu.open > a::after { transform: rotate(-180deg); }
+    nav li.has-submenu > .submenu-toggle {
+        cursor: pointer;
+        margin-left: 5px;
+        display: inline-block;
+        transition: transform 0.3s;
+    }
+    nav li.has-submenu.open > .submenu-toggle {
+        transform: rotate(90deg);
+    }
     nav li > .submenu {
         position: relative;
-        display: block; /* flex убран */
+        display: block;
         max-height: 0;
         overflow: hidden;
         transition: max-height 0.3s ease, padding 0.3s ease;
@@ -125,15 +132,13 @@ nav li:hover > .submenu { display: flex; }
 .logo {
     display: flex;
     align-items: center;
-    gap: 10px; /* расстояние между крокодилом и текстом */
+    gap: 10px;
 }
-
 .logo-icon {
     width: 40px;
     height: 40px;
     object-fit: contain;
 }
-
 </style>
 </head>
 <body>
@@ -153,8 +158,9 @@ nav li:hover > .submenu { display: flex; }
   <nav id="nav">
     <ul>
       <!-- О проекте -->
-      <li>
+      <li class="has-submenu">
         <a href="#about">О проекте</a>
+        <span class="submenu-toggle">▶</span>
         <ul class="submenu">
           <li><a href="#community">Наше комьюнити</a></li>
           <li><a href="#team">Наша команда</a></li>
@@ -165,8 +171,9 @@ nav li:hover > .submenu { display: flex; }
       <li><a href="#ecosystem">Наша экосистема</a></li>
 
       <!-- Обучение -->
-      <li>
-        <a href="#">Всё по обучению</a>
+      <li class="has-submenu">
+        <a href="#learning">Всё по обучению</a>
+        <span class="submenu-toggle">▶</span>
         <ul class="submenu">
           <li><a href="#roadmap">Крипто-карта</a></li>
           <li><a href="#learning-features">Фишки обучения</a></li>
@@ -179,6 +186,8 @@ nav li:hover > .submenu { display: flex; }
 
       <!-- FAQ -->
       <li><a href="#faq">FAQ</a></li>
+
+    </ul>
 
     <div class="mobile-buttons" id="mobile-buttons">
       <button class="btn-start">Старт</button>
@@ -204,46 +213,47 @@ burger.addEventListener('click', () => {
     body.classList.toggle('menu-open');
 });
 
-// Подменю
+// Подменю через стрелку
 document.querySelectorAll('nav li > ul').forEach(sub => {
     sub.parentElement.classList.add('has-submenu');
 });
 
-document.querySelectorAll('nav li.has-submenu').forEach(parent => {
-    const link = parent.querySelector('a');
-    const submenu = parent.querySelector('ul');
+document.querySelectorAll('.submenu-toggle').forEach(toggle => {
+    toggle.addEventListener('click', e => {
+        e.stopPropagation(); // чтобы клик не дошёл до ссылки
+        const parent = toggle.parentElement;
+        const submenu = parent.querySelector('ul');
+        const isOpen = parent.classList.contains('open');
 
-    link.addEventListener('click', e => {
-        if(window.innerWidth <= 900){
-            if(submenu){ // только если есть подменю
-                e.preventDefault();
-                const isOpen = parent.classList.contains('open');
-
-                // Закрываем все подменю
-                document.querySelectorAll('nav li.has-submenu').forEach(item => {
-                    item.classList.remove('open');
-                    const sub = item.querySelector('ul');
-                    if(sub){
-                        sub.style.maxHeight = '0px';
-                        sub.style.paddingTop = '0px';
-                        sub.style.paddingBottom = '0px';
-                    }
-                });
-
-                // Открываем текущее
-                if(!isOpen){
-                    parent.classList.add('open');
-                    submenu.style.maxHeight = submenu.scrollHeight + 'px';
-                    submenu.style.paddingTop = '10px';
-                    submenu.style.paddingBottom = '10px';
+        // Закрываем все остальные
+        document.querySelectorAll('nav li.has-submenu').forEach(item => {
+            if(item !== parent){
+                item.classList.remove('open');
+                const sub = item.querySelector('ul');
+                if(sub){
+                    sub.style.maxHeight = '0px';
+                    sub.style.paddingTop = '0px';
+                    sub.style.paddingBottom = '0px';
                 }
             }
-            // Если подменю нет, клик идёт по ссылке как обычно
+        });
+
+        // Открываем/закрываем текущее
+        if(!isOpen){
+            parent.classList.add('open');
+            submenu.style.maxHeight = submenu.scrollHeight + 'px';
+            submenu.style.paddingTop = '10px';
+            submenu.style.paddingBottom = '10px';
+        } else {
+            parent.classList.remove('open');
+            submenu.style.maxHeight = '0px';
+            submenu.style.paddingTop = '0px';
+            submenu.style.paddingBottom = '0px';
         }
     });
 });
 
-// Клик вне меню закрывает все
+// Клик вне меню закрывает всё
 document.addEventListener('click', e => {
     if(window.innerWidth <= 900){
         if(!nav.contains(e.target) && !burger.contains(e.target)){
@@ -283,6 +293,7 @@ window.addEventListener('resize', () => {
 </script>
 </body>
 </html>
+
 
 <section class="about" id="about">
     <h2>О проекте</h2>
@@ -2239,7 +2250,7 @@ document.querySelectorAll('.faq-item').forEach(item=>{
 
   <!-- Instagram note / warning -->
   <span style="font-size:11px; color:#fff; background:#b33; padding:4px 6px; border-radius:8px; white-space:nowrap; margin-top:10px;">
-    Instagramm принадлежит Meta, признанной экстремистской и запрещённой в РФ
+    Meta признанна экстремистской и запрещённой в РФ</p>
   </span>
 </div>
 
