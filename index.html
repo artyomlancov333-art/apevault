@@ -92,6 +92,7 @@ nav li:hover > .submenu { display: flex; }
     border-bottom: 2px solid #367153;
     transform: rotate(45deg);
     margin-left: 10px;
+    cursor: pointer;
     transition: transform 0.3s;
 }
 li.has-submenu.open > .submenu-toggle {
@@ -193,7 +194,6 @@ li.has-submenu.open > .submenu-toggle {
 
       <!-- FAQ -->
       <li><a href="#faq">FAQ</a></li>
-
     </ul>
 
     <div class="mobile-buttons" id="mobile-buttons">
@@ -220,15 +220,15 @@ burger.addEventListener('click', () => {
     body.classList.toggle('menu-open');
 });
 
-// Подменю через стрелку
+// Стрелки для подменю
 document.querySelectorAll('.submenu-toggle').forEach(toggle => {
     toggle.addEventListener('click', e => {
-        e.stopPropagation(); // чтобы клик не дошёл до ссылки
+        e.stopPropagation(); // чтобы клик не мешал ссылке
         const parent = toggle.parentElement;
         const submenu = parent.querySelector('ul');
         const isOpen = parent.classList.contains('open');
 
-        // Закрываем все остальные
+        // Закрываем другие подменю
         document.querySelectorAll('nav li.has-submenu').forEach(item => {
             if(item !== parent){
                 item.classList.remove('open');
@@ -296,6 +296,7 @@ window.addEventListener('resize', () => {
 </script>
 </body>
 </html>
+
 
 <section class="about" id="about">
     <h2>О проекте</h2>
