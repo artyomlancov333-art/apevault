@@ -305,7 +305,7 @@ window.addEventListener('resize', () => {
             <span class="label">AMA-сессии в неделю</span>
         </div>
         <div class="stat-item" data-anim="left">
-            <span class="number">4+</span>
+            <span class="number">3+</span>
             <span class="label">собственных продуктов<br>для торговли и анализа</span>
         </div>
     </div>
@@ -650,7 +650,7 @@ document.addEventListener('DOMContentLoaded', () => {
           <img src="olga.jpg" alt="Ольга">
         </div>
         <h3 class="name-purple">Ольга</h3>
-        <p>Основательница проекта, спикер, NFT-трейдер и фьючерсная торговля, с июня занималась арбитражем криптовалют через P2P</p>
+        <p>Основательница проекта, спикер, NFT-трейдер и фьючерсная торговля, с июня 2023 по ноябрь 2025 года занималась арбитражем криптовалют через P2P</p>
       </div>
 
     </div>
@@ -2127,6 +2127,384 @@ document.querySelectorAll('.faq-item').forEach(item=>{
   });
 });
 </script>
+
+<!-- 🌿 FOOTER -->
+<footer class="site-footer">
+  <div class="footer-top">
+    <!-- Левая часть -->
+    <div class="footer-left">
+      <a href="#" class="footer-logo">
+        <img src="croc.png" alt="ApeVault">
+        <div class="logo-text">
+          <h3>ApeVault</h3>
+          <span>сообщество диких криптанов</span>
+        </div>
+      </a>
+      <p class="footer-desc">
+        Обучение, сообщество и инструменты для безопасной и осознанной работы с криптовалютами.
+      </p>
+      <div class="socials">
+        <a href="#" class="social"><i class="fa-brands fa-vk"></i></a>
+        <a href="#" class="social"><i class="fa-brands fa-telegram"></i></a>
+        <a href="#" class="social"><i class="fa-brands fa-youtube"></i></a>
+        <a href="#" class="social"><i class="fa-brands fa-r-project"></i></a>
+        <a href="#" class="social social-inst"><i class="fa-brands fa-instagram"></i></a>
+      </div>
+      <span class="social-note">
+        Instagram принадлежит Meta, которая признана в РФ экстремистской организацией и запрещена
+      </span>
+    </div>
+
+    <!-- Средняя часть -->
+    <div class="footer-middle">
+      <h4>Документы</h4>
+      <ul class="docs-list">
+        <li><a href="#">Политика конфиденциальности</a></li>
+        <li><a href="#">Обработка персональных данных</a></li>
+        <li><a href="#">Публичная оферта</a></li>
+        <li><a href="#">Информация о сервисах</a></li>
+      </ul>
+    </div>
+
+    <!-- Правая часть -->
+    <div class="footer-right">
+      <h4>Реквизиты</h4>
+      <address class="company-info">
+        ИП Соболева Ксения Витальевна<br>
+        ИНН 644110963363<br>
+        ОГРН 322645700054948
+      </address>
+      <div class="footer-contacts">
+        <a href="#" class="contact-link">Написать в Telegram</a>
+        <a href="mailto:info@apevault.com" class="contact-link">info@apevault.com</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer-bottom">
+    <span>© 2025 ApeVault. Все права защищены.</span>
+    <div class="policy-links">
+      <a href="#">Политика конфиденциальности</a> |
+      <a href="#">Публичная оферта</a>
+    </div>
+  </div>
+</footer>
+
+<!-- 📘 Стили футера -->
+<style>
+:root {
+  --bg:#0b0b0b;
+  --muted:#aeb3b7;
+  --accent:#D4AF37;
+  --green:#367153;
+  --purple:#6A0DAD;
+  --card-radius:12px;
+  --gap:20px;
+}
+
+.site-footer {
+  background: var(--bg);
+  color: #fff;
+  padding: 40px 20px;
+  font-family: 'Inter', sans-serif;
+}
+
+.footer-top {
+  display: flex;
+  gap: var(--gap);
+  flex-wrap: wrap;
+  align-items: flex-start;
+  justify-content: space-between;
+  max-width: 1200px;
+  margin: 0 auto 20px;
+}
+
+.footer-left {
+  flex: 1 1 340px;
+  min-width: 260px;
+}
+
+.footer-left .footer-logo {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  text-decoration: none;
+  color: inherit;
+  margin-bottom: 12px;
+}
+
+.footer-left .footer-logo img {
+  width: 46px;
+  height: 46px;
+  object-fit: contain;
+}
+
+.footer-left .logo-text h3 {
+  margin: 0;
+  font-size: 18px;
+}
+
+.footer-left .logo-text span {
+  display: block;
+  color: var(--muted);
+  font-size: 13px;
+}
+
+.footer-desc {
+  color: var(--muted);
+  margin-bottom: 14px;
+  max-width: 420px;
+}
+
+.socials {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.social {
+  width: 40px;
+  height: 40px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.03);
+  color: var(--muted);
+  text-decoration: none;
+  transition: all 0.18s ease;
+}
+
+.social:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 0 12px var(--accent);
+  color: #fff;
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.social .fa-brands,
+.social .fa-solid {
+  font-size: 18px;
+}
+
+/* Instagram note */
+.social-note {
+  display: block;
+  font-size: 12px;
+  color: var(--muted);
+  margin-left: 8px;
+  max-width: 320px;
+}
+
+/* Документы */
+.footer-middle {
+  flex: 0 1 260px;
+  min-width: 220px;
+}
+
+.footer-middle h4 {
+  margin: 0 0 10px 0;
+  font-size: 16px;
+}
+
+.docs-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  color: var(--muted);
+}
+
+.docs-list li {
+  margin-bottom: 8px;
+}
+
+.docs-list a {
+  color: var(--muted);
+  text-decoration: none;
+  transition: color 0.18s;
+}
+
+.docs-list a:hover {
+  color: var(--accent);
+}
+
+/* Реквизиты и контакты */
+.footer-right {
+  flex: 0 1 300px;
+  min-width: 220px;
+}
+
+.footer-right h4 {
+  margin: 0 0 10px 0;
+  font-size: 16px;
+}
+
+.company-info {
+  color: var(--muted);
+  font-style: normal;
+  line-height: 1.5;
+  margin-bottom: 12px;
+}
+
+.footer-contacts {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.contact-link {
+  color: var(--muted);
+  text-decoration: none;
+}
+
+.contact-link:hover {
+  color: var(--accent);
+}
+
+/* Нижняя полоса */
+.footer-bottom {
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+  padding-top: 14px;
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  max-width: 1200px;
+  margin: 0 auto;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.policy-links a {
+  color: var(--muted);
+  text-decoration: none;
+  margin: 0 8px;
+}
+
+.policy-links a:hover {
+  color: var(--accent);
+}
+
+/* 📱 Адаптация */
+@media (max-width: 900px) {
+  .site-footer {
+    padding: 25px 5px 5px;
+  }
+
+  .footer-top {
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    text-align: center;
+  }
+
+  .footer-left,
+  .footer-middle,
+  .footer-right {
+    margin: 0;
+    padding: 0;
+  }
+
+  .footer-left .footer-logo {
+    justify-content: center;
+  }
+
+  .footer-desc {
+    margin: 10px auto 12px;
+  }
+
+  .socials {
+    justify-content: center;
+  }
+
+  .social-note {
+    text-align: center;
+    margin: 6px auto 0;
+    max-width: 280px;
+  }
+
+  .footer-middle h4,
+  .footer-right h4 {
+    margin-top: px;
+  }
+
+  .footer-bottom {
+    flex-direction: column;
+    text-align: center;
+    gap: 8px;
+    margin-top: 25px;
+  }
+
+  .policy-links a {
+    display: inline-block;
+    margin: 0 6px;
+  }
+}
+
+@media (max-width: 480px) {
+  .footer-left .footer-logo img {
+    width: 38px;
+    height: 38px;
+  }
+
+  .footer-left .logo-text h3 {
+    font-size: 16px;
+  }
+
+  .footer-left .logo-text span {
+    font-size: 12px;
+  }
+
+  .footer-desc {
+    font-size: 13px;
+    max-width: 90%;
+  }
+
+  .social {
+    width: 36px;
+    height: 36px;
+  }
+
+  .social .fa-brands {
+    font-size: 16px;
+  }
+
+  .social-note {
+    font-size: 11px;
+    line-height: 1.3;
+  }
+
+  .footer-middle h4,
+  .footer-right h4 {
+    font-size: 15px;
+  }
+
+  .docs-list a,
+  .company-info,
+  .contact-link {
+    font-size: 13px;
+  }
+}
+</style>
+
+
+<!-- Небольшой JS: год и пример обработки кнопок скачивания (опционально) -->
+<script>
+  // Вставляем текущий год
+  document.getElementById('year').textContent = new Date().getFullYear();
+
+  // Пример: если нужно отслеживать клики по скачиванию (analytics)
+  document.querySelectorAll('.docs-list a').forEach(a=>{
+    a.addEventListener('click', (e)=>{
+      // analyticsEvent('download', { file: a.getAttribute('href') });
+      // (раскомментируй и заменяй на свою аналитику)
+      console.log('Download click:', a.getAttribute('href'));
+    });
+  });
+</script>
+
+
 
 <!-- Модальное окно -->
 <div id="chatModal" class="modal">
