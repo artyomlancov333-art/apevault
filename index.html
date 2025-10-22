@@ -208,38 +208,42 @@ burger.addEventListener('click', () => {
 document.querySelectorAll('nav li > ul').forEach(sub => {
     sub.parentElement.classList.add('has-submenu');
 });
+
 document.querySelectorAll('nav li.has-submenu').forEach(parent => {
     const link = parent.querySelector('a');
     const submenu = parent.querySelector('ul');
 
     link.addEventListener('click', e => {
         if(window.innerWidth <= 900){
-            e.preventDefault();
-            const isOpen = parent.classList.contains('open');
+            if(submenu){ // только если есть подменю
+                e.preventDefault();
+                const isOpen = parent.classList.contains('open');
 
-            // Закрываем все подменю
-            document.querySelectorAll('nav li.has-submenu').forEach(item => {
-                item.classList.remove('open');
-                const sub = item.querySelector('ul');
-                if(sub){
-                    sub.style.maxHeight = '0px';
-                    sub.style.paddingTop = '0px';
-                    sub.style.paddingBottom = '0px';
+                // Закрываем все подменю
+                document.querySelectorAll('nav li.has-submenu').forEach(item => {
+                    item.classList.remove('open');
+                    const sub = item.querySelector('ul');
+                    if(sub){
+                        sub.style.maxHeight = '0px';
+                        sub.style.paddingTop = '0px';
+                        sub.style.paddingBottom = '0px';
+                    }
+                });
+
+                // Открываем текущее
+                if(!isOpen){
+                    parent.classList.add('open');
+                    submenu.style.maxHeight = submenu.scrollHeight + 'px';
+                    submenu.style.paddingTop = '10px';
+                    submenu.style.paddingBottom = '10px';
                 }
-            });
-
-            // Если текущее было закрыто, открываем
-            if(!isOpen){
-                parent.classList.add('open');
-                submenu.style.maxHeight = submenu.scrollHeight + 'px';
-                submenu.style.paddingTop = '10px';
-                submenu.style.paddingBottom = '10px';
             }
+            // Если подменю нет, клик идёт по ссылке как обычно
         }
     });
 });
 
-// Клик вне меню
+// Клик вне меню закрывает все
 document.addEventListener('click', e => {
     if(window.innerWidth <= 900){
         if(!nav.contains(e.target) && !burger.contains(e.target)){
@@ -2133,381 +2137,147 @@ document.querySelectorAll('.faq-item').forEach(item=>{
 });
 </script>
 
-<!-- 🌿 FOOTER -->
-<footer class="site-footer">
-  <div class="footer-top">
-    <!-- Левая часть -->
-    <div class="footer-left">
-      <a href="#" class="footer-logo">
-        <img src="croc.png" alt="ApeVault">
-        <div class="logo-text">
-          <h3>ApeVault</h3>
-          <span>сообщество диких криптанов</span>
-        </div>
-      </a>
-      <p class="footer-desc">
-        Обучение, сообщество и инструменты для безопасной и осознанной работы с криптовалютами.
-      </p>
-      <div class="socials">
-        <a href="#" class="social"><i class="fa-brands fa-vk"></i></a>
-        <a href="#" class="social"><i class="fa-brands fa-telegram"></i></a>
-        <a href="#" class="social"><i class="fa-brands fa-youtube"></i></a>
-        <a href="#" class="social"><i class="fa-brands fa-r-project"></i></a>
-        <a href="#" class="social social-inst"><i class="fa-brands fa-instagram"></i></a>
-      </div>
-      <span class="social-note">
-        Instagram принадлежит Meta, которая признана в РФ экстремистской организацией
-      </span>
-    </div>
+<!-- START footer -->
+<footer id="site-footer" style="background:#0D0D0D; color:#ddd; padding:40px 20px; font-family:Inter, Arial, sans-serif;">
+  <div class="footer-inner" style="max-width:1200px; margin:0 auto; display:flex; gap:40px; flex-wrap:wrap; align-items:flex-start; justify-content:space-between;">
 
-    <!-- Средняя часть -->
-    <div class="footer-middle">
-      <h4>Документы</h4>
-      <ul class="docs-list">
-        <li><a href="#">Политика конфиденциальности</a></li>
-        <li><a href="#">Обработка персональных данных</a></li>
-        <li><a href="#">Публичная оферта</a></li>
-        <li><a href="#">Информация о сервисах</a></li>
-      </ul>
-    </div>
-
-    <!-- Правая часть -->
-    <div class="footer-right">
-      <h4>Реквизиты</h4>
-      <address class="company-info">
-        ИП Соболева Ксения Витальевна<br>
-        ИНН 644110963363<br>
-        ОГРН 322645700054948
-      </address>
-      <div class="footer-contacts">
-        <a href="#" class="contact-link">Написать в Telegram</a>
-        <a href="mailto:info@apevault.com" class="contact-link">info@apevault.com</a>
-      </div>
+    <!-- Left: logo/description/contact -->
+<div class="footer-col footer-brand" style="min-width:260px; flex:1 1 260px;">
+  <div style="display:flex; align-items:center; gap:12px; margin-bottom:10px;">
+    <!-- логотип вместо иконки -->
+    <img src="croc.png" alt="ApeVault Logo" width="44" height="44" style="object-fit:contain;">
+    <div>
+      <div style="font-weight:700; color:#fff; font-size:18px;">ApeVault</div>
+      <div style="font-size:12px; color:#aaa;">сообщество диких криптанов</div>
     </div>
   </div>
 
-  <div class="footer-bottom">
-    <span>© 2025 ApeVault. Все права защищены.</span>
-    <div class="policy-links">
-      <a href="#">Политика конфиденциальности</a> |
-      <a href="#">Публичная оферта</a>
+  <p style="color:#bbb; line-height:1.6; margin:0 0 18px 0; font-size:14px;">
+    Поддержка пользователей, обучающие курсы и инструменты для безопасной работы с криптой.
+  </p>
+
+  <div class="footer-contacts" style="margin-top:6px;">
+    <div style="display:flex; gap:8px; align-items:center; margin-bottom:6px;">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="#367153" aria-hidden="true"><path d="M21 8V7l-3 2-2-1-7 7 1 2 2 1 3-3h5V8z"></path></svg>
+      <a href="mailto:hello@apevault.example" style="color:#ddd; text-decoration:none;">hello@apevault.example</a>
+    </div>
+    <div style="display:flex; gap:8px; align-items:center;">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="#367153" aria-hidden="true"><path d="M6.62 10.79a15.05 15.05 0 006.59 6.59l2.2-2.2a1 1 0 01.94-.27 11.36 11.36 0 003.6.57 1 1 0 011 1v3.5a1 1 0 01-1 1A17 17 0 013 5a1 1 0 011-1h3.5a1 1 0 011 1 11.36 11.36 0 00.57 3.6 1 1 0 01-.27.94l-2.18 2.25z"></path></svg>
+      <a href="tel:+1234567890" style="color:#ddd; text-decoration:none;">+1 (234) 567‑890</a>
+    </div>
+  </div>
+</div>
+
+    <!-- Middle: links / downloads -->
+    <div class="footer-col footer-links" style="min-width:260px; flex:1 1 260px;">
+      <div style="display:flex; gap:24px; flex-wrap:wrap;">
+        <div style="min-width:140px;">
+          <h4 style="color:#fff; font-size:14px; margin:0 0 10px 0;">Документы</h4>
+          <ul style="list-style:none; padding:0; margin:0; color:#bbb; font-size:14px;">
+            <li style="margin-bottom:8px;">
+              <a class="download-link" href="files/policy.pdf" download aria-label="Скачать Политику обработки персональных данных" style="color:#ddd; text-decoration:none; display:inline-flex; gap:8px; align-items:center;">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="#367153" aria-hidden="true"><path d="M12 16l4-5h-3V4h-2v7H8l4 5z"/><path d="M5 20h14v2H5z"/></svg>
+                Политика обработки персональных данных
+              </a>
+            </li>
+            <li style="margin-bottom:8px;">
+              <a class="download-link" href="files/offer.pdf" download aria-label="Скачать публичную оферту" style="color:#ddd; text-decoration:none; display:inline-flex; gap:8px; align-items:center;">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="#367153" aria-hidden="true"><path d="M3 3h18v18H3V3zm2 2v14h14V5H5z"/><path d="M8 9h8v2H8V9z"/></svg>
+                Публичная оферта
+              </a>
+            </li>
+            <li>
+              <a class="download-link" href="files/services.pdf" download aria-label="Скачать информацию о сервисах" style="color:#ddd; text-decoration:none; display:inline-flex; gap:8px; align-items:center;">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="#367153" aria-hidden="true"><path d="M4 6h16v2H4zM4 10h16v2H4zM4 14h16v2H4z"/></svg>
+                Информация о сервисах
+              </a>
+            </li>
+          </ul>
+        </div>
+
+        <div style="min-width:180px;">
+          <h4 style="color:#fff; font-size:14px; margin:0 0 10px 0;">Реквизиты</h4>
+          <div style="color:#bbb; font-size:14px; line-height:1.6;">
+            ИП Соболева Ксения Витальевна<br>
+            ИНН: <span style="color:#fff;">644110963363</span><br>
+            ОГРН: <span style="color:#fff;">322645700054948</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+<!-- Right: social icons -->
+<div class="footer-col footer-social" style="min-width:220px; flex:1 1 220px; display:flex; flex-direction:column; gap:14px; align-items:flex-end; margin-top:20px;">
+  <div style="display:flex; gap:12px; align-items:center; justify-content:flex-end;">
+
+    <!-- VK -->
+    <a href="https://vk.com/yourpage" target="_blank" rel="noopener" aria-label="ВКонтакте" style="color:inherit; text-decoration:none; display:flex; align-items:center;">
+      <i class="fa-brands fa-vk" style="font-size:36px; color:#ddd;"></i>
+    </a>
+
+    <!-- Telegram -->
+    <a href="https://t.me/yourchannel" target="_blank" rel="noopener" aria-label="Telegram" style="color:inherit; text-decoration:none; display:flex; align-items:center;">
+      <i class="fa-brands fa-telegram" style="font-size:36px; color:#ddd;"></i>
+    </a>
+
+    <!-- YouTube -->
+    <a href="https://youtube.com/yourchannel" target="_blank" rel="noopener" aria-label="YouTube" style="color:inherit; text-decoration:none; display:flex; align-items:center;">
+      <i class="fa-brands fa-youtube" style="font-size:36px; color:#ddd;"></i>
+    </a>
+
+    <!-- RuTube -->
+    <a href="https://rutube.ru/yourchannel" target="_blank" rel="noopener" aria-label="RuTube" style="color:inherit; text-decoration:none; display:flex; align-items:center;">
+      <i class="fa-solid fa-play" style="font-size:36px; color:#ddd;"></i>
+    </a>
+
+    <!-- Instagram -->
+    <a href="https://instagram.com/yourprofile" target="_blank" rel="noopener" aria-label="Instagram" style="color:inherit; text-decoration:none; display:flex; align-items:center;">
+      <i class="fa-brands fa-instagram" style="font-size:36px; color:#ddd;"></i>
+    </a>
+
+  </div>
+
+  <!-- Instagram note / warning -->
+  <span style="font-size:11px; color:#fff; background:#b33; padding:4px 6px; border-radius:8px; white-space:nowrap; margin-top:10px;">
+    Instagramm принадлежит Meta, признанной экстремистской и запрещённой в РФ
+  </span>
+</div>
+
+
+  <!-- Bottom legal row -->
+  <div style="max-width:1200px; margin:28px auto 0; border-top:1px solid rgba(255,255,255,0.04); padding-top:20px; display:flex; flex-wrap:wrap; justify-content:space-between; gap:12px;">
+    <div style="color:#aaa; font-size:13px;">
+      <strong>ИП:</strong> Соболева Ксения Витальевна &nbsp;•&nbsp; <strong>ИНН:</strong> 644110963363 &nbsp;•&nbsp; <strong>ОГРН:</strong> 322645700054948
+    </div>
+    <div style="display:flex; gap:14px; align-items:center;">
+      <a href="files/policy.pdf" download style="color:#367153; font-size:13px; text-decoration:none; border:1px solid rgba(54,113,83,0.12); padding:8px 10px; border-radius:8px;">Политика обработки персональных данных</a>
+      <a href="files/offer.pdf" download style="color:#367153; font-size:13px; text-decoration:none; border:1px solid rgba(54,113,83,0.12); padding:8px 10px; border-radius:8px;">Публичная оферта</a>
+      <a href="files/services.pdf" download style="color:#367153; font-size:13px; text-decoration:none; border:1px solid rgba(54,113,83,0.12); padding:8px 10px; border-radius:8px;">Информация о сервисах</a>
     </div>
   </div>
 </footer>
 
-<!-- 📘 Стили футера -->
-<style>
-:root {
-  --bg:#0b0b0b;
-  --muted:#aeb3b7;
-  --accent:#D4AF37;
-  --green:#367153;
-  --purple:#6A0DAD;
-  --card-radius:12px;
-  --gap:20px;
-}
-
-.site-footer {
-  background: var(--bg);
-  color: #fff;
-  padding: 40px 20px;
-  font-family: 'Inter', sans-serif;
-}
-
-.footer-top {
-  display: flex;
-  gap: var(--gap);
-  flex-wrap: wrap;
-  align-items: flex-start;
-  justify-content: space-between;
-  max-width: 1200px;
-  margin: 0 auto 20px;
-}
-
-.footer-left {
-  flex: 1 1 340px;
-  min-width: 260px;
-}
-
-.footer-left .footer-logo {
-  display: flex;
-  gap: 12px;
-  align-items: center;
-  text-decoration: none;
-  color: inherit;
-  margin-bottom: 12px;
-}
-
-.footer-left .footer-logo img {
-  width: 46px;
-  height: 46px;
-  object-fit: contain;
-}
-
-.footer-left .logo-text h3 {
-  margin: 0;
-  font-size: 18px;
-}
-
-.footer-left .logo-text span {
-  display: block;
-  color: var(--muted);
-  font-size: 13px;
-}
-
-.footer-desc {
-  color: var(--muted);
-  margin-bottom: 14px;
-  max-width: 420px;
-}
-
-.socials {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  flex-wrap: wrap;
-}
-
-.social {
-  width: 40px;
-  height: 40px;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 10px;
-  background: rgba(255, 255, 255, 0.03);
-  color: var(--muted);
-  text-decoration: none;
-  transition: all 0.18s ease;
-}
-
-.social:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 0 12px var(--accent);
-  color: #fff;
-  background: rgba(255, 255, 255, 0.05);
-}
-
-.social .fa-brands,
-.social .fa-solid {
-  font-size: 18px;
-}
-
-/* Instagram note */
-.social-note {
-  display: block;
-  font-size: 12px;
-  color: var(--muted);
-  margin-left: 8px;
-  max-width: 320px;
-}
-
-/* Документы */
-.footer-middle {
-  flex: 0 1 260px;
-  min-width: 220px;
-}
-
-.footer-middle h4 {
-  margin: 0 0 10px 0;
-  font-size: 16px;
-}
-
-.docs-list {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-  color: var(--muted);
-}
-
-.docs-list li {
-  margin-bottom: 8px;
-}
-
-.docs-list a {
-  color: var(--muted);
-  text-decoration: none;
-  transition: color 0.18s;
-}
-
-.docs-list a:hover {
-  color: var(--accent);
-}
-
-/* Реквизиты и контакты */
-.footer-right {
-  flex: 0 1 300px;
-  min-width: 220px;
-}
-
-.footer-right h4 {
-  margin: 0 0 10px 0;
-  font-size: 16px;
-}
-
-.company-info {
-  color: var(--muted);
-  font-style: normal;
-  line-height: 1.5;
-  margin-bottom: 12px;
-}
-
-.footer-contacts {
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-}
-
-.contact-link {
-  color: var(--muted);
-  text-decoration: none;
-}
-
-.contact-link:hover {
-  color: var(--accent);
-}
-
-/* Нижняя полоса */
-.footer-bottom {
-  border-top: 1px solid rgba(255, 255, 255, 0.05);
-  padding-top: 14px;
-  display: flex;
-  justify-content: space-between;
-  gap: 12px;
-  max-width: 1200px;
-  margin: 0 auto;
-  align-items: center;
-  flex-wrap: wrap;
-}
-
-.policy-links a {
-  color: var(--muted);
-  text-decoration: none;
-  margin: 0 8px;
-}
-
-.policy-links a:hover {
-  color: var(--accent);
-}
-
-/* 📱 Адаптация */
-@media (max-width: 900px) {
-  .site-footer {
-    padding: 25px 5px 5px;
-  }
-
-  .footer-top {
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 5px;
-    text-align: center;
-  }
-
-  .footer-left,
-  .footer-middle,
-  .footer-right {
-    margin: 0;
-    padding: 0;
-  }
-
-  .footer-left .footer-logo {
-    justify-content: center;
-  }
-
-  .footer-desc {
-    margin: 10px auto 12px;
-  }
-
-  .socials {
-    justify-content: center;
-  }
-
-  .social-note {
-    text-align: center;
-    margin: 6px auto 0;
-    max-width: 280px;
-  }
-
-  .footer-middle h4,
-  .footer-right h4 {
-    margin-top: px;
-  }
-
-  .footer-bottom {
-    flex-direction: column;
-    text-align: center;
-    gap: 8px;
-    margin-top: 25px;
-  }
-
-  .policy-links a {
-    display: inline-block;
-    margin: 0 6px;
-  }
-}
-
-@media (max-width: 480px) {
-  .footer-left .footer-logo img {
-    width: 38px;
-    height: 38px;
-  }
-
-  .footer-left .logo-text h3 {
-    font-size: 16px;
-  }
-
-  .footer-left .logo-text span {
-    font-size: 12px;
-  }
-
-  .footer-desc {
-    font-size: 13px;
-    max-width: 90%;
-  }
-
-  .social {
-    width: 36px;
-    height: 36px;
-  }
-
-  .social .fa-brands {
-    font-size: 16px;
-  }
-
-  .social-note {
-    font-size: 11px;
-    line-height: 1.3;
-  }
-
-  .footer-middle h4,
-  .footer-right h4 {
-    font-size: 15px;
-  }
-
-  .docs-list a,
-  .company-info,
-  .contact-link {
-    font-size: 13px;
-  }
-}
-</style>
-
-
-<!-- Небольшой JS: год и пример обработки кнопок скачивания (опционально) -->
 <script>
-  // Вставляем текущий год
-  document.getElementById('year').textContent = new Date().getFullYear();
+  // footer small interactivity
+  document.getElementById('footer-year').textContent = new Date().getFullYear();
 
-  // Пример: если нужно отслеживать клики по скачиванию (analytics)
-  document.querySelectorAll('.docs-list a').forEach(a=>{
+  // add small click hooks for downloads (analytics or confirmations)
+  document.querySelectorAll('.download-link, a[download]').forEach(a=>{
     a.addEventListener('click', (e)=>{
-      // analyticsEvent('download', { file: a.getAttribute('href') });
-      // (раскомментируй и заменяй на свою аналитику)
-      console.log('Download click:', a.getAttribute('href'));
+      // example: log to console, replace with analytics push if needed
+      console.log('Download clicked:', a.getAttribute('href'));
+      // optional: could show a toast or confirmation
     });
   });
+
+  // simple hover scale for social icons
+  document.querySelectorAll('.footer-col a svg').forEach(svg=>{
+    svg.parentElement.addEventListener('mouseenter', ()=> svg.style.transform = 'scale(1.05)');
+    svg.parentElement.addEventListener('mouseleave', ()=> svg.style.transform = '');
+  });
 </script>
+<!-- END footer -->
+
 
 
 
