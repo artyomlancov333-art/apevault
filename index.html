@@ -10,6 +10,7 @@ body {
     font-family: 'Arial', sans-serif;
     background-color: #121212;
     color: #fff;
+    scroll-behavior: smooth; /* плавная прокрутка на всех браузерах */
 }
 body.menu-open { overflow: hidden; }
 a { text-decoration: none; color: inherit; }
@@ -220,7 +221,7 @@ burger.addEventListener('click', () => {
     body.classList.toggle('menu-open');
 });
 
-// Стрелки для подменю
+// Стрелки подменю
 document.querySelectorAll('.submenu-toggle').forEach(toggle => {
     toggle.addEventListener('click', e => {
         e.stopPropagation(); // чтобы клик не мешал ссылке
@@ -256,24 +257,35 @@ document.querySelectorAll('.submenu-toggle').forEach(toggle => {
     });
 });
 
-// Клик вне меню закрывает всё
-document.addEventListener('click', e => {
-    if(window.innerWidth <= 900){
-        if(!nav.contains(e.target) && !burger.contains(e.target)){
-            document.querySelectorAll('nav li.has-submenu').forEach(item => {
-                item.classList.remove('open');
-                const sub = item.querySelector('ul');
-                if(sub){
-                    sub.style.maxHeight = '0px';
-                    sub.style.paddingTop = '0px';
-                    sub.style.paddingBottom = '0px';
-                }
-            });
-            nav.classList.remove('active');
-            burger.classList.remove('open');
-            body.classList.remove('menu-open');
+// Прокрутка к якорю и закрытие мобильного меню
+document.querySelectorAll('nav a').forEach(link => {
+    link.addEventListener('click', e => {
+        const targetId = link.getAttribute('href');
+        if(targetId.startsWith('#') && window.innerWidth <= 900){
+            const targetElem = document.querySelector(targetId);
+            if(targetElem){
+                e.preventDefault();
+                // Закрываем меню
+                nav.classList.remove('active');
+                burger.classList.remove('open');
+                body.classList.remove('menu-open');
+
+                // Закрываем все подменю
+                document.querySelectorAll('nav li.has-submenu').forEach(item => {
+                    item.classList.remove('open');
+                    const sub = item.querySelector('ul');
+                    if(sub){
+                        sub.style.maxHeight = '0px';
+                        sub.style.paddingTop = '0px';
+                        sub.style.paddingBottom = '0px';
+                    }
+                });
+
+                // Плавная прокрутка
+                targetElem.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
         }
-    }
+    });
 });
 
 // Сброс при ресайзе
@@ -296,6 +308,7 @@ window.addEventListener('resize', () => {
 </script>
 </body>
 </html>
+
 
 
 <section class="about" id="about">
