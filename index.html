@@ -42,6 +42,7 @@ nav > ul > li > a::after {
     transition: width 0.3s;
 }
 nav > ul > li > a:hover::after { width: 100%; }
+
 /* Подменю десктоп */
 .submenu {
     display: none;
@@ -82,6 +83,21 @@ nav li:hover > .submenu { display: flex; }
 /* Мобильные кнопки */
 .mobile-buttons { display: none; flex-direction: column; gap: 10px; padding: 10px 20px; }
 
+/* Стрелки подменю */
+.submenu-toggle {
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    border-right: 2px solid #367153;
+    border-bottom: 2px solid #367153;
+    transform: rotate(45deg);
+    margin-left: 10px;
+    transition: transform 0.3s;
+}
+li.has-submenu.open > .submenu-toggle {
+    transform: rotate(135deg);
+}
+
 /* Мобильные стили */
 @media (max-width: 900px) {
     nav { 
@@ -91,15 +107,6 @@ nav li:hover > .submenu { display: flex; }
     nav.active { display: flex; }
     nav ul { flex-direction: column; gap: 0; }
     nav li { padding: 10px 20px; }
-    nav li.has-submenu > .submenu-toggle {
-        cursor: pointer;
-        margin-left: 5px;
-        display: inline-block;
-        transition: transform 0.3s;
-    }
-    nav li.has-submenu.open > .submenu-toggle {
-        transform: rotate(90deg);
-    }
     nav li > .submenu {
         position: relative;
         display: block;
@@ -111,7 +118,7 @@ nav li:hover > .submenu { display: flex; }
         padding-bottom: 0;
         margin-top: 5px;
     }
-    nav li.has-submenu.open > .submenu {
+    li.has-submenu.open > .submenu {
         max-height: 500px;
         padding-top: 10px;
         padding-bottom: 10px;
@@ -160,7 +167,7 @@ nav li:hover > .submenu { display: flex; }
       <!-- О проекте -->
       <li class="has-submenu">
         <a href="#about">О проекте</a>
-        <span class="submenu-toggle">▶</span>
+        <span class="submenu-toggle"></span>
         <ul class="submenu">
           <li><a href="#community">Наше комьюнити</a></li>
           <li><a href="#team">Наша команда</a></li>
@@ -173,7 +180,7 @@ nav li:hover > .submenu { display: flex; }
       <!-- Обучение -->
       <li class="has-submenu">
         <a href="#learning">Всё по обучению</a>
-        <span class="submenu-toggle">▶</span>
+        <span class="submenu-toggle"></span>
         <ul class="submenu">
           <li><a href="#roadmap">Крипто-карта</a></li>
           <li><a href="#learning-features">Фишки обучения</a></li>
@@ -214,10 +221,6 @@ burger.addEventListener('click', () => {
 });
 
 // Подменю через стрелку
-document.querySelectorAll('nav li > ul').forEach(sub => {
-    sub.parentElement.classList.add('has-submenu');
-});
-
 document.querySelectorAll('.submenu-toggle').forEach(toggle => {
     toggle.addEventListener('click', e => {
         e.stopPropagation(); // чтобы клик не дошёл до ссылки
@@ -293,7 +296,6 @@ window.addEventListener('resize', () => {
 </script>
 </body>
 </html>
-
 
 <section class="about" id="about">
     <h2>О проекте</h2>
@@ -2250,7 +2252,7 @@ document.querySelectorAll('.faq-item').forEach(item=>{
 
   <!-- Instagram note / warning -->
   <span style="font-size:11px; color:#fff; background:#b33; padding:4px 6px; border-radius:8px; white-space:nowrap; margin-top:10px;">
-    Meta признанна экстремистской и запрещённой в РФ</p>
+     Instagram (Meta) признана экстремистской и запрещённой в РФ</p>
   </span>
 </div>
 
