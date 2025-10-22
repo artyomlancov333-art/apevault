@@ -1795,7 +1795,7 @@ document.addEventListener('DOMContentLoaded', () => {
   justify-content:center;
   align-items:center;
   background:#417F61;
-  padding:10px;
+  padding:10px 12px;
   border-radius:10px;
   font-size:14px;
   text-align:center;
@@ -1808,14 +1808,13 @@ document.addEventListener('DOMContentLoaded', () => {
 .file .icon {
   margin-right:8px;
   display:inline-block;
-  transition: transform 0.5s ease;
+  will-change: transform, opacity;
 }
 
 .file.locked:hover .icon {
   transform: rotate(20deg);
 }
 
-/* Анимация открытия */
 @keyframes openIcon {
   0% { transform: rotate(0deg) scale(1); opacity:0; }
   50% { transform: rotate(-15deg) scale(1.3); opacity:1; }
@@ -1825,6 +1824,29 @@ document.addEventListener('DOMContentLoaded', () => {
 .file.opened .icon {
   animation: openIcon 0.6s forwards;
 }
+
+/* Мобильная адаптация */
+@media (max-width: 768px) {
+  .wheel-wrapper {
+    flex-direction: column !important;
+    align-items: center !important;
+  }
+
+  .wheel-column {
+    order: 1;
+    margin-bottom: 20px;
+  }
+
+  .result-column {
+    order: 2;
+    align-items: center;
+    text-align: center;
+  }
+
+  .locked-files {
+    align-items: center;
+  }
+}
 </style>
 
 <script>
@@ -1833,7 +1855,6 @@ const ctx = canvas.getContext("2d");
 const spinBtn = document.getElementById("spinBtn");
 const tgBtn = document.getElementById("tgBtn");
 const result = document.getElementById("result");
-
 const files = document.querySelectorAll(".file.locked");
 
 const sectors = ["10%", "20%", "30%", "40%", "50%", "60%", "90%", "Еще раз"];
@@ -1858,12 +1879,19 @@ const discountNames = {
   "Еще раз": "ещё один шанс"
 };
 
-// Функция открытия файлов
+// Открытие файлов с перезапуском анимации для мобильных
 function unlockFiles() {
   files.forEach((file, i) => {
     file.classList.remove("locked");
     file.classList.add("opened");
-    file.querySelector(".icon").textContent = "📄";
+    const icon = file.querySelector(".icon");
+    icon.textContent = "📄";
+
+    // перезапуск анимации
+    icon.style.animation = "none";
+    void icon.offsetWidth;
+    icon.style.animation = "openIcon 0.6s forwards";
+
     file.onclick = () => {
       window.open(i === 0 ? '/files/guide_alerts.pdf' : '/files/crypto_glossary.pdf', '_blank');
     };
@@ -1891,6 +1919,7 @@ function getPrize() {
   return "10%";
 }
 
+// Рисуем колесо
 function drawWheel() {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
   ctx.save();
@@ -1919,6 +1948,7 @@ function drawWheel() {
   ctx.restore();
 }
 
+// Крутилка
 function spinWheel(){
   const remainingAttempts = 3 - spins + extraSpin;
   if(spinning || (remainingAttempts <= 0 && tenPercentDropped)) return;
@@ -1948,9 +1978,7 @@ function spinWheel(){
       spinning=false;
       result.innerText = `Тебе выпало: ${prize} — ${discountNames[prize]}`;
 
-      if(spins === 0 && prize !== "Еще раз") {
-        unlockFiles();
-      }
+      if(spins === 0 && prize !== "Еще раз") unlockFiles();
 
       if(prize === "Еще раз") extraSpin += 1;
 
@@ -1970,29 +1998,6 @@ spinBtn.addEventListener("click", spinWheel);
 tgBtn.addEventListener("click",()=>window.open('https://t.me/ApeVaultCrypto','_blank'));
 </script>
 
-<style>
-@media (max-width: 768px) {
-  .wheel-wrapper {
-    flex-direction: column !important;
-    align-items: center !important;
-  }
-
-  .wheel-column {
-    order: 1;
-    margin-bottom: 20px;
-  }
-
-  .result-column {
-    order: 2;
-    align-items: center;
-    text-align: center;
-  }
-
-  .locked-files {
-    align-items: center;
-  }
-}
-</style>
 
 
 <section id="faq" class="faq-section">
@@ -2151,7 +2156,7 @@ document.querySelectorAll('.faq-item').forEach(item=>{
         <a href="#" class="social social-inst"><i class="fa-brands fa-instagram"></i></a>
       </div>
       <span class="social-note">
-        Instagram принадлежит Meta, которая признана в РФ экстремистской организацией и запрещена
+        Instagram принадлежит Meta, которая признана в РФ экстремистской организацией
       </span>
     </div>
 
