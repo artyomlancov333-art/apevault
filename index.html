@@ -173,11 +173,19 @@ li.has-submenu.open > .submenu-toggle {
         <ul class="submenu">
           <li><a href="#community">Наше комьюнити</a></li>
           <li><a href="#team">Наша команда</a></li>
+          <li><a href="#wallets">Наши кошельки</a></li>
         </ul>
       </li>
 
-      <!-- Экосистема -->
-      <li><a href="#ecosystem">Наша экосистема</a></li>
+        <!-- Экосистема -->
+      <li class="has-submenu">
+        <a href="#ecosystem">Наша экосистема</a>
+        <span class="submenu-toggle"></span>
+        <ul class="submenu">
+          <li><a href="#ecosystem">Наша экосистема</a></li>
+          <li><a href="#students">Мы с учениками</a></li>
+        </ul>
+      </li>
 
       <!-- Обучение -->
       <li class="has-submenu">
@@ -1222,6 +1230,7 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 </script>
 
+<section id="students"></section>
 <section class="students-section">
   <div class="students-container">
     <h2 class="section-title">Мы с учениками</h2>
