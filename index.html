@@ -795,6 +795,216 @@ document.addEventListener('DOMContentLoaded', () => {
 }
 </style>
 
+<section id="wallets">
+  <div class="wallets-container">
+    <h2>Наши кошельки</h2>
+    <p class="wallets-subtitle">Ты можешь проверить нашу честность и доходность</p>
+
+    <div class="wallets-grid">
+      <div class="wallet-item" onclick="copyWallet('FrNUmnQitcFcQMhHjf5P5ApsQzcPYJJRfWqSpfMYuGiL', this)">
+        <i class="fas fa-wallet"></i>
+        <div class="wallet-text">
+          <strong>Артём</strong>
+          <span class="wallet-address" title="FrNUmnQitcFcQMhHjf5P5ApsQzcPYJJRfWqSpfMYuGiL">FrNUmn...GiL</span>
+        </div>
+        <button class="copy-btn" title="Скопировать">
+          <i class="fas fa-copy"></i>
+        </button>
+        <span class="copy-popup">скопировано</span>
+      </div>
+
+      <div class="wallet-item" onclick="copyWallet('FXB9hydZNnrRAyTT2U99JnhPxj2F4Toth7w6u2FC3dqe', this)">
+        <i class="fas fa-wallet"></i>
+        <div class="wallet-text">
+          <strong>Ольга</strong>
+          <span class="wallet-address" title="FXB9hydZNnrRAyTT2U99JnhPxj2F4Toth7w6u2FC3dqe">FXB9hy...dqe</span>
+        </div>
+        <button class="copy-btn" title="Скопировать">
+          <i class="fas fa-copy"></i>
+        </button>
+        <span class="copy-popup">скопировано</span>
+      </div>
+
+      <div class="wallet-item" onclick="copyWallet('6D1pgmz2hHLhgNTrhfTidQTRfvrJBtB1Rr1ZMzett4bi', this)">
+        <i class="fas fa-wallet"></i>
+        <div class="wallet-text">
+          <strong>Ксения</strong>
+          <span class="wallet-address" title="6D1pgmz2hHLhgNTrhfTidQTRfvrJBtB1Rr1ZMzett4bi">6D1pgm...4bi</span>
+        </div>
+        <button class="copy-btn" title="Скопировать">
+          <i class="fas fa-copy"></i>
+        </button>
+        <span class="copy-popup">скопировано</span>
+      </div>
+    </div>
+
+    <div class="wallets-info">
+      <p><i class="fas fa-info-circle"></i> Это кошельки DEX на блокчейне <strong>Solana (SOL)</strong>, так как наша команда торгует преимущественно активами, созданными на этой сети.</p>
+      <p>Проверить транзакции можно здесь: 
+        <a href="https://solscan.io/" target="_blank">https://solscan.io/</a>
+      </p>
+      <p>Если ты хочешь проверить кошельки в других сетях — напиши нам. Если мы торгуем в запрашиваемой сети, предоставим адрес для проверки.</p>
+    </div>
+  </div>
+</section>
+
+<style>
+#wallets {
+  background-color: #0d0d0d;
+  color: #fff;
+  padding: 70px 25px;
+  text-align: center;
+  font-family: 'Inter', sans-serif;
+}
+
+.wallets-container {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+#wallets h2 {
+  color: #367153;
+  font-size: 2.2rem;
+  margin-bottom: 10px;
+}
+
+.wallets-subtitle {
+  color: #aaa;
+  margin-bottom: 40px;
+  font-size: 1rem;
+}
+
+.wallets-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 18px;
+}
+
+.wallet-item {
+  background: linear-gradient(145deg, #111 0%, #161616 100%);
+  border: 1px solid #367153;
+  border-radius: 14px;
+  padding: 14px 16px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+  width: 250px;
+}
+
+.wallet-item:hover {
+  background: linear-gradient(145deg, #18231c 0%, #0e1a13 100%);
+  box-shadow: 0 0 15px rgba(54,113,83,0.4);
+  transform: scale(1.03);
+}
+
+.wallet-item i.fa-wallet {
+  font-size: 1.2rem;
+  color: #367153;
+}
+
+.wallet-text {
+  flex-grow: 1;
+  text-align: left;
+}
+
+.wallet-text strong {
+  display: block;
+  color: #fff;
+  font-size: 1rem;
+}
+
+.wallet-address {
+  font-family: monospace;
+  color: #ccc;
+  font-size: 0.9rem;
+}
+
+/* Иконка копирования */
+.copy-btn {
+  background: none;
+  border: none;
+  color: #888;
+  cursor: pointer;
+  font-size: 1.1rem;
+  transition: color 0.3s ease;
+}
+
+.copy-btn:hover {
+  color: #5ecf7c;
+}
+
+.copy-popup {
+  position: absolute;
+  bottom: -18px;
+  right: 14px;
+  font-size: 0.7rem;
+  color: #79c57a;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.wallet-item.copied .copy-popup {
+  opacity: 1;
+}
+
+/* Зелёная вспышка */
+.wallet-item.flash {
+  box-shadow: 0 0 25px rgba(54,113,83,0.7);
+  transition: box-shadow 0.4s ease;
+}
+
+/* Инфо-блок */
+.wallets-info {
+  font-size: 0.95rem;
+  color: #ccc;
+  line-height: 1.6;
+  text-align: left;
+  max-width: 650px;
+  margin: 50px auto 0 auto;
+}
+
+.wallets-info a {
+  color: #367153;
+  text-decoration: none;
+}
+
+.wallets-info a:hover {
+  text-decoration: underline;
+}
+
+/* адаптив */
+@media (max-width: 768px) {
+  .wallet-item { width: 85%; }
+  .copy-popup { bottom: -16px; right: 10px; }
+}
+</style>
+
+<script>
+function copyWallet(address, element) {
+  navigator.clipboard.writeText(address).then(() => {
+    showCopied(element);
+  }).catch(() => {
+    const tempInput = document.createElement('input');
+    tempInput.value = address;
+    document.body.appendChild(tempInput);
+    tempInput.select();
+    document.execCommand('copy');
+    document.body.removeChild(tempInput);
+    showCopied(element);
+  });
+}
+
+function showCopied(element) {
+  element.classList.add('copied', 'flash');
+  setTimeout(() => element.classList.remove('flash'), 400);
+  setTimeout(() => element.classList.remove('copied'), 1500);
+}
+</script>
+
 <section id="ecosystem">
   <div class="ecosystem-container">
     <h2>Наша экосистема</h2>
@@ -1011,6 +1221,117 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 });
 </script>
+
+<section class="students-section">
+  <div class="students-container">
+    <h2 class="section-title">Мы с учениками</h2>
+    <p class="students-subtitle">Настоящее сообщество трейдеров — вместе растём, учимся и делимся опытом</p>
+
+    <div class="carousel">
+      <div class="carousel-row">
+        <img src="images/student1.jpg" alt="ученики">
+        <img src="images/student2.jpg" alt="ученики">
+        <img src="images/student3.jpg" alt="ученики">
+        <img src="images/student4.jpg" alt="ученики">
+        <img src="images/student5.jpg" alt="ученики">
+        <img src="images/student6.jpg" alt="ученики">
+      </div>
+      <div class="carousel-row reverse">
+        <img src="images/student7.jpg" alt="ученики">
+        <img src="images/student8.jpg" alt="ученики">
+        <img src="images/student9.jpg" alt="ученики">
+        <img src="images/student10.jpg" alt="ученики">
+        <img src="images/student11.jpg" alt="ученики">
+        <img src="images/student12.jpg" alt="ученики">
+      </div>
+      <div class="carousel-row">
+        <img src="images/student13.jpg" alt="ученики">
+        <img src="images/student14.jpg" alt="ученики">
+        <img src="images/student15.jpg" alt="ученики">
+        <img src="images/student16.jpg" alt="ученики">
+        <img src="images/student17.jpg" alt="ученики">
+        <img src="images/student18.jpg" alt="ученики">
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+.students-section {
+  background-color: #0d0d0d;
+  color: #fff;
+  padding: 70px 25px;
+  text-align: center;
+  font-family: 'Inter', sans-serif;
+}
+
+.students-container {
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.section-title {
+  color: #367153;
+  font-size: 2.2rem;
+  margin-bottom: 10px;
+  text-transform: none; /* Оставляем обычный регистр */
+}
+
+.students-subtitle {
+  color: #aaa;
+  margin-bottom: 40px;
+  font-size: 1rem;
+}
+
+.carousel {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  overflow: hidden;
+  position: relative;
+}
+
+.carousel-row {
+  display: flex;
+  gap: 20px;
+  animation: scrollRow 30s linear infinite;
+}
+
+.carousel-row.reverse {
+  animation-direction: reverse;
+}
+
+.carousel-row img {
+  width: 220px;
+  height: 220px;
+  object-fit: cover;
+  border-radius: 16px;
+  border: 2px solid #367153;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.carousel-row img:hover {
+  transform: scale(1.08);
+  box-shadow: 0 0 20px rgba(54,113,83,0.3);
+}
+
+@keyframes scrollRow {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+@media (max-width: 768px) {
+  .carousel-row img {
+    width: 140px;
+    height: 140px;
+  }
+}
+</style>
+
 
 <!-- Подключение Font Awesome -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
@@ -2132,6 +2453,13 @@ tgBtn.addEventListener("click",()=>window.open('https://t.me/ApeVaultCrypto','_b
         <div class="faq-question"><i class="fa-solid fa-circle-question"></i> А что за колесо фортуны? Можно крутить его постоянно?</div>
         <div class="faq-answer">
           Колесо фортуны - это геймифицированный способ получения скидки на наше обучение или продукты - боты. Времени от времени мы меняем вероятность выпадения призов и добавляем новые. Касаемо попыток - они ограничены 3 попытками в месяц.</p>
+        </div>
+      </div>
+
+              <div class="faq-item">
+        <div class="faq-question"><i class="fa-solid fa-circle-question"></i> Связан ли проект с GMGN? У них же тоже крокодильчик?</div>
+        <div class="faq-answer">
+          Нет, мы не является проектом GMGN, никак не связаны с ними, в том числе и партнерством. Наши проекты самостоятельны и независимы друг от друга.</p>
         </div>
       </div>
 
