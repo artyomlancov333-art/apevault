@@ -802,7 +802,6 @@ document.addEventListener('DOMContentLoaded', () => {
   .team-grid { grid-template-columns: 1fr; justify-items: center; max-width: 100%; }
 }
 </style>
-
 <section id="wallets">
   <div class="wallets-container">
     <h2>Наши кошельки</h2>
@@ -844,12 +843,24 @@ document.addEventListener('DOMContentLoaded', () => {
         </button>
         <span class="copy-popup">скопировано</span>
       </div>
+
+      <div class="wallet-item" onclick="copyWallet('nrKoADDJMMPrZ72B4KCbjg4uzNQCqwDWcCKCFuAe6KP', this)">
+        <i class="fas fa-wallet"></i>
+        <div class="wallet-text">
+          <strong>Анастасия</strong>
+          <span class="wallet-address" title="nrKoADDJMMPrZ72B4KCbjg4uzNQCqwDWcCKCFuAe6KP">nrKoA...e6KP</span>
+        </div>
+        <button class="copy-btn" title="Скопировать">
+          <i class="fas fa-copy"></i>
+        </button>
+        <span class="copy-popup">скопировано</span>
+      </div>
     </div>
 
     <div class="wallets-info">
       <p><i class="fas fa-info-circle"></i> Это кошельки DEX на блокчейне <strong>Solana (SOL)</strong>, так как наша команда торгует преимущественно активами, созданными на этой сети.</p>
       <p>Проверить транзакции можно здесь: 
-        <a href="https://solscan.io/" target="_blank">https://solscan.io/</a>
+        <a href="https://solscan.io/" target="_blank">https://solscan.io/</a> и <a href="https://app.cielo.finance/feed" target="_blank">https://app.cielo.finance</a>
       </p>
       <p>Если ты хочешь проверить кошельки в других сетях — напиши нам. Если мы торгуем в запрашиваемой сети, предоставим адрес для проверки.</p>
     </div>
@@ -931,7 +942,6 @@ document.addEventListener('DOMContentLoaded', () => {
   font-size: 0.9rem;
 }
 
-/* Иконка копирования */
 .copy-btn {
   background: none;
   border: none;
@@ -959,13 +969,11 @@ document.addEventListener('DOMContentLoaded', () => {
   opacity: 1;
 }
 
-/* Зелёная вспышка */
 .wallet-item.flash {
   box-shadow: 0 0 25px rgba(54,113,83,0.7);
   transition: box-shadow 0.4s ease;
 }
 
-/* Инфо-блок */
 .wallets-info {
   font-size: 0.95rem;
   color: #ccc;
@@ -984,10 +992,14 @@ document.addEventListener('DOMContentLoaded', () => {
   text-decoration: underline;
 }
 
-/* адаптив */
 @media (max-width: 768px) {
-  .wallet-item { width: 85%; }
-  .copy-popup { bottom: -16px; right: 10px; }
+  .wallet-item {
+    width: 85%;
+  }
+  .copy-popup {
+    bottom: -16px;
+    right: 10px;
+  }
 }
 </style>
 
@@ -1360,7 +1372,7 @@ document.addEventListener('DOMContentLoaded', () => {
       <div class="roadmap-line"></div>
 
       <!-- Модули -->
-      <!-- 1-5: зеленые -->
+      <!-- 1-4: зеленые -->
       <div class="module green">
         <div class="marker green"></div>
         <div class="module-icon"><i class="fa-solid fa-flag"></i></div>
@@ -1368,10 +1380,9 @@ document.addEventListener('DOMContentLoaded', () => {
         <p class="module-desc">В рамках этого модуля мы объясним, как устроен курс, кто его ведёт, что ты получишь, как всё работает и чего ожидать. Познакомим со спикерами, экосистемой и программой, дадим советы новичкам и разберём частые страхи перед стартом, а еще ответим на вопросы, которые интересны, но их страшно задавать</p>
         <button class="toggle-lessons green-btn">Показать уроки</button>
         <ul class="lessons">
-          <li>Знакомство со спикерами</li>
+          <li>Знакомство со спикерами и программой курса</li>
           <li>Знакомство с экосистемой</li>
-          <li>Знакомство с программой курса</li>
-          <li>Всё, что хочется узнать, но страшно спросить</li>
+          <li>FAQ</li>
         </ul>
       </div>
 
@@ -1382,47 +1393,41 @@ document.addEventListener('DOMContentLoaded', () => {
         <p class="module-desc">В рамках этого модуля мы научим понимать, что такое криптовалюта, зачем она нужна и как начать с нуля. Разберём базовые понятия, способы покупки и продажи, основы риск-менеджмента и построения инвестиционной стратегии, для тех, кто имеет в тарифе услуга по комплектованию портфеля, соберем индивидуально портфель</p>
         <button class="toggle-lessons green-btn">Показать уроки</button>
         <ul class="lessons">
-          <li>Крипта простыми словами</li>
-          <li>Как покупать и продавать криптовалюту</li>
-          <li>Риск и мани менеджмент</li>
-          <li>Как выбрать стратегию</li>
-          <li>Как собирать портфель</li>
-          <li>Заводим свои первые кошельки</li>
-        </ul>
-      </div>
-
-      <div class="module green">
-        <div class="marker green"></div>
-        <div class="module-icon"><i class="fa-solid fa-brain"></i></div>
-        <div class="module-header">Модуль 3: Психологический блок</div>
-        <p class="module-desc">В рамках этого модуля мы объясним, как не сгореть на эмоциях и не поддаться панике или эйфории. Поможем выстроить личные цели, дисциплину и устойчивость к страху упустить выгоду (FOMO) и панике (FUD)</p>
-        <button class="toggle-lessons green-btn">Показать уроки</button>
-        <ul class="lessons">
           <li>Личные цели и маршрут</li>
-          <li>FOMO и FUD</li>
-          <li>Дисциплина</li>
+          <li>Криптовалюта: основа основ</li>
+          <li>Как покупать и продавать криптовалюту</li>
+          <li>Как выбрать свой путь и стратегию, как собирать портфель</li>
+          <li>Заводим свои первые кошельки</li>
+          <li>Риск и мани-менеджмент</li>
         </ul>
       </div>
 
       <div class="module green">
         <div class="marker green"></div>
         <div class="module-icon"><i class="fa-solid fa-shield-halved"></i></div>
-        <div class="module-header">Модуль 4: Безопасность операций с криптовалютой</div>
-        <p class="module-desc">В этом модуле ты освоишь все, что нужно для полной безопасности в мире криптовалют. Мы покажем, как защищать свои средства и личные данные, как распознавать и избегать мошеннические схемы, а также как правильно настраивать защиту своих кошельков. Ты узнаешь о рисках разных видов кошельков, получишь рекомендации по тем, которыми мы сами пользуемся, и научишься работать с ними на практике. Кроме того, мы подробно разберём, какие опасности подстерегают в P2P-сделках, и покажем реальные схемы мошенничества, чтобы ты всегда оставался на шаг впереди</p>
+        <div class="module-header">Модуль 3: Безопасность операций с криптовалютой</div>
+        <p class="module-desc">Мы покажем, как защищать свои средства и личные данные, как распознавать и избегать мошеннические схемы. Также ты узнаешь о рисках разных видов кошельков, получишь рекомендации по тем, которыми мы сами пользуемся, и научишься работать с ними на практике. <p>Кроме того, мы подробно разберём, какие опасности подстерегают в  разных стратегиях и способах торговли, и покажем реальные схемы мошенничества, чтобы ты всегда оставался на шаг впереди</p>
         <button class="toggle-lessons green-btn">Показать уроки</button>
         <ul class="lessons">
           <li>Основы безопасности в крипте</li>
           <li>Биржевые кошельки</li>
-          <li>Холодные кошельки</li>
           <li>Горячие кошельки</li>
-          <li>Безопасность при P2P</li>
+          <li>Холодные кошельки</li>
+          <li>Безопасность при P2P-транзакциях</li>
+          <li>Безопасность при совершении NFT-транзакций</li>
+          <li>Безопасность при совершении спотовых и фьючерсных-транзакций</li>
+          <li>Безопасность при стейкинге</li>
+          <li>Безопасность AirDrop</li>
+          <li>Безопасность при совершении сделок с мемкоинами</li>
+          <li>Безопасность при совершении сделок с цифровыми активами TG</li>
+          <li>Безопасность при совершении сделок от новостей и сигналов</li>
         </ul>
       </div>
 
       <div class="module green">
         <div class="marker green"></div>
         <div class="module-icon"><i class="fa-solid fa-building-columns"></i></div>
-        <div class="module-header">Модуль 5: Биржи</div>
+        <div class="module-header">Модуль 4: Биржи</div>
         <p class="module-desc">В рамках этого модуля мы объясним, как работают криптобиржи, сравним их, чем отличаются централизованные (CEX) и децентрализованные (DEX), как пользоваться ими на практике, где торгуются NFT, что такое DEX-мониторы и как ими пользоваться для нахождения перспективных активов (токенов)</p>
         <button class="toggle-lessons green-btn">Показать уроки</button>
         <ul class="lessons">
@@ -1434,7 +1439,7 @@ document.addEventListener('DOMContentLoaded', () => {
         </ul>
       </div>
 
-      <!-- 6-11: жёлтые -->
+      <!-- 5-11: жёлтые -->
       <div class="module yellow">
         <div class="marker yellow"></div>
         <div class="module-icon"><i class="fa-solid fa-chart-line"></i></div>
@@ -1767,7 +1772,7 @@ document.querySelectorAll('.toggle-lessons').forEach(btn=>{
           </svg>
         </div>
         <h3>Гибкость по модулям</h3>
-        <p>Можно взять отдельный модуль со скидкой 15% и изучить именно нужное тебе</p>
+        <p>Можно взять отдельный модуль со скидкой 20% и изучить именно нужное тебе</p>
       </div>
 
       <div class="feature-card left">
@@ -1918,6 +1923,7 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 </script>
 
+<section id="pricing"></section>
 <!-- Font Awesome для иконок -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
 
@@ -1930,89 +1936,122 @@ document.addEventListener('DOMContentLoaded', () => {
 
   <div class="pricing-container">
 
-    <!-- Тариф Access -->
-    <div class="pricing-card green-border">
-      <h3 class="pricing-title green-text">Access</h3>
+    <!-- Access (серебро) -->
+    <div class="pricing-card silver-border">
+      <h3 class="pricing-title silver-text">Access</h3>
       <ul class="pricing-features">
-        <li><i class="fas fa-book icon green-icon"></i> Доступ ко всем модулям обучения (на 3 месяца) и инструментам</li>
-        <li><i class="fas fa-users icon green-icon"></i> Общий чат со всеми участниками обучения (потока)</li>
-        <li><i class="fas fa-chalkboard-teacher icon green-icon"></i> Чат с куратором</li>
-        <li><i class="fas fa-robot icon green-icon"></i> Бот с сигналами и новостям: 3 месяца</li>
-        <li><i class="fas fa-shield-alt icon green-icon"></i> Бот с мониторингом кошельков: 3 месяца</li>
-        <li><i class="fas fa-chart-line icon green-icon"></i> Комиссия за торговый бот: 0,5% на время обучения</li>
-        <li><i class="fas fa-chart-bar icon green-icon"></i> Комиссия после обучения в торговом боте: 0,7%</li>
-        <li><i class="fas fa-graduation-cap icon green-icon"></i> Выпускной</li>
-        <li><i class="fas fa-coins icon green-icon"></i> Резервный пул</li>
-        <li><i class="fas fa-file-alt icon green-icon"></i> Анализ сделок: 5 в неделю во время обучения, после обучения — 2 в неделю в течение 30 дней</li>
-        <li><i class="fas fa-money-bill-wave icon green-icon"></i> Сумма для обучения: 7 000 ₽</li>
-        <li><i class="fas fa-link icon green-icon"></i> Максимальный реферальный процент: 15%</li>
+        <li><i class="fas fa-book icon silver-icon"></i> Доступ ко всем модулям на 3 месяца</li>
+        <li><i class="fas fa-cogs icon silver-icon"></i> Доступ ко всем инструментам и стратегиям, кроме PRO</li>
+        <li><i class="fas fa-chalkboard-teacher icon silver-icon"></i> Доступ к чату с куратором</li>
+        <li><i class="fas fa-newspaper icon silver-icon"></i> Бот с новостями — 3 месяца</li>
+        <li><i class="fas fa-robot icon silver-icon"></i> Бот с сигналами — 3 месяца</li>
+        <li><i class="fas fa-chart-line icon silver-icon"></i> Бот с торговлей и копитрейдингом — 199 ₽/мес, 1% со сделки</li>
+        <li><i class="fas fa-coins icon silver-icon"></i> Резервный пул</li>
+        <li><i class="fas fa-file-alt icon silver-icon"></i> Анализ твоей сделки: 10/неделя во время обучения, 5/неделя после (3 месяца)</li>
+        <li><i class="fas fa-money-bill-wave icon silver-icon"></i> Максимальный стартовый депозит — 8 000 ₽</li>
+        <li><i class="fas fa-link icon silver-icon"></i> Максимальный реферальный процент — 7%</li>
+        <li><i class="fas fa-graduation-cap icon silver-icon"></i> Выпускной</li>
       </ul>
       <div class="pricing-bottom">
-        <p class="pricing-price green-text">38 500 ₽</p>
-        <a href="#" class="btn-pricing green-border-btn">Выбрать Access</a>
+        <p class="pricing-price silver-text">38 400 ₽</p>
+        <a href="#" class="btn-pricing silver-border-btn">Выбрать Access</a>
       </div>
     </div>
 
- <!-- Тариф Vault -->
-<div class="pricing-card gold-border">
-  <h3 class="pricing-title gold-text">Vault</h3>
-  <ul class="pricing-features">
-    <li><i class="fas fa-book icon gold-icon"></i> Доступ ко всем модулям обучения (на 4,5 месяца) и инструментам</li>
-    <li><i class="fas fa-users icon gold-icon"></i> Общий чат со всеми участниками обучения (потока)</li>
-    <li><i class="fas fa-chalkboard-teacher icon gold-icon"></i> Чат с куратором</li>
-    <li><i class="fas fa-envelope icon gold-icon"></i> Возможность задавать вопросы лично куратору</li>
-    <li><i class="fas fa-building icon gold-icon"></i> Доступ к чату с основателями проекта</li>
-    <li><i class="fas fa-handshake icon gold-icon"></i> Личное наставничество — один созвон с командой основателей и топовыми трейдерами для совместной торговли и (или) объяснения сервисов во время обучения; далее — 1 созвон раз в 3 месяца</li>
-    <li><i class="fas fa-robot icon gold-icon"></i> Бот с сигналами и новостями: 6 месяцев</li>
-    <li><i class="fas fa-shield-alt icon gold-icon"></i> Бот с мониторингом кошельков: 6 месяцев</li>
-    <li><i class="fas fa-chart-line icon gold-icon"></i> Комиссия за торговый бот: 0,5% на время обучения</li>
-    <li><i class="fas fa-chart-bar icon gold-icon"></i> Комиссия после обучения в торговом боте: 0,7%</li>
-    <li><i class="fas fa-microphone icon gold-icon"></i> Премиум AMA-сессии</li>
-    <li><i class="fas fa-graduation-cap icon gold-icon"></i> Выпускной</li>
-    <li><i class="fas fa-coins icon gold-icon"></i> Резервный пул</li>
-    <li><i class="fas fa-file-alt icon gold-icon"></i> Анализ сделок: 10 в неделю во время обучения, после обучения — 5 в неделю в течение 30 дней</li>
-    <li><i class="fas fa-money-bill-wave icon gold-icon"></i> Сумма для обучения: 14 000 ₽</li>
-    <li><i class="fas fa-cogs icon gold-icon"></i> Сборка портфеля</li>
-    <li><i class="fas fa-link icon gold-icon"></i> Максимальный реферальный процент: 30%</li>
-  </ul>
-  <div class="pricing-bottom">
-    <p class="pricing-price gold-text">58 500 ₽</p>
-    <a href="#" class="btn-pricing gold-border-btn">Выбрать Vault</a>
-  </div>
-</div>
-
-    <!-- Тариф Apex -->
-    <div class="pricing-card purple-border">
-      <h3 class="pricing-title purple-text">Apex</h3>
+    <!-- Vault (зелёный) -->
+    <div class="pricing-card green-border">
+      <h3 class="pricing-title green-text">Vault</h3>
       <ul class="pricing-features">
-        <li><i class="fas fa-book icon purple-icon"></i> Доступ ко всем модулям обучения (на 6 месяцев) и инструментам</li>
-        <li><i class="fas fa-users icon purple-icon"></i> Общий чат со всеми участниками обучения (потока)</li>
-        <li><i class="fas fa-chalkboard-teacher icon purple-icon"></i> Чат с куратором</li>
-        <li><i class="fas fa-envelope icon purple-icon"></i> Возможность задавать вопросы лично куратору</li>
-        <li><i class="fas fa-building icon purple-icon"></i> Доступ к чату с основателями проекта</li>
-        <li><i class="fas fa-handshake icon purple-icon"></i> Личное наставничество — 3 созвона с командой основателей и топовыми трейдерами для совместной торговли и (или) объяснения сервисов во время обучения; далее — 1 созвон раз в 1 месяц</li>
-        <li><i class="fas fa-robot icon purple-icon"></i> Бот с сигналами и новостями: 12 месяцев</li>
-        <li><i class="fas fa-shield-alt icon purple-icon"></i> Бот с мониторингом кошельков: 12 месяцев</li>
-        <li><i class="fas fa-star icon purple-icon"></i> Премиум сигналы владельцев проекта: 12 месяцев</li>
-        <li><i class="fas fa-chart-line icon purple-icon"></i> Комиссия за торговый бот: 0,3% на время обучения</li>
-        <li><i class="fas fa-chart-bar icon purple-icon"></i> Комиссия после обучения в торговом боте: 0,5%</li>
-        <li><i class="fas fa-microphone icon purple-icon"></i> Премиум AMA-сессии</li>
-        <li><i class="fas fa-graduation-cap icon purple-icon"></i> Выпускной</li>
-        <li><i class="fas fa-coins icon purple-icon"></i> Резервный пул</li>
-        <li><i class="fas fa-file-alt icon purple-icon"></i> Анализ сделок: 20 в неделю во время обучения, после обучения — 10 в неделю в течение 30 дней</li>
-    <li><i class="fas fa-money-bill-wave icon purple-icon"></i> Сумма для обучения: 15 000 ₽</li>
-        <li><i class="fas fa-cogs icon purple-icon"></i> Сборка портфеля</li>
-        <li><i class="fas fa-rocket icon purple-icon"></i> Наивысший приоритет доступа к новым сервисам проекта</li>
-        <li><i class="fas fa-link icon purple-icon"></i> Максимальный реферальный процент: 50%</li>
+        <li><i class="fas fa-book icon green-icon"></i> Доступ ко всем модулям на 6 месяцев</li>
+        <li><i class="fas fa-cogs icon green-icon"></i> Доступ ко всем инструментам и стратегиям, включая PRO</li>
+        <li><i class="fas fa-chalkboard-teacher icon green-icon"></i> Доступ к чату с куратором</li>
+        <li><i class="fas fa-envelope icon green-icon"></i> Возможность задавать вопросы лично куратору</li>
+        <li><i class="fas fa-newspaper icon green-icon"></i> Бот с новостями — 6 месяцев</li>
+        <li><i class="fas fa-robot icon green-icon"></i> Бот с сигналами — 6 месяцев</li>
+        <li><i class="fas fa-chart-line icon green-icon"></i> Бот с торговлей и копитрейдингом — 99 ₽/мес, 0,7% со сделки</li>
+        <li><i class="fas fa-coins icon green-icon"></i> Резервный пул</li>
+        <li><i class="fas fa-file-alt icon green-icon"></i> Анализ твоей сделки: 20/неделя во время обучения, 10/неделя после (3 месяца)</li>
+        <li><i class="fas fa-money-bill-wave icon green-icon"></i> Максимальный стартовый депозит — 15 000 ₽</li>
+        <li><i class="fas fa-link icon green-icon"></i> Максимальный реферальный процент — 20%</li>
+        <li><i class="fas fa-graduation-cap icon green-icon"></i> Выпускной</li>
+        <li><i class="fas fa-microphone icon green-icon"></i> 3 AMA-сессии в месяц с основателями и топ-трейдерами</li>
+        <li><i class="fas fa-handshake icon green-icon"></i> Личное наставничество — 2 созвона с командой и куратором</li>
+        <li><i class="fas fa-cogs icon green-icon"></i> Сборка портфеля</li>
       </ul>
       <div class="pricing-bottom">
-        <p class="pricing-price purple-text">78 500 ₽</p>
-        <a href="#" class="btn-pricing purple-border-btn">Выбрать Apex</a>
+        <p class="pricing-price green-text">54 400 ₽</p>
+        <a href="#" class="btn-pricing green-border-btn">Выбрать Vault</a>
+      </div>
+    </div>
+
+    <!-- Apex (золотой) -->
+    <div class="pricing-card gold-border">
+      <h3 class="pricing-title gold-text">Apex</h3>
+      <ul class="pricing-features">
+        <li><i class="fas fa-book icon gold-icon"></i> Доступ ко всем модулям на 12 месяцев</li>
+        <li><i class="fas fa-cogs icon gold-icon"></i> Доступ ко всем инструментам и стратегиям, включая PRO</li>
+        <li><i class="fas fa-chalkboard-teacher icon gold-icon"></i> Доступ к чату с куратором</li>
+        <li><i class="fas fa-envelope icon gold-icon"></i> Возможность задавать вопросы лично куратору</li>
+        <li><i class="fas fa-newspaper icon gold-icon"></i> Бот с новостями — 12 месяцев</li>
+        <li><i class="fas fa-robot icon gold-icon"></i> Бот с сигналами — 12 месяцев</li>
+        <li><i class="fas fa-chart-line icon gold-icon"></i> Бот с торговлей и копитрейдингом — 49 ₽/мес, 0,5% со сделки</li>
+        <li><i class="fas fa-coins icon gold-icon"></i> Резервный пул</li>
+        <li><i class="fas fa-file-alt icon gold-icon"></i> Анализ твоей сделки: 30/неделя во время обучения, 20/неделя после (3 месяца)</li>
+        <li><i class="fas fa-money-bill-wave icon gold-icon"></i> Максимальный стартовый депозит — 25 000 ₽</li>
+        <li><i class="fas fa-link icon gold-icon"></i> Максимальный реферальный процент — 40%</li>
+        <li><i class="fas fa-graduation-cap icon gold-icon"></i> Выпускной</li>
+        <li><i class="fas fa-microphone icon gold-icon"></i> 6 AMA-сессий с основателями и топ-трейдерами</li>
+        <li><i class="fas fa-handshake icon gold-icon"></i> Личное наставничество — 4 созвона с командой и куратором</li>
+        <li><i class="fas fa-cogs icon gold-icon"></i> Сборка портфеля</li>
+        <li><i class="fas fa-list icon gold-icon"></i> Список активов с хорошим % стейкинга и бесплатным AirDrop</li>
+        <li><i class="fas fa-star icon gold-icon"></i> Премиум сигналы от команды-основателей — 3 месяца</li>
+        <li><i class="fas fa-rocket icon gold-icon"></i> Приоритетный доступ к разработкам и стратегиям</li>
+        <li><i class="fas fa-user-plus icon gold-icon"></i> Приглашение друга к обучению: до 25% скидки + +1 месяц к продуктам</li>
+        <li><i class="fas fa-user-plus icon gold-icon"></i> Приглашение друга к сервисам сообщества: до 25% скидки + +1 месяц к продуктам</li>
+      </ul>
+      <div class="pricing-bottom">
+        <p class="pricing-price gold-text">72 400 ₽</p>
+        <a href="#" class="btn-pricing gold-border-btn">Выбрать Apex</a>
+      </div>
+    </div>
+
+    <!-- Prestige (фиолетовый) -->
+    <div class="pricing-card purple-border">
+      <h3 class="pricing-title purple-text">Prestige</h3>
+      <ul class="pricing-features">
+        <li><i class="fas fa-book icon purple-icon"></i> Доступ ко всем модулям на 24 месяца</li>
+        <li><i class="fas fa-tools icon purple-icon"></i> Доступ ко всем инструментам, включая PRO</li>
+        <li><i class="fas fa-chalkboard-teacher icon purple-icon"></i> Доступ к чату с куратором</li>
+        <li><i class="fas fa-envelope icon purple-icon"></i> Возможность задавать куратору вопросы лично</li>
+        <li><i class="fas fa-users icon purple-icon"></i> Возможность задавать вопросы основателям проекта — 6 месяцев</li>
+        <li><i class="fas fa-building icon purple-icon"></i> Доступ к чату с основателями и топ-трейдерами</li>
+        <li><i class="fas fa-newspaper icon purple-icon"></i> Бот с новостями — 24 месяца</li>
+        <li><i class="fas fa-robot icon purple-icon"></i> Бот с сигналами — 24 месяца</li>
+        <li><i class="fas fa-hand-holding-usd icon purple-icon"></i> Бот с торговлей и копитрейдингом — 0 ₽/мес, 0,5% со сделки</li>
+        <li><i class="fas fa-coins icon purple-icon"></i> Резервный пул</li>
+        <li><i class="fas fa-file-alt icon purple-icon"></i> Анализ сделок: без лимита во время обучения, после — 30/неделя</li>
+        <li><i class="fas fa-wallet icon purple-icon"></i> Максимальный стартовый депозит — 40 000 ₽</li>
+        <li><i class="fas fa-link icon purple-icon"></i> Максимальный реферальный процент — 60%</li>
+        <li><i class="fas fa-graduation-cap icon purple-icon"></i> Выпускной</li>
+        <li><i class="fas fa-microphone icon purple-icon"></i> Все AMA-сессии с основателями и топ-трейдерами</li>
+        <li><i class="fas fa-handshake icon purple-icon"></i> Личное наставничество — 8 созвонов с командой и куратором</li>
+        <li><i class="fas fa-cogs icon purple-icon"></i> Сборка портфеля</li>
+        <li><i class="fas fa-coins icon purple-icon"></i> Список активов с хорошим % стейкинга</li>
+        <li><i class="fas fa-gift icon purple-icon"></i> Список активов с бесплатным AirDrop</li>
+        <li><i class="fas fa-star icon purple-icon"></i> Премиум сигналы от команды-основателей — 6 месяцев</li>
+        <li><i class="fas fa-rocket icon purple-icon"></i> Наивысший доступ к продуктам и стратегиям</li>
+        <li><i class="fas fa-user-plus icon purple-icon"></i> Приглашение друга к обучению: до 50% скидки + +1 месяц к продуктам</li>
+        <li><i class="fas fa-user-plus icon purple-icon"></i> Приглашение друга к сервисам сообщества: до 50% скидки + +1 месяц к продуктам</li>
+      </ul>
+      <div class="pricing-bottom">
+        <p class="pricing-price purple-text">102 400 ₽</p>
+        <a href="#" class="btn-pricing purple-border-btn">Выбрать Prestige</a>
       </div>
     </div>
 
   </div>
 </section>
+
 
 <style>
 /* --- Общие стили --- */
@@ -2033,35 +2072,39 @@ document.addEventListener('DOMContentLoaded', () => {
   flex-direction: column;
   justify-content: space-between;
   transition: transform 0.3s ease, box-shadow 1.5s ease-in-out;
-  animation: glowBorder 2s infinite alternate;
 }
 .pricing-card:hover { transform: translateY(-10px); }
 
-/* Цвета рамок */
-.green-border { border-color: #367153; animation: glowGreen 2s infinite alternate; }
-.gold-border { border-color: #D4AF37; animation: glowGold 2s infinite alternate; }
-.purple-border { border-color: #6A0DAD; animation: glowPurple 2s infinite alternate; }
+/* --- Цвета рамок и анимации --- */
+.silver-border { border-color: #C0C0C0; animation: glowSilver 6s infinite alternate; }
+.green-border { border-color: #367153; animation: glowGreen 6s infinite alternate; }
+.gold-border { border-color: #D4AF37; animation: glowGold 6s infinite alternate; }
+.purple-border { border-color: #6A0DAD; animation: glowPurple 6s infinite alternate; }
 
-/* Названия тарифов */
+/* --- Названия тарифов --- */
 .pricing-title { font-size: 28px; margin-bottom: 20px; font-weight: 700; }
+.silver-text { color: #C0C0C0; }
 .green-text { color: #367153; }
 .gold-text { color: #D4AF37; }
 .purple-text { color: #6A0DAD; }
 
-/* Список преимуществ */
+/* --- Список преимуществ --- */
 .pricing-features { list-style: none; padding: 0; margin: 0; text-align: left; font-size: 16px; line-height: 1.7; }
 .pricing-features li { display: flex; align-items: center; margin-bottom: 12px; }
 .icon { margin-right: 10px; font-size: 20px; flex-shrink: 0; }
+.silver-icon { color: #C0C0C0; }
 .green-icon { color: #367153; }
 .gold-icon { color: #D4AF37; }
 .purple-icon { color: #6A0DAD; }
 
-/* Нижняя часть карточки: цена + кнопка */
+/* --- Нижняя часть карточки: цена + кнопка --- */
 .pricing-bottom { display: flex; justify-content: space-between; align-items: center; margin-top: auto; }
 .pricing-price { background-color: #111; border-radius: 12px; display: inline-block; padding: 8px 20px; font-weight: 700; font-size: 20px; border: 2px solid; }
 
-/* Кнопки */
+/* --- Кнопки --- */
 .btn-pricing { text-decoration: none; padding: 12px 28px; border-radius: 12px; font-weight: 700; transition: background 0.3s, color 0.3s; display: inline-block; }
+.silver-border-btn { background-color: #C0C0C0; color: #111; border: 2px solid #C0C0C0; }
+.silver-border-btn:hover { background-color: #a9a9a9; }
 .green-border-btn { background-color: #367153; color: #fff; border: 2px solid #367153; }
 .green-border-btn:hover { background-color: #2c5a42; }
 .gold-border-btn { background-color: #D4AF37; color: #111; border: 2px solid #D4AF37; }
@@ -2070,6 +2113,7 @@ document.addEventListener('DOMContentLoaded', () => {
 .purple-border-btn:hover { background-color: #580a9a; }
 
 /* --- Анимации пульсации рамок --- */
+@keyframes glowSilver { 0% { box-shadow: 0 0 10px #C0C0C0; } 100% { box-shadow: 0 0 25px #C0C0C0; } }
 @keyframes glowGreen { 0% { box-shadow: 0 0 10px #367153; } 100% { box-shadow: 0 0 25px #367153; } }
 @keyframes glowGold  { 0% { box-shadow: 0 0 10px #D4AF37; } 100% { box-shadow: 0 0 25px #D4AF37; } }
 @keyframes glowPurple{ 0% { box-shadow: 0 0 10px #6A0DAD; } 100% { box-shadow: 0 0 25px #6A0DAD; } }
@@ -2078,7 +2122,7 @@ document.addEventListener('DOMContentLoaded', () => {
 @media (max-width: 1200px) { 
   .pricing-card { 
     width: 45%; 
-    padding: 20px; /* чуть меньше паддинг, чтобы рамка не "съезжала" */
+    padding: 20px;
   } 
 }
 
@@ -2095,12 +2139,12 @@ document.addEventListener('DOMContentLoaded', () => {
     align-items: center; 
   } 
   .pricing-card { 
-    width: 90%; /* теперь карточка не выходит за экран */
+    width: 90%; 
     padding: 15px; 
     margin-bottom: 30px; 
   } 
   .pricing-features li { 
-    font-size: 15px; /* чуть меньше, чтобы помещалось */
+    font-size: 15px; 
   } 
   .pricing-price { 
     font-size: 18px; 
@@ -2112,6 +2156,9 @@ document.addEventListener('DOMContentLoaded', () => {
   } 
 }
 </style>
+
+<!-- Font Awesome для иконок -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
 
 <section id="wheel-section" style="padding:60px 20px; background-color:#0d0d0d; color:white;">
   <h2 style="color:#367153; font-size:36px; margin-bottom:10px; text-align:center;">Колесо фортуны</h2>
@@ -2219,76 +2266,100 @@ const tgBtn = document.getElementById("tgBtn");
 const result = document.getElementById("result");
 const files = document.querySelectorAll(".file.locked");
 
-const sectors = ["10%", "20%", "30%", "40%", "50%", "60%", "90%", "Еще раз"];
-const colors = ["#417F61", "#262626"];
+// Сектора колеса
+const sectors = ["10%", "20%", "30%", "40%", "50%", "90%", "Продление", "30%", "25%", "Ещё раз"];
+const colors = ["#367153", "#262626"]; // зеленый - темный - зеленый - темный...
 const size = sectors.length;
 const arc = (2 * Math.PI) / size;
 
-let angle = 0;
-let spinning = false;
-let spins = 0;
-let extraSpin = 0;
-let tenPercentDropped = false;
-
+// Названия для вывода
 const discountNames = {
-  "10%": "молекулярная скидка",
-  "20%": "скидка бронзика",
-  "30%": "не выпадает",
-  "40%": "не выпадает",
-  "50%": "не выпадает",
-  "60%": "не выпадает",
-  "90%": "не выпадает",
-  "Еще раз": "ещё один шанс"
+  "10%": "10% скидка",
+  "20%": "20% скидка",
+  "30%": "30% скидка",
+  "40%": "40% скидка",
+  "50%": "50% скидка",
+  "90%": "90% скидка",
+  "Продление доступа": "Продление доступа к сервисам/продуктам на твой выбор, не более 1 сервиса и не более 1 месяца",
+  "30%": "30% скидка на продукты",
+  "25%": "25% скидка для друга на обучение",
+  "Ещё раз": "ещё один шанс"
 };
 
-// Открытие файлов с перезапуском анимации для мобильных
+// Состояние с сохранением
+function getState() {
+  const state = JSON.parse(localStorage.getItem('wheelState')) || {
+    spins: 0,
+    extraSpin: 0,
+    specialDropped: false,
+    encoreDropped: false
+  };
+  state.remainingAttempts = 3;
+  return state;
+}
+
+function saveState(state = getState()) {
+  localStorage.setItem('wheelState', JSON.stringify(state));
+}
+
+// Открытие файлов
 function unlockFiles() {
   files.forEach((file, i) => {
     file.classList.remove("locked");
     file.classList.add("opened");
     const icon = file.querySelector(".icon");
     icon.textContent = "📄";
-
-    // перезапуск анимации
     icon.style.animation = "none";
     void icon.offsetWidth;
     icon.style.animation = "openIcon 0.6s forwards";
-
-    file.onclick = () => {
-      window.open(i === 0 ? '/files/guide_alerts.pdf' : '/files/crypto_glossary.pdf', '_blank');
-    };
+    file.onclick = () => window.open(i === 0 ? '/files/guide_alerts.pdf' : '/files/crypto_glossary.pdf', '_blank');
   });
 }
 
-// Генератор приза
+// Генератор приза с вероятностями
 function getPrize() {
-  const remainingAttempts = 3 - spins + extraSpin;
+  const state = getState();
+  const remainingAttempts = state.remainingAttempts + state.extraSpin - state.spins;
 
-  if (remainingAttempts === 1 && !tenPercentDropped) {
-    tenPercentDropped = true;
-    return "10%";
+  // Спецприз может выпасть только один раз
+  const specials = ["Продление доступа", "30% скидка", "25% скидка"];
+  if (!state.specialDropped) {
+    const chance = Math.random();
+    if (chance < 0.10) { // 10% шанс
+      state.specialDropped = true;
+      saveState(state);
+      return specials[Math.floor(Math.random() * specials.length)];
+    }
   }
 
+  // Проверяем encore ("Ещё раз")
+  if (!state.encoreDropped && Math.random() < 0.8) {
+    state.encoreDropped = true;
+    saveState(state);
+    return "Ещё раз";
+  }
+
+  // Обычные скидки
   const rand = Math.random() * 100;
-  if (rand < 3) return "20%";
-  if (rand < 15) return "Еще раз";
-  if (rand < 25) {
-    tenPercentDropped = true;
-    return "10%";
-  }
-
-  tenPercentDropped = true;
-  return "10%";
+  if (rand < 90) return "10%";
+  else if (rand < 90 + 20) return "20%";
+  else if (rand < 90 + 20 + 5) return "30%";
+  else if (rand < 90 + 20 + 5 + 3) return "40%";
+  else if (rand < 90 + 20 + 5 + 3 + 0.5) return "50%";
+  else return "90%";
 }
 
 // Рисуем колесо
+let angle = 0;
+let spinning = false;
+
 function drawWheel() {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
   ctx.save();
   ctx.translate(canvas.width/2, canvas.height/2);
   ctx.rotate(angle);
 
-  for(let i=0; i<size; i++){
+  for (let i = 0; i < size; i++) {
     ctx.beginPath();
     ctx.fillStyle = colors[i%2];
     ctx.moveTo(0,0);
@@ -2303,7 +2374,7 @@ function drawWheel() {
     ctx.rotate((i+0.5)*arc);
     ctx.textAlign="right";
     ctx.fillStyle="white";
-    ctx.font="bold 16px Poppins";
+    ctx.font="bold 14px Poppins";
     ctx.fillText(sectors[i],140,5);
     ctx.restore();
   }
@@ -2311,24 +2382,30 @@ function drawWheel() {
 }
 
 // Крутилка
-function spinWheel(){
-  const remainingAttempts = 3 - spins + extraSpin;
-  if(spinning || (remainingAttempts <= 0 && tenPercentDropped)) return;
+function spinWheel() {
+  const state = getState();
+  const remainingAttempts = state.remainingAttempts + state.extraSpin - state.spins;
+
+  if (spinning) return;
+  if (remainingAttempts <= 0) {
+    spinBtn.innerText = "Попытки закончились";
+    return;
+  }
 
   const prize = getPrize();
   const sectorIndex = sectors.indexOf(prize);
 
   let turns = 6;
-  let stopAngle = (size - sectorIndex)*arc - arc/2 - Math.PI/2;
+  let stopAngle = (size - sectorIndex) * arc - arc/2 - Math.PI/2;
   let finalAngle = stopAngle + turns*2*Math.PI;
   let duration = 6000;
-  let start=null;
-  spinning=true;
+  let start = null;
+  spinning = true;
 
   function animate(timestamp){
-    if(!start) start=timestamp;
+    if (!start) start = timestamp;
     let progress = (timestamp-start)/duration;
-    if(progress>1) progress=1;
+    if (progress>1) progress=1;
 
     let easing = 1 - Math.pow(1-progress,3);
     angle = finalAngle*easing;
@@ -2336,20 +2413,23 @@ function spinWheel(){
 
     if(progress<1){
       requestAnimationFrame(animate);
-    }else{
+    } else {
       spinning=false;
       result.innerText = `Тебе выпало: ${prize} — ${discountNames[prize]}`;
 
-      if(spins === 0 && prize !== "Еще раз") unlockFiles();
+      if (state.spins===0 && !["Ещё раз"].includes(prize)) unlockFiles();
 
-      if(prize === "Еще раз") extraSpin += 1;
+      state.spins++;
 
-      spins++;
-      const newRemaining = 3 - spins + extraSpin;
+      if(prize==="Ещё раз") state.extraSpin+=1;
+
+      const newRemaining = state.remainingAttempts + state.extraSpin - state.spins;
 
       if(newRemaining > 1) spinBtn.innerText = `Ещё ${newRemaining} попытки`;
       else if(newRemaining === 1) spinBtn.innerText = "Последний шанс";
       else spinBtn.innerText = "Попытки закончились";
+
+      saveState(state);
     }
   }
   requestAnimationFrame(animate);
@@ -2359,6 +2439,9 @@ drawWheel();
 spinBtn.addEventListener("click", spinWheel);
 tgBtn.addEventListener("click",()=>window.open('https://t.me/ApeVaultCrypto','_blank'));
 </script>
+
+
+
 
 
 
@@ -2642,8 +2725,6 @@ document.querySelectorAll('.faq-item').forEach(item=>{
   });
 </script>
 <!-- END footer -->
-
-
 
 
 <!-- Модальное окно -->
@@ -3000,7 +3081,7 @@ document.addEventListener('DOMContentLoaded', () => {
         <span class="num">2</span>
         <strong>Бот для анализа новых токенов:</strong>
         <p>
-          Анализирует новые токены (от момента появления до 14 дней) и присылает сигналы:
+          Анализирует новые токены (от момента появления до 6 часов) и присылает сигналы:
           <b>объём, ликвидность, капитализация, аудит Dex</b> и динамика роста.
         </p>
       </li>
