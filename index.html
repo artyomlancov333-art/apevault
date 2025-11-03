@@ -172,6 +172,7 @@ li.has-submenu.open > .submenu-toggle {
         <span class="submenu-toggle"></span>
         <ul class="submenu">
           <li><a href="#community">Наше комьюнити</a></li>
+          <li><a href="#mission">Наша миссия</a></li>
           <li><a href="#team">Наша команда</a></li>
           <li><a href="#wallets">Наши кошельки</a></li>
         </ul>
@@ -183,6 +184,7 @@ li.has-submenu.open > .submenu-toggle {
         <span class="submenu-toggle"></span>
         <ul class="submenu">
           <li><a href="#ecosystem">Наша экосистема</a></li>
+          <li><a href="#products">Наши продукты</a></li>
           <li><a href="#students">Мы с учениками</a></li>
         </ul>
       </li>
@@ -316,8 +318,6 @@ window.addEventListener('resize', () => {
 </script>
 </body>
 </html>
-
-
 
 <section class="about" id="about">
     <h2>О проекте</h2>
@@ -657,6 +657,141 @@ document.addEventListener('DOMContentLoaded', () => {
   cards.forEach(card => observer.observe(card));
 });
 </script>
+
+<section id="mission" class="info-section-wrapper">
+  <h2 class="section-title">Наша миссия</h2>
+  <p class="section-subtitle">Где хаос крипторынка превращается в систему знаний, доверия и движения вперёд</p>
+
+  <blockquote class="mission-quote">
+    <p>Крипторынок перегружен шумом, спамом и псевдоэкспертами.  
+    Новички теряются, а опытные трейдеры остаются в изоляции.  
+    <p>Мы создаём экосистему, где обучение, инсайды и капитал соединяются с чувством принадлежности.  
+    Наша цель — превратить крипту в пространство смысла, прозрачности и правильного азарта.  
+    Когда торговля становится игрой, обучение — приключением, а комьюнити — домом,  
+    рождается новая культура цифрового участия</p>
+  </blockquote>
+</section>
+
+<style>
+#mission.info-section-wrapper {
+  background-color: #0d0d0d;
+  padding: 20px 20px 100px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+#mission .section-title {
+  font-size: 36px;
+  color: #367153;
+  font-weight: 700;
+  margin-bottom: 16px;
+}
+
+#mission .section-subtitle {
+  font-size: 18px;
+  color: #ccc;
+  margin-bottom: 50px;
+  font-weight: 400;
+  letter-spacing: 0.3px;
+}
+
+.mission-quote {
+  max-width: 850px;
+  margin: 0 auto;
+  font-size: 17px;
+  line-height: 1.9;
+  color: #ddd;
+  background: linear-gradient(155deg, #0e0e0e, #141414);
+  border: 1px solid rgba(54, 113, 83, 0.4);
+  border-radius: 16px;
+  padding: 48px 36px;
+  box-shadow: 0 0 40px rgba(54, 113, 83, 0.15);
+  position: relative;
+  opacity: 0;
+  transform: translateY(50px);
+  transition: all 1.6s cubic-bezier(0.22, 1, 0.36, 1);
+  font-family: 'Inter', sans-serif;
+}
+
+.mission-quote.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.mission-quote::before,
+.mission-quote::after {
+  content: "";
+  position: absolute;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(54,113,83,0.25) 0%, transparent 70%);
+  z-index: 0;
+}
+
+.mission-quote::before {
+  width: 160px;
+  height: 160px;
+  top: -60px;
+  left: -60px;
+  filter: blur(40px);
+}
+
+.mission-quote::after {
+  width: 200px;
+  height: 200px;
+  bottom: -80px;
+  right: -80px;
+  filter: blur(50px);
+}
+
+.mission-quote p {
+  position: relative;
+  z-index: 1;
+  text-align: center;
+  font-style: italic;
+  letter-spacing: 0.2px;
+  color: #e0e0e0;
+}
+
+.mission-quote b {
+  color: #8ef1a4;
+  font-weight: 600;
+}
+
+/* Адаптив */
+@media (max-width: 700px) {
+  #mission .section-title {
+    font-size: 28px;
+  }
+  #mission .section-subtitle {
+    font-size: 16px;
+    margin-bottom: 32px;
+  }
+  .mission-quote {
+    font-size: 15px;
+    padding: 32px 20px;
+  }
+}
+</style>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  const quote = document.querySelector('.mission-quote');
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+      } else {
+        entry.target.classList.remove('visible');
+      }
+    });
+  }, { threshold: 0.3 });
+
+  observer.observe(quote);
+});
+</script>
+
 
 <section id="team" class="team-section">
   <div class="container">
@@ -1353,6 +1488,236 @@ document.addEventListener('DOMContentLoaded', () => {
 }
 </style>
 
+<section id="products" style="padding:80px 20px; background-color:#0d0d0d; color:white;">
+  <div class="container" style="max-width:1200px; margin:0 auto; text-align:center;">
+    <h2 style="color:#367153; font-size:36px; margin-bottom:10px;">Наши продукты</h2>
+    <p style="color:#ccc; font-size:18px; margin-bottom:50px;">
+      Для тех, кто уже прошёл обучение или понимает, как работает рынок
+    </p>
+
+    <div class="product-grid">
+      <!-- 01 -->
+      <div class="product-card">
+        <div class="product-number">01</div>
+        <h3>Бот с новостями</h3>
+        <p class="desc">Следи за ключевыми инсайтами и событиями рынка в реальном времени</p>
+        <div class="price-options">
+          <button class="plan">1 мес — 299₽</button>
+          <button class="plan">3 мес — 799₽</button>
+          <button class="plan">6 мес — 1 399₽</button>
+          <button class="plan">12 мес — 2 299₽</button>
+        </div>
+        <button class="select-btn">Выбрать</button>
+      </div>
+
+      <!-- 02 -->
+      <div class="product-card">
+        <div class="product-number">02</div>
+        <h3>Бот с сигналами</h3>
+        <p class="desc">Получай торговые сигналы и точки входа по мемкоинам по нашим фильтрам</p>
+        <div class="price-options">
+          <button class="plan">1 мес — 299₽</button>
+          <button class="plan">3 мес — 799₽</button>
+          <button class="plan">6 мес — 1399₽</button>
+          <button class="plan">12 мес — 2299₽</button>
+        </div>
+        <button class="select-btn">Выбрать</button>
+      </div>
+
+      <!-- 03 -->
+      <div class="product-card">
+        <div class="product-number">03</div>
+        <h3>Сборка / анализ портфеля</h3>
+        <p class="desc">Индивидуальный анализ и стратегия под твои цели, риск-профиль и активы</p>
+        <div class="price-single">15 000₽</div>
+        <button class="select-btn">Выбрать</button>
+      </div>
+
+      <!-- 04 -->
+      <div class="product-card">
+        <div class="product-number">04</div>
+        <h3>Доступ к чату с основателями</h3>
+        <p class="desc">Сигналы, аналитика и общение с опытными трейдерами ApeVault</p>
+        <div class="price-single">7 990₽ / мес</div>
+        <button class="select-btn">Выбрать</button>
+      </div>
+
+      <!-- 05 -->
+      <div class="product-card">
+        <div class="product-number">05</div>
+        <h3>Резервный пул</h3>
+        <p class="desc">Минимальное участие — 5 000₽ в месяц. Защищай свой депозит, получай поддержку в случае ошибок и помогай сообществу</p>
+        <div class="price-single">от 5 000₽ / мес</div>
+        <button class="select-btn">Выбрать</button>
+      </div>
+
+      <!-- 06 -->
+      <div class="product-card">
+        <div class="product-number">06</div>
+        <h3>Бот с торговлей и копитрейдингом</h3>
+        <p class="desc">Торговля и копирование сделок</p>
+        <div class="price-single">990₽ / мес</div>
+        <button class="select-btn">Выбрать</button>
+      </div>
+
+      <!-- 07 -->
+      <div class="product-card product-center">
+        <div class="product-number">07</div>
+        <h3>Участие в AMA-сессии</h3>
+        <p class="desc">Эксклюзивные эфиры с инсайтами, стратегиями и ответами от основателей проекта и топовых трейдеров сообщества</p>
+        <div class="price-single">3 990₽</div>
+        <button class="select-btn">Выбрать</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 40px;
+  justify-content: center;
+  align-items: stretch;
+}
+
+/* Центрируем 7-й продукт */
+@media (min-width: 992px) {
+  .product-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  .product-center {
+    grid-column: 2 / 3;
+  }
+}
+
+.product-card {
+  background: #121212;
+  border: 2px solid #1c1c1c;
+  border-radius: 20px;
+  padding: 20px 25px 20px 25px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 0 20px rgba(0,0,0,0.4);
+  transition: transform 0.5s ease, box-shadow 0.5s ease;
+  animation: breathe 7s ease-in-out infinite;
+}
+
+.product-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 0 30px rgba(54,113,83,0.5);
+}
+
+.product-number {
+  position: absolute;
+  top: 15px;
+  left: 20px;
+  font-size: 64px;
+  font-weight: 700;
+  color: #367153;
+  opacity: 0.15;
+  user-select: none;
+  pointer-events: none;
+  transition: opacity 0.4s ease, transform 0.4s ease;
+}
+
+.product-card:hover .product-number {
+  opacity: 0.25;
+  transform: scale(1.05);
+}
+
+.product-card h3 {
+  font-size: 22px;
+  color: #fff;
+  margin-bottom: 15px;
+  z-index: 2;
+  position: relative;
+}
+
+.product-card .desc {
+  font-size: 15px;
+  color: #ccc;
+  margin-bottom: 25px;
+  line-height: 1.6;
+  position: relative;
+  z-index: 2;
+}
+
+.price-options {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.plan {
+  background: #1c1c1c;
+  border: 1px solid #367153;
+  color: #fff;
+  border-radius: 12px;
+  padding: 8px 12px;
+  font-size: 14px;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.plan:hover {
+  background: #367153;
+  border-color: #367153;
+}
+
+.plan.active {
+  background: #367153;
+  border-color: #367153;
+  box-shadow: 0 0 8px rgba(54,113,83,0.6);
+}
+
+.price-single {
+  font-size: 20px;
+  color: #367153;
+  font-weight: 600;
+  margin-bottom: 20px;
+}
+
+.select-btn {
+  background: #367153;
+  color: white;
+  border: none;
+  border-radius: 12px;
+  padding: 12px 20px;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.3s ease, transform 0.3s ease;
+}
+
+.select-btn:hover {
+  background: #489b6f;
+  transform: translateY(-2px);
+}
+
+@keyframes breathe {
+  0%, 100% { transform: scale(1); box-shadow:0 0 15px rgba(54,113,83,0.15); }
+  50% { transform: scale(1.015); box-shadow:0 0 30px rgba(54,113,83,0.4); }
+}
+
+@media (max-width:768px) {
+  .product-card h3 { font-size:20px; }
+  .product-number { font-size:48px; top:10px; left:15px; }
+}
+</style>
+
+<script>
+document.querySelectorAll('.plan').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const group = btn.closest('.price-options');
+    group.querySelectorAll('.plan').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+  });
+});
+</script>
 
 <!-- Подключение Font Awesome -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
@@ -2157,9 +2522,6 @@ document.addEventListener('DOMContentLoaded', () => {
 }
 </style>
 
-<!-- Font Awesome для иконок -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
-
 <section id="wheel-section" style="padding:60px 20px; background-color:#0d0d0d; color:white;">
   <h2 style="color:#367153; font-size:36px; margin-bottom:10px; text-align:center;">Колесо фортуны</h2>
   <p style="color:#ccc; font-size:18px; margin-bottom:40px; text-align:center;">
@@ -2266,100 +2628,76 @@ const tgBtn = document.getElementById("tgBtn");
 const result = document.getElementById("result");
 const files = document.querySelectorAll(".file.locked");
 
-// Сектора колеса
-const sectors = ["10%", "20%", "30%", "40%", "50%", "90%", "Продление", "30%", "25%", "Ещё раз"];
-const colors = ["#367153", "#262626"]; // зеленый - темный - зеленый - темный...
+const sectors = ["10%", "20%", "30%", "40%", "50%", "60%", "90%", "Еще раз"];
+const colors = ["#417F61", "#262626"];
 const size = sectors.length;
 const arc = (2 * Math.PI) / size;
 
-// Названия для вывода
+let angle = 0;
+let spinning = false;
+let spins = 0;
+let extraSpin = 0;
+let tenPercentDropped = false;
+
 const discountNames = {
-  "10%": "10% скидка",
-  "20%": "20% скидка",
-  "30%": "30% скидка",
-  "40%": "40% скидка",
-  "50%": "50% скидка",
-  "90%": "90% скидка",
-  "Продление доступа": "Продление доступа к сервисам/продуктам на твой выбор, не более 1 сервиса и не более 1 месяца",
-  "30%": "30% скидка на продукты",
-  "25%": "25% скидка для друга на обучение",
-  "Ещё раз": "ещё один шанс"
+  "10%": "молекулярная скидка",
+  "20%": "скидка бронзика",
+  "30%": "не выпадает",
+  "40%": "не выпадает",
+  "50%": "не выпадает",
+  "60%": "не выпадает",
+  "90%": "не выпадает",
+  "Еще раз": "ещё один шанс"
 };
 
-// Состояние с сохранением
-function getState() {
-  const state = JSON.parse(localStorage.getItem('wheelState')) || {
-    spins: 0,
-    extraSpin: 0,
-    specialDropped: false,
-    encoreDropped: false
-  };
-  state.remainingAttempts = 3;
-  return state;
-}
-
-function saveState(state = getState()) {
-  localStorage.setItem('wheelState', JSON.stringify(state));
-}
-
-// Открытие файлов
+// Открытие файлов с перезапуском анимации для мобильных
 function unlockFiles() {
   files.forEach((file, i) => {
     file.classList.remove("locked");
     file.classList.add("opened");
     const icon = file.querySelector(".icon");
     icon.textContent = "📄";
+
+    // перезапуск анимации
     icon.style.animation = "none";
     void icon.offsetWidth;
     icon.style.animation = "openIcon 0.6s forwards";
-    file.onclick = () => window.open(i === 0 ? '/files/guide_alerts.pdf' : '/files/crypto_glossary.pdf', '_blank');
+
+    file.onclick = () => {
+      window.open(i === 0 ? '/files/guide_alerts.pdf' : '/files/crypto_glossary.pdf', '_blank');
+    };
   });
 }
 
-// Генератор приза с вероятностями
+// Генератор приза
 function getPrize() {
-  const state = getState();
-  const remainingAttempts = state.remainingAttempts + state.extraSpin - state.spins;
+  const remainingAttempts = 3 - spins + extraSpin;
 
-  // Спецприз может выпасть только один раз
-  const specials = ["Продление доступа", "30% скидка", "25% скидка"];
-  if (!state.specialDropped) {
-    const chance = Math.random();
-    if (chance < 0.10) { // 10% шанс
-      state.specialDropped = true;
-      saveState(state);
-      return specials[Math.floor(Math.random() * specials.length)];
-    }
+  if (remainingAttempts === 1 && !tenPercentDropped) {
+    tenPercentDropped = true;
+    return "10%";
   }
 
-  // Проверяем encore ("Ещё раз")
-  if (!state.encoreDropped && Math.random() < 0.8) {
-    state.encoreDropped = true;
-    saveState(state);
-    return "Ещё раз";
-  }
-
-  // Обычные скидки
   const rand = Math.random() * 100;
-  if (rand < 90) return "10%";
-  else if (rand < 90 + 20) return "20%";
-  else if (rand < 90 + 20 + 5) return "30%";
-  else if (rand < 90 + 20 + 5 + 3) return "40%";
-  else if (rand < 90 + 20 + 5 + 3 + 0.5) return "50%";
-  else return "90%";
+  if (rand < 3) return "20%";
+  if (rand < 15) return "Еще раз";
+  if (rand < 25) {
+    tenPercentDropped = true;
+    return "10%";
+  }
+
+  tenPercentDropped = true;
+  return "10%";
 }
 
 // Рисуем колесо
-let angle = 0;
-let spinning = false;
-
 function drawWheel() {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
   ctx.save();
   ctx.translate(canvas.width/2, canvas.height/2);
   ctx.rotate(angle);
 
-  for (let i = 0; i < size; i++) {
+  for(let i=0; i<size; i++){
     ctx.beginPath();
     ctx.fillStyle = colors[i%2];
     ctx.moveTo(0,0);
@@ -2374,7 +2712,7 @@ function drawWheel() {
     ctx.rotate((i+0.5)*arc);
     ctx.textAlign="right";
     ctx.fillStyle="white";
-    ctx.font="bold 14px Poppins";
+    ctx.font="bold 16px Poppins";
     ctx.fillText(sectors[i],140,5);
     ctx.restore();
   }
@@ -2382,30 +2720,24 @@ function drawWheel() {
 }
 
 // Крутилка
-function spinWheel() {
-  const state = getState();
-  const remainingAttempts = state.remainingAttempts + state.extraSpin - state.spins;
-
-  if (spinning) return;
-  if (remainingAttempts <= 0) {
-    spinBtn.innerText = "Попытки закончились";
-    return;
-  }
+function spinWheel(){
+  const remainingAttempts = 3 - spins + extraSpin;
+  if(spinning || (remainingAttempts <= 0 && tenPercentDropped)) return;
 
   const prize = getPrize();
   const sectorIndex = sectors.indexOf(prize);
 
   let turns = 6;
-  let stopAngle = (size - sectorIndex) * arc - arc/2 - Math.PI/2;
+  let stopAngle = (size - sectorIndex)*arc - arc/2 - Math.PI/2;
   let finalAngle = stopAngle + turns*2*Math.PI;
   let duration = 6000;
-  let start = null;
-  spinning = true;
+  let start=null;
+  spinning=true;
 
   function animate(timestamp){
-    if (!start) start = timestamp;
+    if(!start) start=timestamp;
     let progress = (timestamp-start)/duration;
-    if (progress>1) progress=1;
+    if(progress>1) progress=1;
 
     let easing = 1 - Math.pow(1-progress,3);
     angle = finalAngle*easing;
@@ -2413,23 +2745,20 @@ function spinWheel() {
 
     if(progress<1){
       requestAnimationFrame(animate);
-    } else {
+    }else{
       spinning=false;
       result.innerText = `Тебе выпало: ${prize} — ${discountNames[prize]}`;
 
-      if (state.spins===0 && !["Ещё раз"].includes(prize)) unlockFiles();
+      if(spins === 0 && prize !== "Еще раз") unlockFiles();
 
-      state.spins++;
+      if(prize === "Еще раз") extraSpin += 1;
 
-      if(prize==="Ещё раз") state.extraSpin+=1;
-
-      const newRemaining = state.remainingAttempts + state.extraSpin - state.spins;
+      spins++;
+      const newRemaining = 3 - spins + extraSpin;
 
       if(newRemaining > 1) spinBtn.innerText = `Ещё ${newRemaining} попытки`;
       else if(newRemaining === 1) spinBtn.innerText = "Последний шанс";
       else spinBtn.innerText = "Попытки закончились";
-
-      saveState(state);
     }
   }
   requestAnimationFrame(animate);
@@ -2439,9 +2768,6 @@ drawWheel();
 spinBtn.addEventListener("click", spinWheel);
 tgBtn.addEventListener("click",()=>window.open('https://t.me/ApeVaultCrypto','_blank'));
 </script>
-
-
-
 
 
 
@@ -2725,6 +3051,8 @@ document.querySelectorAll('.faq-item').forEach(item=>{
   });
 </script>
 <!-- END footer -->
+
+
 
 
 <!-- Модальное окно -->
@@ -3081,7 +3409,7 @@ document.addEventListener('DOMContentLoaded', () => {
         <span class="num">2</span>
         <strong>Бот для анализа новых токенов:</strong>
         <p>
-          Анализирует новые токены (от момента появления до 6 часов) и присылает сигналы:
+          Анализирует новые токены (от момента появления до 6) и присылает сигналы:
           <b>объём, ликвидность, капитализация, аудит Dex</b> и динамика роста.
         </p>
       </li>
